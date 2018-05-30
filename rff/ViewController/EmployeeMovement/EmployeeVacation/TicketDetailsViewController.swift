@@ -7,48 +7,65 @@
 //
 
 import UIKit
+import NotificationCenter
 
-class TicketDetailsViewController: UIViewController {
+class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     // -- MARK: IBOutlets
     
     @IBOutlet weak var selectorByCompany: UIView!
     @IBOutlet weak var selectorCash: UIView!
     @IBOutlet weak var selectorExitYes: UIView!
     @IBOutlet weak var selectorExitNo: UIView!
-    @IBOutlet weak var selectorVisaYes: UIView!
-    @IBOutlet weak var selectorVisaNo: UIView!
     
     @IBOutlet weak var innerSelectorByCompany: UIView!
     @IBOutlet weak var innerSelectorCash: UIView!
     @IBOutlet weak var innerSelectorExitYes: UIView!
     @IBOutlet weak var innerSelectorExitNo: UIView!
-    @IBOutlet weak var innerSelectorVisaYes: UIView!
-    @IBOutlet weak var innerSelectorVisaNo: UIView!
     
     @IBOutlet weak var byCompanyButton: UIButton!
     @IBOutlet weak var cashButton: UIButton!
     @IBOutlet weak var ExitYesButton: UIButton!
     @IBOutlet weak var exitNoBuuton: UIButton!
-    @IBOutlet weak var visaYesButton: UIButton!
-    @IBOutlet weak var visaNoButton: UIButton!
     
     @IBOutlet weak var dependentTicket: UITextField!
+    @IBOutlet weak var visaReuireTableView: UITableView!
+    @IBOutlet weak var comment: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // -- MARK: Constrains
+    
+    @IBOutlet weak var commentWidth: NSLayoutConstraint!
+    @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
     
     // -- MARK: Variables
     
     let mainBackgroundColor = AppDelegate().mainBackgroundColor
+    let screenSize = AppDelegate().screenSize
     let cornerRadiusValueHolder: CGFloat = 12
     let cornerRadiusValueInner: CGFloat = 11
     let cornerRadiusValueView: CGFloat = 9
+    
+    var empVacationDetails = EmpVac()
+    let cell_Id = "cell_visaRequires"
     
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        comment.delegate = self
+        
+        dependentTicket.text = empVacationDetails.Dependent_Ticket
+        setupScreenLayout()
         sutupTicketRequestSelector()
         sutupExitSelector()
-        sutupVisaSelector()
+        setUpLanguageChosen()
+        setUpCommentDisplay()
+        
+        // Handling the appearance of keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        scrollView.keyboardDismissMode = .interactive
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +75,16 @@ class TicketDetailsViewController: UIViewController {
     
     // -- MARK: setUps
     
+    func setupScreenLayout(){
+        commentWidth.constant = screenSize.width * 0.85
+    }
+    
+    func setUpCommentDisplay(){
+        comment.layer.cornerRadius = 5.0
+        comment.layer.borderColor = mainBackgroundColor.cgColor
+        comment.layer.borderWidth = 1
+    }
+    
     func sutupTicketRequestSelector(){
         selectorByCompany.layer.cornerRadius = cornerRadiusValueHolder
         selectorCash.layer.cornerRadius = cornerRadiusValueHolder
@@ -66,9 +93,9 @@ class TicketDetailsViewController: UIViewController {
         innerSelectorCash.layer.cornerRadius = cornerRadiusValueInner
         
         byCompanyButton.layer.cornerRadius = cornerRadiusValueView
-        byCompanyButton.backgroundColor = mainBackgroundColor
+        byCompanyButton.backgroundColor = .white
         cashButton.layer.cornerRadius = cornerRadiusValueView
-        cashButton.backgroundColor = .white
+        cashButton.backgroundColor = mainBackgroundColor
     }
     
     func sutupExitSelector(){
@@ -84,17 +111,43 @@ class TicketDetailsViewController: UIViewController {
         exitNoBuuton.backgroundColor = .white
     }
     
-    func sutupVisaSelector(){
-        selectorVisaYes.layer.cornerRadius = cornerRadiusValueHolder
-        selectorVisaNo.layer.cornerRadius = cornerRadiusValueHolder
+    func sutupVisaRequireCell(cell: VisaRequiresCell){
+        cell.selectorVisaYes.layer.cornerRadius = cornerRadiusValueHolder
+        cell.selectorVisaNo.layer.cornerRadius = cornerRadiusValueHolder
         
-        innerSelectorVisaYes.layer.cornerRadius = cornerRadiusValueInner
-        innerSelectorVisaNo.layer.cornerRadius = cornerRadiusValueInner
+        cell.innerSelectorVisaYes.layer.cornerRadius = cornerRadiusValueInner
+        cell.innerSelectorVisaNo.layer.cornerRadius = cornerRadiusValueInner
         
-        visaYesButton.layer.cornerRadius = cornerRadiusValueView
-        visaYesButton.backgroundColor = mainBackgroundColor
-        visaNoButton.layer.cornerRadius = cornerRadiusValueView
-        visaNoButton.backgroundColor = .white
+        cell.visaYesButton.layer.cornerRadius = cornerRadiusValueView
+        cell.visaYesButton.backgroundColor = mainBackgroundColor
+        cell.visaNoButton.layer.cornerRadius = cornerRadiusValueView
+        cell.visaNoButton.backgroundColor = .white
+        
+        cell.holderView.layer.cornerRadius = 5.0
+        cell.holderView.layer.borderColor = mainBackgroundColor.cgColor
+        cell.holderView.layer.borderWidth = 1
+    }
+    
+    func setUpLanguageChosen(){
+//        if languangeChosen == 1{
+//            su.setTitle("NEXT", for: .normal)
+//        } else {
+//            nextButtonOutlet.setTitle("التالي", for: .normal)
+//        }
+    }
+    
+    // -- MARK: Tableview data source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cell_Id, for: indexPath) as? VisaRequiresCell{
+            self.sutupVisaRequireCell(cell: cell)
+            return cell
+        }
+        return UITableViewCell()
     }
     
     // -- MARK: IBActions
@@ -119,18 +172,45 @@ class TicketDetailsViewController: UIViewController {
         exitNoBuuton.backgroundColor = mainBackgroundColor
     }
     
-    @IBAction func visaYesButtonTapped(_ sender: Any) {
-        visaYesButton.backgroundColor = mainBackgroundColor
-        visaNoButton.backgroundColor = .white
-    }
-    
-    @IBAction func visaNoButtonTapped(_ sender: Any) {
-        visaYesButton.backgroundColor = .white
-        visaNoButton.backgroundColor = mainBackgroundColor
-    }
-    
     @IBAction func submitButtonTapped(_ sender: Any) {
         
     }
     
+    // -- MARK: Handle Keyboard
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height - 68
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            comment.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+

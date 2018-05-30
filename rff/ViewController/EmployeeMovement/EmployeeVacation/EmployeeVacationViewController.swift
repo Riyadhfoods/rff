@@ -11,6 +11,7 @@ import UIKit
 class EmployeeVacationViewController: UIViewController {
 
     @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var addVacationButtonOutlet: UIButton!
     
     let screenSize = AppDelegate().screenSize
     //let swrevealAction = SWRevealFunction()
@@ -19,8 +20,13 @@ class EmployeeVacationViewController: UIViewController {
         super.viewDidLoad()
         
         // Changing the back button of the navigation contoller
-        setCustomBackButton(navItem: navigationItem)
+        setCustomNav(navItem: navigationItem)
         
+        if LoginViewController.languageChosen == 1 {
+            addVacationButtonOutlet.setTitle("ADD VACATION", for: .normal)
+        } else {
+            addVacationButtonOutlet.setTitle("إضافة اجازه", for: .normal)
+        }
         sideMenus()
     }
     
@@ -35,7 +41,11 @@ class EmployeeVacationViewController: UIViewController {
     }
     
     @IBAction func signOutBuuttonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        AuthServices().logout(self)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }

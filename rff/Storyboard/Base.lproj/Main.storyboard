@@ -53,12 +53,12 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKs-cD-xpl">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username - اسم المستخدم" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAA-Je-EIr">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username - اسم المستخدم" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OAA-Je-EIr">
                                                                         <rect key="frame" x="8" y="0.0" width="335" height="50"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.10255244006849315" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,7 +73,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="StN-Ic-hG4">
                                                                 <rect key="frame" x="0.0" y="58" width="343" height="50"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password - الرقم السري" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RpM-ny-esP">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password - الرقم السري" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RpM-ny-esP">
                                                                         <rect key="frame" x="8" y="0.0" width="335" height="50"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="textColor" white="1" alpha="0.95093642980000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -199,13 +199,20 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="buttonHeight" destination="D2Q-Lc-SYn" id="gH2-ku-jZn"/>
                         <outlet property="companyDropdownImage" destination="zch-dE-CYG" id="40l-AQ-ySi"/>
                         <outlet property="companyPickerView" destination="bUc-Qw-Ou3" id="JhD-ax-kSj"/>
                         <outlet property="languangeDropdownImage" destination="5fJ-iv-T0Q" id="27S-5O-gxw"/>
                         <outlet property="languangePickerView" destination="2iT-jT-fzB" id="uqW-kn-nMf"/>
+                        <outlet property="logoHeight" destination="oYf-Vh-Z5c" id="cvg-nq-h3f"/>
+                        <outlet property="logoHolderHeight" destination="INF-cs-Klj" id="VgZ-jl-0X5"/>
                         <outlet property="logoHolderView" destination="yRg-RX-C15" id="wXi-Zy-zgH"/>
+                        <outlet property="logoHolderWidth" destination="A4V-5p-8ZC" id="V38-xB-XuC"/>
                         <outlet property="logoImage" destination="P1Q-hU-xjS" id="PRp-ht-KwB"/>
+                        <outlet property="logoWidth" destination="ywa-0Q-8l3" id="qPF-Ob-2ai"/>
                         <outlet property="passwordTextfield" destination="RpM-ny-esP" id="AYc-DL-a5x"/>
+                        <outlet property="pickerViewHeight" destination="ufB-tM-Ey4" id="iHU-kx-QDs"/>
+                        <outlet property="textfieldHeight" destination="sBa-EF-Kun" id="Uuh-U2-bO6"/>
                         <outlet property="usernameTextfield" destination="OAA-Je-EIr" id="thZ-vQ-MXr"/>
                         <segue destination="qZR-YD-fdJ" kind="show" identifier="showHomePage" id="OEq-46-kDG"/>
                     </connections>
@@ -217,7 +224,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="1Sr-WZ-9qC">
             <objects>
-                <viewController id="qZR-YD-fdJ" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeViewControllerSWReveal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qZR-YD-fdJ" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PBy-tJ-hit">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -460,10 +467,10 @@
             </objects>
             <point key="canvasLocation" x="1936.8" y="1806.7466266866568"/>
         </scene>
-        <!--Home-->
+        <!--homeViewControllerNav-->
         <scene sceneID="IUK-Sd-tYJ">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="homeNavController" storyboardName="Home" id="rIL-ek-B3A" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="homeViewController" storyboardName="Home" referencedIdentifier="homeViewControllerNav" id="rIL-ek-B3A" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPJ-ni-Rjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3222" y="1519"/>
@@ -916,6 +923,6 @@
         <image name="rff_logo" width="386" height="178"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="blt-EB-Nwg"/>
+        <segue reference="RZ6-CK-JbD"/>
     </inferredMetricsTieBreakers>
 </document>

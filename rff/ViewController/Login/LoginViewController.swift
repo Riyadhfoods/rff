@@ -20,6 +20,16 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var languangePickerView: UITextField!
     @IBOutlet weak var languangeDropdownImage: UIImageView!
     
+    // MARK: Constrians
+    @IBOutlet weak var logoHeight: NSLayoutConstraint!
+    @IBOutlet weak var logoWidth: NSLayoutConstraint!
+    @IBOutlet weak var logoHolderHeight: NSLayoutConstraint!
+    @IBOutlet weak var logoHolderWidth: NSLayoutConstraint!
+    @IBOutlet weak var textfieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var pickerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var buttonHeight: NSLayoutConstraint!
+    
+    
     let activityIndicator: UIActivityIndicatorView = {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -30,6 +40,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }()
     
     // -- MARK: Variables
+    
+    let screenHeight = AppDelegate().screenSize.height
     let pickerViewAction = PickerviewAction()
     
     let pickViewCompay: UIPickerView = UIPickerView()
@@ -50,6 +62,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         
         logoHolderView.layer.cornerRadius = 153.41 / 2
+        setUpLayout()
         
         // text field delegate
         usernameTextfield.delegate = self
@@ -59,6 +72,26 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     // -- MARK: Pick view functions
+    
+    func setUpLayout(){
+        let logoHolderSEScreen = screenHeight * 0.23
+        let logoSEScreen = screenHeight * 0.215
+        let textfieldbuttonSESecreen = screenHeight * 0.074
+        
+        if screenHeight == 568 {
+            logoHolderHeight.constant = logoHolderSEScreen
+            logoHolderWidth.constant = logoHolderSEScreen
+            logoWidth.constant = logoSEScreen
+            logoHeight.constant = logoSEScreen
+            textfieldHeight.constant = textfieldbuttonSESecreen
+            pickerViewHeight.constant = textfieldbuttonSESecreen
+            buttonHeight.constant = textfieldbuttonSESecreen
+            logoHolderView.layer.cornerRadius = logoHolderSEScreen / 2
+        } else {
+            logoHolderView.layer.cornerRadius = 153.41 / 2
+        }
+    }
+    
     func setUpPickerView(){
         pickerViewAction.showPickView(txtfield: companyPickerView, pickerview: pickViewCompay, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)
         pickerViewAction.showPickView(txtfield: languangePickerView, pickerview: pickViewLanguage, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)

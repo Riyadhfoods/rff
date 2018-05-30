@@ -177,6 +177,87 @@
         let returnValue:[String?] = vals
         return returnValue
     }
+    public func Task_InboxArrFromXMLString(xmlToParse:String)->[Task_Inbox] {
+        
+        let xml = SWXMLHash.lazy(xmlToParse)
+        let xmlRoot = xml.children.first
+        let xmlBody = xmlRoot?.children.last
+        let xmlResponse: XMLIndexer? = xml.children.first?.children.first?.children.first
+        let xmlResult0: XMLIndexer?  = xmlResponse?.children.last
+        var strVal = ""
+        var elemName = ""
+        var returnValue:[Task_Inbox] = [Task_Inbox]()
+        if elemName == "" {
+            // Array Property For returnValue
+            let itemCount1: Int = (xmlResult0?.children.count)!
+            for i1 in 0 ..< itemCount1 {
+                let rItem1 = Task_Inbox()
+                let xmlResult_Parent1:XMLIndexer? = xmlResult0?.children[i1]
+                let childCount1 :Int = (xmlResult_Parent1?.children.count)!
+                for j1 in 0 ..< childCount1 {
+                    
+                    let xmlResult1: XMLIndexer? =  xmlResult_Parent1?.children[j1]
+                    let elem1: XMLElement? =  xmlResult1?.element
+                    strVal = ""
+                    if elem1?.children.first is TextElement {
+                        let elemText:TextElement = elem1?.children.first as! TextElement
+                        strVal = elemText.text
+                        
+                    }
+                    elemName = elem1!.name
+                    // Array Propert of returnValue subProperty for rItem1
+                    if elemName == "EnglishDes" {
+                        rItem1.EnglishDes =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "ArabicDesc" {
+                        rItem1.ArabicDesc =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "PageName" {
+                        rItem1.PageName =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Count" {
+                        rItem1.Count = strVal.toInt()!
+                    }
+                    
+                }
+                returnValue.append(rItem1)
+                
+            }
+        }
+        return returnValue
+    }
+    public func Task_InboxArrFromXML(data: Data)-> [Task_Inbox] {
+        
+        let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
+        return Task_InboxArrFromXMLString( xmlToParse : xmlToParse)
+    }
+    public func Task_InboxM(langid:Int, emp_id:String)-> [Task_Inbox]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<Task_Inbox xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "<emp_id>"
+        soapReqXML += emp_id
+        soapReqXML += "</emp_id>"
+        soapReqXML += "</Task_Inbox>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/Task_Inbox"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[Task_Inbox]=Task_InboxArrFromXML(data : responseData)
+        return returnValue
+    }
     public func ChangePassword(emp_id:String, oldpassword:String, newpassword:String, error:String)-> String{
         var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
         
@@ -370,6 +451,389 @@
         
         let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
         let returnValue:[InboxGrid]=InboxGridArrFromXML(data : responseData)
+        return returnValue
+    }
+    public func EmpVacArrFromXMLString(xmlToParse:String)->[EmpVac] {
+        
+        let xml = SWXMLHash.lazy(xmlToParse)
+        let xmlRoot = xml.children.first
+        let xmlBody = xmlRoot?.children.last
+        let xmlResponse: XMLIndexer? = xml.children.first?.children.first?.children.first
+        let xmlResult0: XMLIndexer?  = xmlResponse?.children.last
+        var strVal = ""
+        var elemName = ""
+        var returnValue:[EmpVac] = [EmpVac]()
+        if elemName == "" {
+            // Array Property For returnValue
+            let itemCount1: Int = (xmlResult0?.children.count)!
+            for i1 in 0 ..< itemCount1 {
+                let rItem1 = EmpVac()
+                let xmlResult_Parent1:XMLIndexer? = xmlResult0?.children[i1]
+                let childCount1 :Int = (xmlResult_Parent1?.children.count)!
+                for j1 in 0 ..< childCount1 {
+                    
+                    let xmlResult1: XMLIndexer? =  xmlResult_Parent1?.children[j1]
+                    let elem1: XMLElement? =  xmlResult1?.element
+                    strVal = ""
+                    if elem1?.children.first is TextElement {
+                        let elemText:TextElement = elem1?.children.first as! TextElement
+                        strVal = elemText.text
+                        
+                    }
+                    elemName = elem1!.name
+                    // Array Propert of returnValue subProperty for rItem1
+                    if elemName == "exitrentry" {
+                        rItem1.exitrentry =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "extradays" {
+                        rItem1.extradays =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Emp_Id" {
+                        rItem1.Emp_Id = strVal.toInt()!
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Emp_Ename" {
+                        rItem1.Emp_Ename =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Emp_AName" {
+                        rItem1.Emp_AName =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Job_Num" {
+                        rItem1.Job_Num =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Job_English" {
+                        rItem1.Job_English =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Job_Arabic" {
+                        rItem1.Job_Arabic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Sub_Job_Num" {
+                        rItem1.Sub_Job_Num =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Sub_Job_English" {
+                        rItem1.Sub_Job_English =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Sub_Job_Arabic" {
+                        rItem1.Sub_Job_Arabic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Nationality_Num" {
+                        rItem1.Nationality_Num =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Nationality_English" {
+                        rItem1.Nationality_English =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Nationality_Arabic" {
+                        rItem1.Nationality_Arabic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Manager_Id" {
+                        rItem1.Manager_Id =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Manager_English" {
+                        rItem1.Manager_English =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Manager_Arabic" {
+                        rItem1.Manager_Arabic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Department_Num" {
+                        rItem1.Department_Num =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Department_English" {
+                        rItem1.Department_English =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "JoinDate" {
+                        rItem1.JoinDate =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "StartDate" {
+                        rItem1.StartDate =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Leave_Start_Dt" {
+                        rItem1.Leave_Start_Dt =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Leave_Return_Dt" {
+                        rItem1.Leave_Return_Dt =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Balance_Vacation" {
+                        rItem1.Balance_Vacation =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Number_Days" {
+                        rItem1.Number_Days =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "ExitReEntry" {
+                        rItem1.ExitReEntry =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "ExtraDays" {
+                        rItem1.ExtraDays =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Vac_Type" {
+                        rItem1.Vac_Type =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Vac_Desc" {
+                        rItem1.Vac_Desc =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SettlementAmount" {
+                        rItem1.SettlementAmount =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Dependent_Ticket" {
+                        rItem1.Dependent_Ticket =  strVal
+                    }
+                    
+                }
+                returnValue.append(rItem1)
+                
+            }
+        }
+        return returnValue
+    }
+    public func EmpVacArrFromXML(data: Data)-> [EmpVac] {
+        
+        let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
+        return EmpVacArrFromXMLString( xmlToParse : xmlToParse)
+    }
+    public func BindEmpsVacationsDropDown(langid:Int, Emp_no:String)-> [EmpVac]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<BindEmpsVacationsDropDown xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "<Emp_no>"
+        soapReqXML += Emp_no
+        soapReqXML += "</Emp_no>"
+        soapReqXML += "</BindEmpsVacationsDropDown>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/BindEmpsVacationsDropDown"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[EmpVac]=EmpVacArrFromXML(data : responseData)
+        return returnValue
+    }
+    public func BindDelegateVacationsDropDown(langid:Int, Emp_no:String)-> [EmpVac]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<BindDelegateVacationsDropDown xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "<Emp_no>"
+        soapReqXML += Emp_no
+        soapReqXML += "</Emp_no>"
+        soapReqXML += "</BindDelegateVacationsDropDown>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/BindDelegateVacationsDropDown"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[EmpVac]=EmpVacArrFromXML(data : responseData)
+        return returnValue
+    }
+    public func EmpVacFromXMLString(xmlToParse:String)->EmpVac {
+        
+        let xml = SWXMLHash.lazy(xmlToParse)
+        let xmlRoot = xml.children.first
+        let xmlBody = xmlRoot?.children.last
+        let xmlResponse: XMLIndexer? = xml.children.first?.children.first?.children.first
+        let xmlResult0: XMLIndexer?  = xmlResponse?.children.last
+        var strVal = ""
+        var elemName = ""
+        var returnValue:EmpVac = EmpVac()
+        if elemName == "" {
+            // Property name :
+            let itemCount1: Int = (xmlResult0?.children.count)!
+            for i1 in 0 ..< itemCount1 {
+                let xmlResult1:XMLIndexer? = xmlResult0?.children[i1]
+                let elem1: XMLElement? =  xmlResult1!.element
+                strVal = ""
+                if elem1?.children.first is TextElement {
+                    let elemText1:TextElement = elem1?.children.first as! TextElement
+                    strVal = elemText1.text
+                    
+                }
+                elemName = elem1!.name
+                if elemName == "exitrentry" {
+                    returnValue.exitrentry =  strVal
+                }
+                else if elemName == "extradays" {
+                    returnValue.extradays =  strVal
+                }
+                else if elemName == "Emp_Id" {
+                    returnValue.Emp_Id = strVal.toInt()!
+                }
+                else if elemName == "Emp_Ename" {
+                    returnValue.Emp_Ename =  strVal
+                }
+                else if elemName == "Emp_AName" {
+                    returnValue.Emp_AName =  strVal
+                }
+                else if elemName == "Job_Num" {
+                    returnValue.Job_Num =  strVal
+                }
+                else if elemName == "Job_English" {
+                    returnValue.Job_English =  strVal
+                }
+                else if elemName == "Job_Arabic" {
+                    returnValue.Job_Arabic =  strVal
+                }
+                else if elemName == "Sub_Job_Num" {
+                    returnValue.Sub_Job_Num =  strVal
+                }
+                else if elemName == "Sub_Job_English" {
+                    returnValue.Sub_Job_English =  strVal
+                }
+                else if elemName == "Sub_Job_Arabic" {
+                    returnValue.Sub_Job_Arabic =  strVal
+                }
+                else if elemName == "Nationality_Num" {
+                    returnValue.Nationality_Num =  strVal
+                }
+                else if elemName == "Nationality_English" {
+                    returnValue.Nationality_English =  strVal
+                }
+                else if elemName == "Nationality_Arabic" {
+                    returnValue.Nationality_Arabic =  strVal
+                }
+                else if elemName == "Manager_Id" {
+                    returnValue.Manager_Id =  strVal
+                }
+                else if elemName == "Manager_English" {
+                    returnValue.Manager_English =  strVal
+                }
+                else if elemName == "Manager_Arabic" {
+                    returnValue.Manager_Arabic =  strVal
+                }
+                else if elemName == "Department_Num" {
+                    returnValue.Department_Num =  strVal
+                }
+                else if elemName == "Department_English" {
+                    returnValue.Department_English =  strVal
+                }
+                else if elemName == "JoinDate" {
+                    returnValue.JoinDate =  strVal
+                }
+                else if elemName == "StartDate" {
+                    returnValue.StartDate =  strVal
+                }
+                else if elemName == "Leave_Start_Dt" {
+                    returnValue.Leave_Start_Dt =  strVal
+                }
+                else if elemName == "Leave_Return_Dt" {
+                    returnValue.Leave_Return_Dt =  strVal
+                }
+                else if elemName == "Balance_Vacation" {
+                    returnValue.Balance_Vacation =  strVal
+                }
+                else if elemName == "Number_Days" {
+                    returnValue.Number_Days =  strVal
+                }
+                else if elemName == "ExitReEntry" {
+                    returnValue.ExitReEntry =  strVal
+                }
+                else if elemName == "ExtraDays" {
+                    returnValue.ExtraDays =  strVal
+                }
+                else if elemName == "Vac_Type" {
+                    returnValue.Vac_Type =  strVal
+                }
+                else if elemName == "Vac_Desc" {
+                    returnValue.Vac_Desc =  strVal
+                }
+                else if elemName == "SettlementAmount" {
+                    returnValue.SettlementAmount =  strVal
+                }
+                else if elemName == "Dependent_Ticket" {
+                    returnValue.Dependent_Ticket =  strVal
+                }
+            }
+        }
+        return returnValue
+    }
+    public func EmpVacFromXML(data: Data)-> EmpVac {
+        
+        let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
+        return EmpVacFromXMLString( xmlToParse : xmlToParse)
+    }
+    public func GetEmpVacationDetails(langid:Int, Emp_no:String)-> EmpVac{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<GetEmpVacationDetails xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "<Emp_no>"
+        soapReqXML += Emp_no
+        soapReqXML += "</Emp_no>"
+        soapReqXML += "</GetEmpVacationDetails>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/GetEmpVacationDetails"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:EmpVac=EmpVacFromXML(data : responseData)
+        return returnValue
+    }
+    public func BindVacationType_DDL(langid:Int)-> [EmpVac]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<BindVacationType_DDL xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "</BindVacationType_DDL>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/BindVacationType_DDL"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[EmpVac]=EmpVacArrFromXML(data : responseData)
         return returnValue
     }
  }

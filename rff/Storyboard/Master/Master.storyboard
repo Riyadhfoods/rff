@@ -160,8 +160,11 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="changeButtonOutlet" destination="qej-4O-XN6" id="Htn-SY-m4N"/>
                         <outlet property="menuBtn" destination="uib-BV-FE2" id="Wg1-sj-Uz7"/>
+                        <outlet property="newPasswordLabel" destination="83c-xO-oXB" id="CrW-OB-D4w"/>
                         <outlet property="newPasswordTextfield" destination="2GX-ah-tjE" id="1l5-G8-Ptq"/>
+                        <outlet property="oldPasswordLabel" destination="Ev9-RJ-Xce" id="PS6-Uo-m2X"/>
                         <outlet property="oldPasswordTextfield" destination="nPY-c2-cfo" id="dlR-xi-EXM"/>
                     </connections>
                 </viewController>
@@ -172,7 +175,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Obz-IY-eZ7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Erk-oN-dp2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Erk-oN-dp2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KVa-tJ-ayA">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

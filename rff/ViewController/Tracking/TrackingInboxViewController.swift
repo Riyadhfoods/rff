@@ -15,6 +15,8 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var listTextfield: UITextField!
     @IBOutlet weak var categoryTextfield: UITextField!
     @IBOutlet weak var searchContectTextfield: UITextField!
+    @IBOutlet weak var searchButtonOutlet: UIButton!
+    @IBOutlet weak var returnButtonOutlet: UIButton!
     
     let pickerViewAction = PickerviewAction()
     
@@ -62,15 +64,31 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
         
         // Changing the back button of the navigation contoller
         //navigationItem.backBarButtonItem = backButtonItem
-        setCustomBackButton(navItem: navigationItem)
+        setCustomNav(navItem: navigationItem)
         listTextfield.tintColor = .clear
         categoryTextfield.tintColor = .clear
         
         setUpPickerView()
+        setupLanguagChange()
         sideMenus()
     }
     
     // -- MARK: Setups
+    
+    func setupLanguagChange(){
+        if LoginViewController.languageChosen == 1 {
+            searchContectTextfield.placeholder = "Search content"
+            searchContectTextfield.textAlignment = .left
+            searchButtonOutlet.setTitle("SEARCH", for: .normal)
+            returnButtonOutlet.setTitle("RETURN", for: .normal)
+        } else {
+            searchContectTextfield.placeholder = "محتوى البحث"
+            searchContectTextfield.textAlignment = .right
+            searchButtonOutlet.setTitle("بحث", for: .normal)
+            returnButtonOutlet.setTitle("عودة", for: .normal)
+        }
+    }
+    
     func setUpPickerView(){
         pickerViewAction.showPickView(
             txtfield: listTextfield,
@@ -216,15 +234,21 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
             if let viewController = segue.destination as? InboxTableViewController{
                 viewController.listIndexSelected = self.listIndexSelected
                 viewController.categoryIndexSelected = self.categoryIndexSelected
+                if let title = self.listTextfield.text{
+                    viewController.navTitle = title
+                }
             }
         }
     }
     
     @IBAction func returnButtonTapped(_ sender: Any) {
-//        if let homeStoryboard = storyboard?.instantiateViewController(withIdentifier: "homeNavController"){
-//            present(homeStoryboard, animated: true, completion: nil)
-//        }
-        
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeStoryboard = storyboard.instantiateViewController(withIdentifier: "homeViewControllerNav")
+        revealViewController().pushFrontViewController(homeStoryboard, animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }

@@ -32,6 +32,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //let language = LoginViewController
     let languageChosen = LoginViewController.languageChosen
+    static var selectedItem: String = ""
     
     // -- MARK: viewDidLoad
     override func viewDidLoad() {
@@ -303,6 +304,23 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let identifier = getRowIdentifier(indexPath) else {return}
         performSegue(withIdentifier: identifier, sender: nil)
+        getNavTitle(indexPath: indexPath)
+    }
+    
+    func getNavTitle(indexPath: IndexPath){
+        if languageChosen == 1 {
+            if (indexPath.section == 0 || indexPath.section == 12 || indexPath.section == 13){
+                SlideMenuViewController.selectedItem = sectionsEnglish[indexPath.section].name
+            } else {
+                SlideMenuViewController.selectedItem = sectionsEnglish[indexPath.section].items[indexPath.row]
+            }
+        } else {
+            if (indexPath.section == 0 || indexPath.section == 12 || indexPath.section == 13){
+                SlideMenuViewController.selectedItem = sectionsArabic[indexPath.section].name
+            } else {
+                SlideMenuViewController.selectedItem = sectionsArabic[indexPath.section].items[indexPath.row]
+            }
+        }
     }
 }
 

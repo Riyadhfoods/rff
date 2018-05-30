@@ -25,8 +25,23 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var exitReEntryDays: UITextField!
     @IBOutlet weak var extraDays: UILabel!
     @IBOutlet weak var settlementAmount: UILabel!
+    @IBOutlet weak var nextButtonOutlet: UIButton!
     
     @IBOutlet weak var vacationDetailsStackViewWidth: NSLayoutConstraint!
+    
+    // -- labels
+    @IBOutlet weak var vacationDetailsHeader: UILabel!
+    @IBOutlet weak var settlementDetailsHeader: UILabel!
+    
+    @IBOutlet weak var numberOfDaysTitle: UILabel!
+    @IBOutlet weak var balanceVacationTitle: UILabel!
+    @IBOutlet weak var leaveStartDateTitle: UILabel!
+    @IBOutlet weak var returnDateTitle: UILabel!
+    @IBOutlet weak var vacationTypeTitle: UILabel!
+    @IBOutlet weak var exitTitle: UILabel!
+    @IBOutlet weak var extraDaysTitle: UILabel!
+    @IBOutlet weak var settlementTitle: UILabel!
+    
     
     let leaveDatePickerDatePicker: UIDatePicker = UIDatePicker()
     let returnDatePickerDatePicker: UIDatePicker = UIDatePicker()
@@ -41,14 +56,15 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     // -- MARK: Variables
     
     let screenSize = AppDelegate().screenSize
+    let webservice = Login()
     
-    let vacationTypeArray = ["Annual Vacations"]
-    let empNameArray = [
-        "Select Employee - اختر الموظف",
-        "1598 - Faisal Saad Suliman"]
-    let empDelegateArray = [
-        "Your delegate - الموظف البديل",
-        "111 - Ahmed Siddig Ahmed Algam"]
+    var empVacationDetails = EmpVac()
+    var vacationTypeArray = [EmpVac]()
+    var empVacArray = [EmpVac]()
+    var empDelegateArray = [EmpVac]()
+    
+    // To store vacation type id
+    var vacationTypeId: String = ""
     
     var empNametextChosen: String?
     var empDelegatetextChosen: String?
@@ -58,16 +74,19 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     var empDelegateIndex: Int = 0
     var vacationTypeIndex: Int = 0
     
+    var languangeChosen: Int = LoginViewController.languageChosen
+    
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupArrays()
         
         // Change the width of vacation Details Stack View base of the screen size
         vacationDetailsStackViewWidth.constant = screenSize.width - 32
         
         // Changing the back button of the navigation contoller
-        setCustomBackButton(navItem: navigationItem)
+        setCustomNav(navItem: navigationItem)
         
         leaveStartDatePickerView.tintColor = .clear
         ReturnDatePickerView.tintColor = .clear
@@ -77,6 +96,8 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         
         setUpPickerView()
         setupDatePicker()
+        setupLanguagChange()
+        setUpEmployeeDetails()
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +106,39 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     }
 
     // -- MARK: Set ups
+    
+    func setupArrays(){
+        if let userId = AuthServices.currentUserId{
+            empVacArray = webservice.BindEmpsVacationsDropDown(langid: languangeChosen, Emp_no: userId)
+            self.empPickerView.text = empVacArray[0].Emp_Ename
+            
+            empDelegateArray = webservice.BindDelegateVacationsDropDown(langid: languangeChosen, Emp_no: userId)
+            vacationTypeArray = webservice.BindVacationType_DDL(langid: languangeChosen)
+            self.vacationTypePickerView.text = vacationTypeArray[2].Vac_Desc
+            
+            empVacationDetails = webservice.GetEmpVacationDetails(langid: languangeChosen, Emp_no: userId)
+        }
+    }
+    
+    func setUpEmployeeDetails(){
+        numOfDays.text = empVacationDetails.Number_Days
+        balanceVacation.text = empVacationDetails.Balance_Vacation
+        leaveStartDatePickerView.text = empVacationDetails.Leave_Start_Dt
+        ReturnDatePickerView.text = empVacationDetails.Leave_Return_Dt
+        exitReEntryDays.text = empVacationDetails.ExitReEntry
+        
+        if empVacationDetails.ExtraDays == "" {
+            extraDays.text = "       "
+        } else {
+           extraDays.text = empVacationDetails.ExtraDays
+        }
+        if languangeChosen == 1 {
+           settlementAmount.text = empVacationDetails.SettlementAmount
+        } else {
+            settlementTitle.text = empVacationDetails.SettlementAmount
+        }
+        
+    }
     
     func setUpPickerView(){
         PickerviewAction().showPickView(
@@ -109,6 +163,70 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         PickerviewAction().showDatePicker(txtfield: ReturnDatePickerView, datePicker: returnDatePickerDatePicker, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
     }
     
+    func setupLanguagChange(){
+        setlanguageForTitle(label: vacationDetailsHeader, titleEnglish: "Vacations Details", titleArabic: "تفاصيل الإجازة")
+        setlanguageForTitle(label: settlementDetailsHeader, titleEnglish: "Settlement Details", titleArabic: "تفاصيل التصفية")
+        setlanguageForTitle(label: numberOfDaysTitle, titleEnglish: "No of Days", titleArabic: "الإجازة المطلوبة")
+        setlanguageForTitle(label: balanceVacationTitle, titleEnglish: "Balance Vacation", titleArabic: "الإجازة المستحقة")
+        setlanguageForTitle(label: leaveStartDateTitle, titleEnglish: "Leave Start Date", titleArabic: "تاريخ بداية الإجازة")
+        setlanguageForTitle(label: returnDateTitle, titleEnglish: "Return Date", titleArabic: "تاريخ نهاية الإجازة")
+        setlanguageForTitle(label: vacationTypeTitle, titleEnglish: "Vacation Type", titleArabic: "نوع الاجازة")
+        setlanguageForTitle(label: exitTitle, titleEnglish: "Exit Re-Entry Days", titleArabic: "عدد ايام الخروج والعودة")
+        setlanguageForTitle(label: extraDaysTitle, titleEnglish: "Extra Days", titleArabic: "ايام اضافية")
+        setSettlementLocalization()
+        setupSubLabel()
+        
+        if languangeChosen == 1{
+            nextButtonOutlet.setTitle("NEXT", for: .normal)
+        } else {
+            nextButtonOutlet.setTitle("التالي", for: .normal)
+        }
+    }
+    
+    func setupSubLabel(){
+        if languangeChosen == 1{
+            numOfDays.textAlignment = .left
+            balanceVacation.textAlignment = .left
+            leaveStartDatePickerView.textAlignment = .left
+            ReturnDatePickerView.textAlignment = .left
+            vacationTypePickerView.textAlignment = .left
+            exitReEntryDays.textAlignment = .left
+            extraDays.textAlignment = .left
+        } else {
+            numOfDays.textAlignment = .right
+            balanceVacation.textAlignment = .right
+            leaveStartDatePickerView.textAlignment = .right
+            ReturnDatePickerView.textAlignment = .right
+            vacationTypePickerView.textAlignment = .right
+            exitReEntryDays.textAlignment = .right
+            extraDays.textAlignment = .right
+        }
+    }
+    
+    func setlanguageForTitle(label: UILabel, titleEnglish: String, titleArabic: String){
+        if languangeChosen == 1{
+            label.text = titleEnglish
+            label.textAlignment = .left
+        } else {
+            label.text = titleArabic
+            label.textAlignment = .right
+        }
+    }
+    
+    func setSettlementLocalization(){
+        if languangeChosen == 1{
+            settlementTitle.text = "Settlement Amount:"
+            settlementTitle.textAlignment = .left
+            settlementAmount.text = "99999999"
+            settlementAmount.textAlignment = .left
+        } else {
+            settlementAmount.text = "مبلغ التصفية:"
+            settlementTitle.textAlignment = .right
+            settlementTitle.text = "99999999"
+            settlementAmount.textAlignment = .right
+        }
+    }
+    
     // -- MARK: objc function
     
     @objc func handleDatePicker(sender: UIDatePicker){
@@ -127,7 +245,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     {
         if pickerView == pickViewEmpName{
             if empNameIndex == 0 {
-                 empPickerView.text = empNameArray[0]
+                 empPickerView.text = empVacArray[0].Emp_Ename
             }else {
                 empPickerView.text = empNametextChosen
             }
@@ -137,7 +255,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         
         else if pickerView == pickViewEmpDelegate{
             if empDelegateIndex == 0 {
-                delegatePickerView.text = empDelegateArray[0]
+                delegatePickerView.text = empDelegateArray[0].Emp_Ename
             }else {
                 delegatePickerView.text = empDelegatetextChosen
             }
@@ -147,7 +265,8 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         
         else if pickerView == vacationTypePickerViewPikcer{
             if vacationTypeIndex == 0 {
-                vacationTypePickerView.text = vacationTypeArray[0]
+                vacationTypePickerView.text = vacationTypeArray[0].Vac_Desc
+                vacationTypeId = vacationTypeArray[0].Vac_Type
             }else {
                 vacationTypePickerView.text = vacationTypetextChosen
             }
@@ -182,7 +301,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         if pickerView == vacationTypePickerViewPikcer{
             return vacationTypeArray.count
         } else if pickerView == pickViewEmpName {
-            return empNameArray.count
+            return empVacArray.count
         }
         return empDelegateArray.count
     }
@@ -190,28 +309,60 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == vacationTypePickerViewPikcer{
             self.pickerView = pickerView
-            return vacationTypeArray[row]
+            return vacationTypeArray[row].Vac_Desc
         } else if pickerView == pickViewEmpName{
             self.pickerView = pickViewEmpName
-            return empNameArray[row]
+            print(empVacArray[row].Emp_Ename)
+            return empVacArray[row].Emp_Ename
         }
         self.pickerView = pickViewEmpDelegate
-        return empDelegateArray[row]
+        return empDelegateArray[row].Emp_Ename
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == vacationTypePickerViewPikcer{
-            vacationTypetextChosen = vacationTypeArray[row]
+            vacationTypetextChosen = vacationTypeArray[row].Vac_Desc
+            vacationTypeId = vacationTypeArray[row].Vac_Type
             vacationTypeIndex = row
         } else if pickerView == pickViewEmpName {
-            empNametextChosen = empNameArray[row]
+            empNametextChosen = empVacArray[row].Emp_Ename
             empNameIndex = row
         } else {
-            empDelegatetextChosen =  empDelegateArray[row]
+            empDelegatetextChosen =  empDelegateArray[row].Emp_Ename
             empDelegateIndex = row
         }
     }
     
+    // -- MARK: IBAction
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        if let numOfDays = numOfDays.text, let leaveStartDate = leaveStartDatePickerView.text, let returnDate = ReturnDatePickerView.text, let vacationType = vacationTypePickerView.text, let exitReEntryDays = exitReEntryDays.text{
+            empVacationDetails.Number_Days = numOfDays
+            empVacationDetails.Leave_Start_Dt = leaveStartDate
+            empVacationDetails.Leave_Return_Dt = returnDate
+            
+            if vacationTypeId == "" {
+                empVacationDetails.Vac_Type = vacationTypeArray[2].Vac_Type
+            } else {
+                empVacationDetails.Vac_Type = vacationTypeId
+            }
+            
+            empVacationDetails.Vac_Desc = vacationType
+            empVacationDetails.ExitReEntry = exitReEntryDays
+        }
+        performSegue(withIdentifier: "showTicketDetails", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTicketDetails"{
+            if let vc = segue.destination as? TicketDetailsViewController{
+                vc.empVacationDetails = self.empVacationDetails
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 

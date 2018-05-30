@@ -16,9 +16,13 @@ class InboxTableViewController: UITableViewController {
     var categoryIndexSelected: Int = 0
     
     let mainBackgroundColor = AppDelegate().mainBackgroundColor
+    var navTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set title for nav bar
+        setCustomNav(navItem: navigationItem, title: navTitle)
         
         //Geting array of inbox elements
         setupArrayOfInboxGrid()
@@ -40,29 +44,13 @@ class InboxTableViewController: UITableViewController {
             }
         }
     }
-    
-    // -- MARK: Helper functions:
-    func emptyMessage(message:String, viewController:UITableViewController) {
-        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-        let messageLabel = UILabel(frame: rect)
-        messageLabel.text = message
-        messageLabel.textColor = mainBackgroundColor
-        messageLabel.backgroundColor = .clear
-        messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 20)
-        messageLabel.sizeToFit()
-        
-        viewController.tableView.backgroundView = messageLabel;
-        viewController.tableView.separatorStyle = .none;
-    }
 
     // -- MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if arrayOfInboxGrid.count == 0 {
-            emptyMessage(message: "No data", viewController: self)
+            emptyMessage(message: "No data", viewController: self, tableView: self.tableView)
         }
         return arrayOfInboxGrid.count
     }
@@ -80,9 +68,26 @@ class InboxTableViewController: UITableViewController {
             let emp_name = arrayOfInboxGrid[indexPath.row].empname
             let date = arrayOfInboxGrid[indexPath.row].date
             
-            cell.empId.text = emp_id
-            cell.empName.text = emp_name
-            cell.date.text = date
+            if LoginViewController.languageChosen == 1 {
+                cell.empIdEnglish.text = emp_id
+                cell.empNameEnglish.text = emp_name
+                cell.dateEnglish.text = date
+                cell.viewForm.setTitle("VIEW FORM", for: .normal)
+                
+                cell.empIdArabic.text = "Emp ID:"
+                cell.empNameArabic.text = "Emp Name:"
+                cell.dateArabic.text = "Date:"
+            } else {
+                cell.empIdEnglish.text = "رقم الموظف"
+                cell.empNameEnglish.text = "اسم الموظف"
+                cell.dateEnglish.text = "التاريخ"
+                
+                cell.empIdArabic.text = emp_id
+                cell.empNameArabic.text = emp_name
+                cell.dateArabic.text = date
+                cell.viewForm.setTitle("عرض النموذج", for: .normal)
+            }
+            
             
             return cell
         }
@@ -90,6 +95,10 @@ class InboxTableViewController: UITableViewController {
         // Configure the cell...
 
         return UITableViewCell()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }

@@ -178,6 +178,8 @@
                         <outlet property="categoryTextfield" destination="ACN-uQ-HLn" id="aHL-qr-KIV"/>
                         <outlet property="listTextfield" destination="Mv2-xm-fzY" id="Ads-7u-lJl"/>
                         <outlet property="menuBtn" destination="eX2-cO-6Bb" id="WGE-4c-NxK"/>
+                        <outlet property="returnButtonOutlet" destination="AV8-iT-XX7" id="hqF-do-IeG"/>
+                        <outlet property="searchButtonOutlet" destination="FhL-KB-zMf" id="hyo-go-Unt"/>
                         <outlet property="searchContectTextfield" destination="v3I-Ns-dzl" id="pOv-I5-i9A"/>
                         <segue destination="oqg-Mg-mzy" kind="show" identifier="showInboxTable" id="Lyh-vP-ohF"/>
                     </connections>
@@ -211,51 +213,61 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xjg-6v-xrS">
                                                             <rect key="frame" x="0.0" y="0.0" width="327" height="83"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iAo-LD-XBT">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iAo-LD-XBT">
                                                                     <rect key="frame" x="0.0" y="0.0" width="127" height="83"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emp ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWv-aJ-WV9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="50.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="127" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emp Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJc-Gf-uKj">
-                                                                            <rect key="frame" x="0.0" y="33" width="74.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="33" width="127" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySE-g0-cC7">
-                                                                            <rect key="frame" x="0.0" y="66" width="34.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="66" width="127" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="nJc-Gf-uKj" secondAttribute="trailing" id="Xbd-FK-9gy"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="ySE-g0-cC7" secondAttribute="trailing" id="cYL-Qn-Pqc"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="OWv-aJ-WV9" secondAttribute="trailing" id="ufp-kv-EWm"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="wKe-kp-Q3v">
                                                                     <rect key="frame" x="143" y="0.0" width="184" height="83"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1598" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76M-O9-aQk">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="184" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Faisal Alkhotaifi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-jj-dCj">
-                                                                            <rect key="frame" x="0.0" y="33" width="101" height="17"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Faisal Alkhotaifi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-jj-dCj">
+                                                                            <rect key="frame" x="0.0" y="33" width="184" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018/05/13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-lV-N9W">
-                                                                            <rect key="frame" x="0.0" y="66" width="73.5" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="66" width="184" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="76M-O9-aQk" secondAttribute="trailing" id="9sq-fs-Ujt"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="abI-jj-dCj" secondAttribute="trailing" id="TdU-38-fet"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="s4C-lV-N9W" secondAttribute="trailing" id="rmM-Pz-bfg"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
@@ -297,9 +309,12 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="date" destination="s4C-lV-N9W" id="dR4-WS-Boj"/>
-                                    <outlet property="empId" destination="76M-O9-aQk" id="Tk2-Iu-7Tt"/>
-                                    <outlet property="empName" destination="abI-jj-dCj" id="y9r-v3-Rqr"/>
+                                    <outlet property="dateArabic" destination="ySE-g0-cC7" id="1zY-lz-jha"/>
+                                    <outlet property="dateEnglish" destination="s4C-lV-N9W" id="dR4-WS-Boj"/>
+                                    <outlet property="empIdArabic" destination="OWv-aJ-WV9" id="blF-Me-WSz"/>
+                                    <outlet property="empIdEnglish" destination="76M-O9-aQk" id="Tk2-Iu-7Tt"/>
+                                    <outlet property="empNameArabic" destination="nJc-Gf-uKj" id="Prs-SZ-E0B"/>
+                                    <outlet property="empNameEnglish" destination="abI-jj-dCj" id="y9r-v3-Rqr"/>
                                     <outlet property="holderView" destination="XoR-h0-cdj" id="8cd-Fz-gKN"/>
                                     <outlet property="viewForm" destination="ZLv-hx-Bll" id="QrA-FY-7pb"/>
                                 </connections>

@@ -12,12 +12,18 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
 
     // -- MARK: IBOutlets
     @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var oldPasswordLabel: UILabel!
     @IBOutlet weak var oldPasswordTextfield: UITextField!
+    @IBOutlet weak var newPasswordLabel: UILabel!
     @IBOutlet weak var newPasswordTextfield: UITextField!
+    @IBOutlet weak var changeButtonOutlet: UIButton!
     
     // -- MARK: Variable
     let screenSize = AppDelegate().screenSize
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    // 1 --> English, 2 --> Arabic
+    let languageChosen = LoginViewController.languageChosen
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +31,22 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         // Adding the text field delegate
         oldPasswordTextfield.delegate = self
         newPasswordTextfield.delegate = self
+        
+        // Change the language to the correspanding language chosen
+        if languageChosen == 1 {
+            oldPasswordLabel.text = "Old password"
+            oldPasswordLabel.textAlignment = .left
+            newPasswordLabel.text = "New Password"
+            newPasswordLabel.textAlignment = .left
+            changeButtonOutlet.setTitle("CHANGE", for: .normal)
+        } else {
+            oldPasswordLabel.text = "الرقم السري القديم"
+            oldPasswordLabel.textAlignment = .right
+            newPasswordLabel.text = "الرقم السري الجديد"
+            newPasswordLabel.textAlignment = .right
+            changeButtonOutlet.setTitle("تغيير", for: .normal)
+        }
+        setCustomNav(navItem: navigationItem)
         
         sideMenus()
     }
@@ -46,7 +68,6 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func changeButtonTapped(_ sender: Any) {
-        
         // Adding Activity indicator
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
