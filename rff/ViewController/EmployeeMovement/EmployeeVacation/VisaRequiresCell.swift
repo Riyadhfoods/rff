@@ -21,6 +21,8 @@ class VisaRequiresCell: UITableViewCell {
     
     @IBOutlet weak var holderView: UIView!
         
+    @IBOutlet weak var ticketNumber: UILabel!
+    @IBOutlet weak var dependentName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

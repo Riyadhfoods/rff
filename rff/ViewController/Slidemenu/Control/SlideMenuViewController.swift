@@ -60,10 +60,8 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
             Section(name: "MASTER", items: ["Change Password"], isExpanded: false),
             Section(name: "TRACKING", items: ["Inbox"]),
             Section(name: "EMPLOYEE MOVEMENT", items: [
-                    "New Employee",
                     "Employee Vacation",
                     "Loan",
-                    "Loan List",
                     "Resign",
                     "Employee violation",
                     "Return from Vacation",
@@ -81,14 +79,6 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
                     "OverTime Calculation",
                     "Settle Calculation",
                     "Attendance Clearance"
-                ], isExpanded: false),
-            Section(name: "ADMIN", items: [
-                    "Approval Action",
-                    "Assign Approval Action",
-                    "Add Forms",
-                    "Salary Calculation",
-                    "Salary Deduction Rule",
-                    "HR Doc Expiry"
                 ], isExpanded: false),
             Section(name: "PURCHASE SYSTEM", items: [
                     "Purchase Inbox",
@@ -215,9 +205,8 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "home"), listImage: []),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "master"), listImage: [#imageLiteral(resourceName: "password")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "tracking"), listImage: [#imageLiteral(resourceName: "inbox")]),
-            MenuImage(headerTitleImage: #imageLiteral(resourceName: "employeeMovement"), listImage: [#imageLiteral(resourceName: "newEmployee"), #imageLiteral(resourceName: "employeeVacation"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "loanList"), #imageLiteral(resourceName: "resign"), #imageLiteral(resourceName: "EmployeeViolation"), #imageLiteral(resourceName: "flight"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "employeeInfo"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "VacationDaysUpdate"), #imageLiteral(resourceName: "TicketChange"), #imageLiteral(resourceName: "JobTitleChange"), #imageLiteral(resourceName: "businessTrip"), #imageLiteral(resourceName: "InOutDeducation")]),
+            MenuImage(headerTitleImage: #imageLiteral(resourceName: "employeeMovement"), listImage: [#imageLiteral(resourceName: "employeeVacation"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "resign"), #imageLiteral(resourceName: "EmployeeViolation"), #imageLiteral(resourceName: "flight"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "employeeInfo"), #imageLiteral(resourceName: "loan"), #imageLiteral(resourceName: "VacationDaysUpdate"), #imageLiteral(resourceName: "TicketChange"), #imageLiteral(resourceName: "JobTitleChange"), #imageLiteral(resourceName: "businessTrip"), #imageLiteral(resourceName: "InOutDeducation")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "attendance"), listImage: [#imageLiteral(resourceName: "attendanceDetails"), #imageLiteral(resourceName: "overTimeCalc"), #imageLiteral(resourceName: "salaryCalc"), #imageLiteral(resourceName: "approvalAction")]),
-            MenuImage(headerTitleImage: #imageLiteral(resourceName: "admin"), listImage: [#imageLiteral(resourceName: "approvalAction"), #imageLiteral(resourceName: "approvalAction"), #imageLiteral(resourceName: "AddForms"), #imageLiteral(resourceName: "salaryCalc"), #imageLiteral(resourceName: "InOutDeducation"), #imageLiteral(resourceName: "hrDoc")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "purchseSystem"), listImage: [#imageLiteral(resourceName: "inbox"), #imageLiteral(resourceName: "purchase"), #imageLiteral(resourceName: "PurchaseSystemRF")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "itDepartment"), listImage: [#imageLiteral(resourceName: "request"), #imageLiteral(resourceName: "itMasterFile"), #imageLiteral(resourceName: "AddForms"), #imageLiteral(resourceName: "request"), #imageLiteral(resourceName: "DeviceDetials")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "paymentRequisition"), listImage: [#imageLiteral(resourceName: "request"), #imageLiteral(resourceName: "request"), #imageLiteral(resourceName: "UpdateBackStatus")]),

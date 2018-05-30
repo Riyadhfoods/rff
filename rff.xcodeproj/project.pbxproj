@@ -16,6 +16,7 @@
 		C00707FA20A05F2800320ED4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00707F920A05F2800320ED4 /* SWRevealViewController.m */; };
 		C00707FE20A0617000320ED4 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00707FD20A0617000320ED4 /* SlideMenuViewController.swift */; };
 		C007080020A0619500320ED4 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00707FF20A0619500320ED4 /* HeaderTableViewCell.swift */; };
+		C013CC4620BEAE3200B08289 /* DepVacTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013CC4520BEAE3100B08289 /* DepVacTicket.swift */; };
 		C035313E20B183A100E0DBD9 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035313D20B183A100E0DBD9 /* AuthServices.swift */; };
 		C035314920B1875700E0DBD9 /* SoapHttpClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */; };
 		C035314A20B1875700E0DBD9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314420B1875700E0DBD9 /* Login.swift */; };
@@ -173,6 +174,7 @@
 		C00707F920A05F2800320ED4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		C00707FD20A0617000320ED4 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		C00707FF20A0619500320ED4 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		C013CC4520BEAE3100B08289 /* DepVacTicket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepVacTicket.swift; sourceTree = "<group>"; };
 		C035313D20B183A100E0DBD9 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoapHttpClientExtension.swift; sourceTree = "<group>"; };
 		C035314420B1875700E0DBD9 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				C0D090B720B6D7ED0049226F /* ArrayOfString.swift */,
 				C0CE40C720BC14C500A06CB4 /* ArrayOfTask_Inbox.swift */,
 				C0CE40C420BC14C400A06CB4 /* EmpVac.swift */,
+				C013CC4520BEAE3100B08289 /* DepVacTicket.swift */,
 				C005CB7020B40B7600875740 /* InboxGrid.swift */,
 				C005CB6F20B40B7500875740 /* ListType.swift */,
 				C035314420B1875700E0DBD9 /* Login.swift */,
@@ -1047,6 +1050,7 @@
 				C08A269D20A6E41E0028052C /* JobTitleChangeViewController.swift in Sources */,
 				C0D2ABA720A80606001AE4FD /* InboxTableViewCell.swift in Sources */,
 				C035314A20B1875700E0DBD9 /* Login.swift in Sources */,
+				C013CC4620BEAE3200B08289 /* DepVacTicket.swift in Sources */,
 				C08A268120A6E2DE0028052C /* TrackingInboxViewController.swift in Sources */,
 				C08A26DF20A6E8340028052C /* ReturnOrderRequestsViewController.swift in Sources */,
 				C08A268520A6E3080028052C /* EmployeeVacationViewController.swift in Sources */,

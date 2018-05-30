@@ -38,9 +38,9 @@ extension SlideMenuViewController {
         switch sectionIndexPath{
         case 0:
             identifier = "showHome"
-        case 12:
+        case 11:
             identifier = "showCitirix"
-        case 13:
+        case 12:
             identifier = "showReport"
         default:
             break
@@ -63,18 +63,16 @@ extension SlideMenuViewController {
         case 4:
             identifier = getAttendanceRowsIdentifier(rowIndex: indexPath.row)
         case 5:
-            identifier = getAdminRowsIdentifier(rowIndex: indexPath.row)
-        case 6:
             identifier = getPurchaseSystemRowsIdentifier(rowIndex: indexPath.row)
-        case 7:
+        case 6:
             identifier = getItDepartmentRowsIdentifier(rowIndex: indexPath.row)
-        case 8:
+        case 7:
             identifier = getPaymentRequisitionRowsIdentifier(rowIndex: indexPath.row)
-        case 9:
+        case 8:
             identifier = getTaskRowsIdentifier(rowIndex: indexPath.row)
-        case 10:
+        case 9:
             identifier = getComplainRowsIdentifier(rowIndex: indexPath.row)
-        case 11:
+        case 10:
             identifier = getSalesRowsIdentifier(rowIndex: indexPath.row)
         default:
             break
@@ -88,34 +86,30 @@ extension SlideMenuViewController {
         var identifier: String? = nil
         switch rowIndex{
         case 0:
-            identifier = "showNewEmployee"
-        case 1:
             identifier = "showEmployeeVacation"
-        case 2:
+        case 1:
             identifier = "showLoan"
-        case 3:
-            identifier = "showLoanList"
-        case 4:
+        case 2:
             identifier = "showResign"
-        case 5:
+        case 3:
             identifier = "showEmployeeViolation"
-        case 6:
+        case 4:
             identifier = "showReturnFromVacation"
-        case 7:
+        case 5:
             identifier = "showSalaryPreview"
-        case 8:
+        case 6:
             identifier = "showEmployeeInfo"
-        case 9:
+        case 7:
             identifier = "showSalaryChange"
-        case 10:
+        case 8:
             identifier = "showVacationDaysUpdate"
-        case 11:
+        case 9:
             identifier = "showTicketChange"
-        case 12:
+        case 10:
             identifier = "showJobTitleChange"
-        case 13:
+        case 11:
             identifier = "showBusinessTrip"
-        case 14:
+        case 12:
             identifier = "showInOutDeduction"
         default:
             break

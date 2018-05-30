@@ -9,7 +9,7 @@
 import UIKit
 import NotificationCenter
 
-class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
+class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate {
     // -- MARK: IBOutlets
     
     @IBOutlet weak var selectorByCompany: UIView!
@@ -36,6 +36,8 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var commentWidth: NSLayoutConstraint!
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var commentBottomAncher: NSLayoutConstraint!
+    
     
     // -- MARK: Variables
     
@@ -45,27 +47,35 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     let cornerRadiusValueInner: CGFloat = 11
     let cornerRadiusValueView: CGFloat = 9
     
+    let languageChosen = LoginViewController.languageChosen
     var empVacationDetails = EmpVac()
     let cell_Id = "cell_visaRequires"
+    var webservice = Login()
+    var ticketdependentArray = [DepVacTicket]()
+    var isKeyboardPresent = false
     
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        comment.text = ""
         comment.delegate = self
         
         dependentTicket.text = empVacationDetails.Dependent_Ticket
+        
+        if let userId = AuthServices.currentUserId{
+            ticketdependentArray = webservice.GetEmpVacationTickets(emp_id: userId, langId: languageChosen)
+        }
+        
         setupScreenLayout()
         sutupTicketRequestSelector()
         sutupExitSelector()
         setUpLanguageChosen()
         setUpCommentDisplay()
         
-        // Handling the appearance of keyboard
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        scrollView.keyboardDismissMode = .interactive
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
+        view.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +87,7 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func setupScreenLayout(){
         commentWidth.constant = screenSize.width * 0.85
+        tableViewWidth.constant = CGFloat(130 * (ticketdependentArray.count))
     }
     
     func setUpCommentDisplay(){
@@ -111,7 +122,7 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         exitNoBuuton.backgroundColor = .white
     }
     
-    func sutupVisaRequireCell(cell: VisaRequiresCell){
+    func sutupVisaRequireCell(cell: VisaRequiresCell, requireVisaSelected: Int){
         cell.selectorVisaYes.layer.cornerRadius = cornerRadiusValueHolder
         cell.selectorVisaNo.layer.cornerRadius = cornerRadiusValueHolder
         
@@ -119,9 +130,15 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         cell.innerSelectorVisaNo.layer.cornerRadius = cornerRadiusValueInner
         
         cell.visaYesButton.layer.cornerRadius = cornerRadiusValueView
-        cell.visaYesButton.backgroundColor = mainBackgroundColor
         cell.visaNoButton.layer.cornerRadius = cornerRadiusValueView
-        cell.visaNoButton.backgroundColor = .white
+        
+        if requireVisaSelected == 0 {
+            cell.visaYesButton.backgroundColor = .white
+            cell.visaNoButton.backgroundColor = mainBackgroundColor
+        } else {
+            cell.visaYesButton.backgroundColor = mainBackgroundColor
+            cell.visaNoButton.backgroundColor = .white
+        }
         
         cell.holderView.layer.cornerRadius = 5.0
         cell.holderView.layer.borderColor = mainBackgroundColor.cgColor
@@ -129,22 +146,21 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func setUpLanguageChosen(){
-//        if languangeChosen == 1{
-//            su.setTitle("NEXT", for: .normal)
-//        } else {
-//            nextButtonOutlet.setTitle("التالي", for: .normal)
-//        }
     }
     
     // -- MARK: Tableview data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return ticketdependentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cell_Id, for: indexPath) as? VisaRequiresCell{
-            self.sutupVisaRequireCell(cell: cell)
+            self.sutupVisaRequireCell(cell: cell, requireVisaSelected: ticketdependentArray[indexPath.row].RequireVisa)
+            
+            cell.ticketNumber.text = ticketdependentArray[indexPath.row].Ticket
+            cell.dependentName.text = ticketdependentArray[indexPath.row].DependentName
+            
             return cell
         }
         return UITableViewCell()
@@ -173,24 +189,14 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        
+        empVacationDetails.DependentVactionTicket = ticketdependentArray
+        print(empVacationDetails)
     }
     
     // -- MARK: Handle Keyboard
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height - 68
-            }
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y = 0
-            }
-        }
+   
+    @objc func didTapView(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -202,6 +208,55 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
 }
+
+extension TicketDetailsViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
+    }
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillShow(notification: notification)
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillHide(notification: notification)
+        }
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: Notification){
+        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInset = UIEdgeInsets(top: 0, left: 8, bottom: frame.height, right: 0)
+        scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: Notification){
+        scrollView.contentInset = UIEdgeInsets.zero
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
