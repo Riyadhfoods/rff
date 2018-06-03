@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var pendingInboxTableview: UITableView!
     
     // -- MARK: Variable
+    let language = LoginViewController.languageChosen
     let screenSize = AppDelegate().screenSize
     let mainBackgroundColor = AppDelegate().mainBackgroundColor
     var greetingMessage: String = ""
@@ -28,12 +29,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let userId = AuthServices.currentUserId {
             taskInbox = webservice.Task_InboxM(langid: LoginViewController.languageChosen, emp_id: userId)
         }
-        
-        if LoginViewController.languageChosen == 1 {
-            navigationItem.title = "Home"
-        } else {
-            navigationItem.title = "الرئيسية"
-        }
+        navigationItem.title = getString(englishString: "Home", arabicString: "الرئيسية", language: language)
         
         view.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
         sideMenus()
@@ -43,27 +39,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if taskInbox.count == 0 {
-            emptyMessage(message: "No data", viewController: self, tableView: pendingInboxTableview)
+            emptyMessage(message: getString(englishString: "No data", arabicString: "لا توجد بيانات", language: language), viewController: self, tableView: pendingInboxTableview)
         }
         return taskInbox.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cell_id, for: indexPath) as? PendingInboxCell{
-            
-            cell.holderView.layer.cornerRadius = 5.0
-            cell.holderView.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
-            cell.holderView.layer.borderWidth = 1
-            
             cell.contentView.backgroundColor = UIColor.clear
             
             let english_description = taskInbox[indexPath.row].EnglishDes
             let arabic_description = taskInbox[indexPath.row].ArabicDesc
             let count = taskInbox[indexPath.row].Count
             
-            cell.englishDescription.text = english_description
-            cell.arabicDescription.text = arabic_description
-            cell.count.text = "\(count)"
+            cell.englishDescriptionLeft.text = getString(englishString: english_description, arabicString: "الوصف بالانجليزي:", language: language)
+            cell.arabicDescriptionLeft.text = getString(englishString: arabic_description, arabicString: "الوصف بالعربي:", language: language)
+            cell.countLeft.text = getString(englishString: "\(count)", arabicString: "العدد:", language: language)
+            cell.englishDescriptionRight.text = getString(englishString: "English Description:", arabicString: english_description, language: language)
+            cell.arabicDescriptionRight.text = getString(englishString: "Arabic Description:", arabicString: arabic_description, language: language)
+            cell.countRight.text = getString(englishString: "Count:", arabicString: "\(count)", language: language)
+            cell.viewButton.setTitle(getString(englishString: "CLICK TO VIEW", arabicString: "اضغط للعرض", language: language), for: .normal)
             
             return cell
         }

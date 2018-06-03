@@ -39,6 +39,17 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return ai
     }()
     
+    let toolBar: UIToolbar = {
+        let tb = UIToolbar()
+        tb.barStyle = .default
+        tb.isTranslucent = true
+        tb.tintColor = UIColor.black
+        tb.sizeToFit()
+        tb.isUserInteractionEnabled = true
+        
+        return tb
+    }()
+    
     // -- MARK: Variables
     
     let screenHeight = AppDelegate().screenSize.height
@@ -69,6 +80,20 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         passwordTextfield.delegate = self
         
         setUpPickerView()
+        setUpUserNameToolBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        usernameTextfield.text = ""
+        passwordTextfield.text = ""
+    }
+    
+    func isLoggedIn(){
+        if AuthServices.currentUserId != nil {
+            performSegue(withIdentifier: "showHomePage", sender: nil)
+        }
     }
     
     // -- MARK: Pick view functions
@@ -105,6 +130,17 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         languangePickerView.resignFirstResponder()
     }
     
+    func setUpUserNameToolBar(){
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([spaceButton, nextButton], animated: false)
+        usernameTextfield.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneClick(){
+        passwordTextfield.becomeFirstResponder()
+    }
+    
     // -- MARK: IBActions
     
     @IBAction func loginButton(_ sender: Any) {
@@ -114,7 +150,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        print("Button pressed!")
         guard let usernametext = usernameTextfield.text, let passwordText = passwordTextfield.text else {
             activityIndicator.stopAnimating()
             return

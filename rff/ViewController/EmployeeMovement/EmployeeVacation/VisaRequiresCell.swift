@@ -12,17 +12,23 @@ class VisaRequiresCell: UITableViewCell {
     
     @IBOutlet weak var selectorVisaYes: UIView!
     @IBOutlet weak var selectorVisaNo: UIView!
-    
     @IBOutlet weak var innerSelectorVisaYes: UIView!
     @IBOutlet weak var innerSelectorVisaNo: UIView!
-    
     @IBOutlet weak var visaYesButton: UIButton!
     @IBOutlet weak var visaNoButton: UIButton!
     
     @IBOutlet weak var holderView: UIView!
         
-    @IBOutlet weak var ticketNumber: UILabel!
-    @IBOutlet weak var dependentName: UILabel!
+    @IBOutlet weak var ticketNumberRight: UILabel!
+    @IBOutlet weak var dependentNameRight: UILabel!
+    @IBOutlet weak var ticketNumberLeft: UILabel!
+    @IBOutlet weak var dependentNameLeft: UILabel!
+    
+    @IBOutlet weak var requireVisa: UILabel!
+    @IBOutlet weak var yesTitle: UILabel!
+    @IBOutlet weak var noTitle: UILabel!
+    
+    let langauge = LoginViewController.languageChosen
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +39,12 @@ class VisaRequiresCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        setUpHeaderLabel(label: ticketNumberRight, language: langauge)
+        setUpHeaderLabel(label: dependentNameRight, language: langauge)
+        setUpHeaderLabel(label: ticketNumberLeft, language: langauge)
+        setUpHeaderLabel(label: dependentNameLeft, language: langauge)
+        
+        setlanguageForTitle(label: requireVisa, titleEnglish: "Require Visa", titleArabic: "طلب التأشيرة", language: langauge)
     }
     
     @IBAction func visaYesButtonTapped(_ sender: Any) {

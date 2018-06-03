@@ -20,10 +20,12 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     
     // -- MARK: Variable
     let screenSize = AppDelegate().screenSize
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     // 1 --> English, 2 --> Arabic
     let languageChosen = LoginViewController.languageChosen
+    var buttonTitle: String = ""
+    var successfulAlertTitle: String = ""
+    var errorAlertTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,19 +35,12 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         newPasswordTextfield.delegate = self
         
         // Change the language to the correspanding language chosen
-        if languageChosen == 1 {
-            oldPasswordLabel.text = "Old password"
-            oldPasswordLabel.textAlignment = .left
-            newPasswordLabel.text = "New Password"
-            newPasswordLabel.textAlignment = .left
-            changeButtonOutlet.setTitle("CHANGE", for: .normal)
-        } else {
-            oldPasswordLabel.text = "الرقم السري القديم"
-            oldPasswordLabel.textAlignment = .right
-            newPasswordLabel.text = "الرقم السري الجديد"
-            newPasswordLabel.textAlignment = .right
-            changeButtonOutlet.setTitle("تغيير", for: .normal)
-        }
+        setlanguageForTitle(label: oldPasswordLabel, titleEnglish: "Old password", titleArabic: "الرقم السري القديم", language: languageChosen)
+        setlanguageForTitle(label: newPasswordLabel, titleEnglish: "New Password", titleArabic: "الرقم السري الجديد", language: languageChosen)
+        
+        buttonTitle = getString(englishString: "CHANGE", arabicString: "تغيير", language: languageChosen)
+        changeButtonOutlet.setTitle(buttonTitle, for: .normal)
+        
         setCustomNav(navItem: navigationItem)
         
         sideMenus()
@@ -68,18 +63,12 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func changeButtonTapped(_ sender: Any) {
-        // Adding Activity indicator
-        activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
+        successfulAlertTitle = getString(englishString: "Password Change Successfully", arabicString: "تم تغيير الرقم السري بنجاح", language: languageChosen)
+        errorAlertTitle = getString(englishString: "Error!", arabicString: "خطأ", language: languageChosen)
         
         if let currentUserId = AuthServices.currentUserId, let oldPassword = oldPasswordTextfield.text, let newPassword = newPasswordTextfield.text{
             AuthServices().changePassword(id: currentUserId, oldPassword: oldPassword, newPassword: newPassword, onSeccuss: {
-                self.activityIndicator.stopAnimating()
-                AlertMessage().showAlertMessage(alertTitle: "Password Change Successfully", alertMessage: "", actionTitle: "Ok", onAction: {
+                AlertMessage().showAlertMessage(alertTitle: self.successfulAlertTitle, alertMessage: "", actionTitle: "Ok", onAction: {
                     self.oldPasswordTextfield.text = ""
                     self.newPasswordTextfield.text = ""
                     
@@ -87,8 +76,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                     self.newPasswordTextfield.resignFirstResponder()
                 }, cancelAction: nil, self)
             }) { (error) in
-                self.activityIndicator.stopAnimating()
-                AlertMessage().showAlertMessage(alertTitle: "Error!", alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
+                AlertMessage().showAlertMessage(alertTitle: self.errorAlertTitle, alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
             }
             self.view.endEditing(true)
         }

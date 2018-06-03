@@ -76,17 +76,10 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     // -- MARK: Setups
     
     func setupLanguagChange(){
-        if LoginViewController.languageChosen == 1 {
-            searchContectTextfield.placeholder = "Search content"
-            searchContectTextfield.textAlignment = .left
-            searchButtonOutlet.setTitle("SEARCH", for: .normal)
-            returnButtonOutlet.setTitle("RETURN", for: .normal)
-        } else {
-            searchContectTextfield.placeholder = "محتوى البحث"
-            searchContectTextfield.textAlignment = .right
-            searchButtonOutlet.setTitle("بحث", for: .normal)
-            returnButtonOutlet.setTitle("عودة", for: .normal)
-        }
+        searchContectTextfield.placeholder = getString(englishString: "Search content", arabicString: "محتوى البحث", language: languageChosen)
+        setUpHeaderLabel(txt: searchContectTextfield, language: languageChosen)
+        searchButtonOutlet.setTitle(getString(englishString: "SEARCH", arabicString: "بحث", language: languageChosen), for: .normal)
+        returnButtonOutlet.setTitle(getString(englishString: "RETURN", arabicString: "عودة", language: languageChosen), for: .normal)
     }
     
     func setUpPickerView(){
@@ -222,7 +215,11 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBAction func searchButtonTapped(_ sender: Any) {
         if listRowIndex == 0
             || CategopryRowIndex == 0 {
-            AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: "Select a list or category first", actionTitle: "Ok", onAction: {
+            AlertMessage().showAlertMessage(
+                alertTitle: getString(englishString: "Alert!", arabicString: "تنبيه", language: languageChosen),
+                alertMessage: getString(englishString: "Select a list or category first", arabicString: "اختر قائمة او حالة اولاً", language: languageChosen),
+                actionTitle: "Ok",
+                onAction: {
                 return
             }, cancelAction: nil, self)
         }

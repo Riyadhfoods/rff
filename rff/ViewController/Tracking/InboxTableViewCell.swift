@@ -21,27 +21,23 @@ class InboxTableViewCell: UITableViewCell {
     @IBOutlet weak var empNameArabic: UILabel!
     @IBOutlet weak var dateArabic: UILabel!
     
+    let language = LoginViewController.languageChosen
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        if LoginViewController.languageChosen == 1 {
-            changeTextAligment(textAligment: .left)
-        } else {
-            changeTextAligment(textAligment: .right)
-        }
+        holderView.layer.cornerRadius = 5.0
+        holderView.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
+        holderView.layer.borderWidth = 1
+        
+        setUpHeaderLabel(label: empIdEnglish, language: language)
+        setUpHeaderLabel(label: empNameEnglish, language: language)
+        setUpHeaderLabel(label: dateEnglish, language: language)
+        setUpHeaderLabel(label: empIdArabic, language: language)
+        setUpHeaderLabel(label: empNameArabic, language: language)
+        setUpHeaderLabel(label: dateArabic, language: language)
     }
     
-    func changeTextAligment(textAligment: NSTextAlignment){
-        empIdEnglish.textAlignment = textAligment
-        empNameEnglish.textAlignment = textAligment
-        dateEnglish.textAlignment = textAligment
-        
-        empIdArabic.textAlignment = textAligment
-        empNameArabic.textAlignment = textAligment
-        dateArabic.textAlignment = textAligment
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

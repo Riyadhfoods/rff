@@ -14,6 +14,7 @@ class EmployeeVacationViewController: UIViewController {
     @IBOutlet weak var addVacationButtonOutlet: UIButton!
     
     let screenSize = AppDelegate().screenSize
+    let languageChosen = LoginViewController.languageChosen
     //let swrevealAction = SWRevealFunction()
     
     override func viewDidLoad() {
@@ -21,12 +22,7 @@ class EmployeeVacationViewController: UIViewController {
         
         // Changing the back button of the navigation contoller
         setCustomNav(navItem: navigationItem)
-        
-        if LoginViewController.languageChosen == 1 {
-            addVacationButtonOutlet.setTitle("ADD VACATION", for: .normal)
-        } else {
-            addVacationButtonOutlet.setTitle("إضافة اجازه", for: .normal)
-        }
+        addVacationButtonOutlet.setTitle(getString(englishString: "ADD VACATION", arabicString: "إضافة اجازه", language: languageChosen), for: .normal)
         sideMenus()
     }
     

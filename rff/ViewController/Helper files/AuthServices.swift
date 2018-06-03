@@ -15,9 +15,10 @@ class AuthServices{
     var result: String?
     static var currentUserId: String?
     static var currentUserName: String?
+    let language = LoginViewController.languageChosen
     
     func checkUserId(id: String, password: String, onSeccuss: @escaping () -> Void, onError: @escaping (_ ErrorMessage: String) -> Void){
-        arrayOfResult = login.CheckLogin(username: id, password: password, error: "", langid: LoginViewController.languageChosen)
+        arrayOfResult = login.CheckLogin(username: id, password: password, error: "", langid: language)
             
         if arrayOfResult[0] == "0"{
             AuthServices.currentUserId = id
@@ -31,10 +32,30 @@ class AuthServices{
     }
     
     func logout(_ UIViewController: UIViewController){
-        AlertMessage().showAlertMessage(alertTitle: "SignOut", alertMessage: "Are you sure you want to sign out?", actionTitle: "Yes", onAction: {
+        let title: String = getString(
+            englishString: "SignOut",
+            arabicString: "تسجيل خروج",
+            language: language)
+        
+        let message: String = getString(
+            englishString: "Are you sure you want to sign out?",
+            arabicString: "هل انت متأكد من تسجيل الخروج؟",
+            language: language)
+        
+        let actionTitle: String = getString(
+            englishString: "Yes",
+            arabicString: "نعم",
+            language: language)
+        
+        let cancelTitle: String = getString(
+            englishString: "Cancel",
+            arabicString: "إلغاء",
+            language: language)
+        
+        AlertMessage().showAlertMessage(alertTitle: title, alertMessage: message, actionTitle: actionTitle, onAction: {
             AuthServices.currentUserId = nil
             UIViewController.dismiss(animated: true, completion: nil)
-        }, cancelAction: "Cancel", UIViewController)
+        }, cancelAction: cancelTitle, UIViewController)
     }
     
     func changePassword(id: String, oldPassword: String, newPassword: String, onSeccuss: @escaping () -> Void, onError: @escaping (_ ErrorMessage: String) -> Void){

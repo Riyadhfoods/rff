@@ -32,6 +32,27 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+   // labels
+    // Ticket Request
+    @IBOutlet weak var ticketDetailsTitle: UILabel!
+    @IBOutlet weak var ticketRequestTitle: UILabel!
+    @IBOutlet weak var byCommpanyTitle: UILabel!
+    @IBOutlet weak var cashTitle: UILabel!
+    
+    // Exit Re-Entry Visa
+    @IBOutlet weak var exitReEntryVisaTitle: UILabel!
+    @IBOutlet weak var exitYesTitle: UILabel!
+    @IBOutlet weak var exitNoTitle: UILabel!
+    
+    // Dependent Ticket
+    @IBOutlet weak var dependentTicketTitle: UILabel!
+    
+    // Comment
+    @IBOutlet weak var commentTitle: UILabel!
+    
+    // Submit button
+    @IBOutlet weak var submitOutlet: UIButton!
+    
     // -- MARK: Constrains
     
     @IBOutlet weak var commentWidth: NSLayoutConstraint!
@@ -62,12 +83,11 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         comment.text = ""
         comment.delegate = self
         
+        print(empVacationDetails.Dependent_Ticket)
         dependentTicket.text = empVacationDetails.Dependent_Ticket
-        
         if let userId = AuthServices.currentUserId{
             ticketdependentArray = webservice.GetEmpVacationTickets(emp_id: userId, langId: languageChosen)
         }
-        
         setupScreenLayout()
         sutupTicketRequestSelector()
         sutupExitSelector()
@@ -87,7 +107,7 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func setupScreenLayout(){
         commentWidth.constant = screenSize.width * 0.85
-        tableViewWidth.constant = CGFloat(130 * (ticketdependentArray.count))
+        tableViewWidth.constant = CGFloat(140 * (ticketdependentArray.count))
     }
     
     func setUpCommentDisplay(){
@@ -146,6 +166,12 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func setUpLanguageChosen(){
+        setlanguageForTitle(label: ticketDetailsTitle, titleEnglish: "Ticket Details", titleArabic: "تفاصيل التذاكر", language: languageChosen)
+        setlanguageForTitle(label: ticketRequestTitle, titleEnglish: "Ticket Request", titleArabic: "طلب تذكر", language: languageChosen)
+        setlanguageForTitle(label: exitReEntryVisaTitle, titleEnglish: "Exit Re-Entry Visa", titleArabic: "تأشيرة خروج وعودة", language: languageChosen)
+        setlanguageForTitle(label: dependentTicketTitle, titleEnglish: "Dependent Ticket", titleArabic: "إعتماد التذكرة", language: languageChosen)
+        setlanguageForTitle(label: commentTitle, titleEnglish: "Comment", titleArabic: "ملاحظات", language: languageChosen)
+        submitOutlet.setTitle(getString(englishString: "SUBMIT", arabicString: "تسليم", language: languageChosen), for: .normal)
     }
     
     // -- MARK: Tableview data source
@@ -158,8 +184,17 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         if let cell = tableView.dequeueReusableCell(withIdentifier: cell_Id, for: indexPath) as? VisaRequiresCell{
             self.sutupVisaRequireCell(cell: cell, requireVisaSelected: ticketdependentArray[indexPath.row].RequireVisa)
             
-            cell.ticketNumber.text = ticketdependentArray[indexPath.row].Ticket
-            cell.dependentName.text = ticketdependentArray[indexPath.row].DependentName
+            let ticket = ticketdependentArray[indexPath.row].Ticket
+            let dependentName = ticketdependentArray[indexPath.row].DependentName
+            
+            cell.ticketNumberRight.text = getString(englishString: ticket, arabicString: "بدل تذكرة:", language: languageChosen)
+            cell.dependentNameRight.text = getString(englishString: dependentName, arabicString: "اسم الموظف:", language: languageChosen)
+            
+            cell.ticketNumberLeft.text = getString(englishString: "Ticket:", arabicString: ticket, language: languageChosen)
+            cell.dependentNameLeft.text = getString(englishString: "Name:", arabicString: dependentName, language: languageChosen)
+            
+            changeBoldFont(labelLeft: cell.ticketNumberLeft, labelRight: cell.ticketNumberRight, langauge: languageChosen)
+            changeBoldFont(labelLeft: cell.dependentNameLeft, labelRight: cell.dependentNameRight, langauge: languageChosen)
             
             return cell
         }

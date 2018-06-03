@@ -43,6 +43,16 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var settlementTitle: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    let toolBar: UIToolbar = {
+        let tb = UIToolbar()
+        tb.barStyle = .default
+        tb.isTranslucent = true
+        tb.tintColor = UIColor.black
+        tb.sizeToFit()
+        tb.isUserInteractionEnabled = true
+        
+        return tb
+    }()
     
     let leaveDatePickerDatePicker: UIDatePicker = UIDatePicker()
     let returnDatePickerDatePicker: UIDatePicker = UIDatePicker()
@@ -95,10 +105,14 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         empPickerView.tintColor = .clear
         delegatePickerView.tintColor = .clear
         
+        numOfDays.delegate = self
+        exitReEntryDays.delegate = self
+        
         setUpPickerView()
         setupDatePicker()
         setupLanguagChange()
         setUpEmployeeDetails()
+        setUpToolBar()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
         view.addGestureRecognizer(tapGesture)
@@ -163,20 +177,23 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func setupDatePicker(){
-        PickerviewAction().showDatePicker(txtfield: leaveStartDatePickerView, datePicker: leaveDatePickerDatePicker, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
-        PickerviewAction().showDatePicker(txtfield: ReturnDatePickerView, datePicker: returnDatePickerDatePicker, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
+        let leaveTitle = getString(englishString: "Leave Start Date", arabicString: "تاريخ بداية الإجازة", language: languangeChosen)
+        let returnTitle = getString(englishString: "Return Date", arabicString: "تاريخ نهاية الإجازة", language: languangeChosen)
+        
+        PickerviewAction().showDatePicker(txtfield: leaveStartDatePickerView, datePicker: leaveDatePickerDatePicker, title: leaveTitle, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
+        PickerviewAction().showDatePicker(txtfield: ReturnDatePickerView, datePicker: returnDatePickerDatePicker, title: returnTitle, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
     }
     
     func setupLanguagChange(){
-        setlanguageForTitle(label: vacationDetailsHeader, titleEnglish: "Vacations Details", titleArabic: "تفاصيل الإجازة")
-        setlanguageForTitle(label: settlementDetailsHeader, titleEnglish: "Settlement Details", titleArabic: "تفاصيل التصفية")
-        setlanguageForTitle(label: numberOfDaysTitle, titleEnglish: "No of Days", titleArabic: "الإجازة المطلوبة")
-        setlanguageForTitle(label: balanceVacationTitle, titleEnglish: "Balance Vacation", titleArabic: "الإجازة المستحقة")
-        setlanguageForTitle(label: leaveStartDateTitle, titleEnglish: "Leave Start Date", titleArabic: "تاريخ بداية الإجازة")
-        setlanguageForTitle(label: returnDateTitle, titleEnglish: "Return Date", titleArabic: "تاريخ نهاية الإجازة")
-        setlanguageForTitle(label: vacationTypeTitle, titleEnglish: "Vacation Type", titleArabic: "نوع الاجازة")
-        setlanguageForTitle(label: exitTitle, titleEnglish: "Exit Re-Entry Days", titleArabic: "عدد ايام الخروج والعودة")
-        setlanguageForTitle(label: extraDaysTitle, titleEnglish: "Extra Days", titleArabic: "ايام اضافية")
+        setlanguageForTitle(label: vacationDetailsHeader, titleEnglish: "Vacations Details", titleArabic: "تفاصيل الإجازة", language: languangeChosen)
+        setlanguageForTitle(label: settlementDetailsHeader, titleEnglish: "Settlement Details", titleArabic: "تفاصيل التصفية", language: languangeChosen)
+        setlanguageForTitle(label: numberOfDaysTitle, titleEnglish: "No of Days", titleArabic: "الإجازة المطلوبة", language: languangeChosen)
+        setlanguageForTitle(label: balanceVacationTitle, titleEnglish: "Balance Vacation", titleArabic: "الإجازة المستحقة", language: languangeChosen)
+        setlanguageForTitle(label: leaveStartDateTitle, titleEnglish: "Leave Start Date", titleArabic: "تاريخ بداية الإجازة", language: languangeChosen)
+        setlanguageForTitle(label: returnDateTitle, titleEnglish: "Return Date", titleArabic: "تاريخ نهاية الإجازة", language: languangeChosen)
+        setlanguageForTitle(label: vacationTypeTitle, titleEnglish: "Vacation Type", titleArabic: "نوع الاجازة", language: languangeChosen)
+        setlanguageForTitle(label: exitTitle, titleEnglish: "Exit Re-Entry Days", titleArabic: "عدد ايام الخروج والعودة", language: languangeChosen)
+        setlanguageForTitle(label: extraDaysTitle, titleEnglish: "Extra Days", titleArabic: "ايام اضافية", language: languangeChosen)
         setSettlementLocalization()
         setupSubLabel()
         
@@ -188,33 +205,13 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     func setupSubLabel(){
-        if languangeChosen == 1{
-            numOfDays.textAlignment = .left
-            balanceVacation.textAlignment = .left
-            leaveStartDatePickerView.textAlignment = .left
-            ReturnDatePickerView.textAlignment = .left
-            vacationTypePickerView.textAlignment = .left
-            exitReEntryDays.textAlignment = .left
-            extraDays.textAlignment = .left
-        } else {
-            numOfDays.textAlignment = .right
-            balanceVacation.textAlignment = .right
-            leaveStartDatePickerView.textAlignment = .right
-            ReturnDatePickerView.textAlignment = .right
-            vacationTypePickerView.textAlignment = .right
-            exitReEntryDays.textAlignment = .right
-            extraDays.textAlignment = .right
-        }
-    }
-    
-    func setlanguageForTitle(label: UILabel, titleEnglish: String, titleArabic: String){
-        if languangeChosen == 1{
-            label.text = titleEnglish
-            label.textAlignment = .left
-        } else {
-            label.text = titleArabic
-            label.textAlignment = .right
-        }
+        setUpHeaderLabel(txt: numOfDays, language: languangeChosen)
+        setUpHeaderLabel(label: balanceVacation, language: languangeChosen)
+        setUpHeaderLabel(txt: leaveStartDatePickerView, language: languangeChosen)
+        setUpHeaderLabel(txt: ReturnDatePickerView, language: languangeChosen)
+        setUpHeaderLabel(txt: vacationTypePickerView, language: languangeChosen)
+        setUpHeaderLabel(txt: exitReEntryDays, language: languangeChosen)
+        setUpHeaderLabel(label: extraDays, language: languangeChosen)
     }
     
     func setSettlementLocalization(){
@@ -229,6 +226,21 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
             settlementTitle.text = "99999999"
             settlementAmount.textAlignment = .right
         }
+        
+        changeBoldFont(labelLeft: settlementTitle, labelRight: settlementAmount, langauge: languangeChosen)
+    }
+    
+    var textfield = UITextField()
+    func setUpToolBar(){
+        let doneButton = UIBarButtonItem(title: getString(englishString: "Done", arabicString: "تم", language: languangeChosen), style: .plain, target: self, action: #selector(doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        numOfDays.inputAccessoryView = toolBar
+        exitReEntryDays.inputAccessoryView = toolBar
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.textfield = textField
     }
     
     // -- MARK: objc function
@@ -238,7 +250,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     }
     
     @objc func handleDatePicker(sender: UIDatePicker){
-        var dateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.datePickerView = sender
         
@@ -299,6 +311,14 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         vacationTypePickerView.resignFirstResponder()
     }
     
+    @objc func doneClick(){
+        if textfield == numOfDays{
+            numOfDays.resignFirstResponder()
+        } else {
+            exitReEntryDays.resignFirstResponder()
+        }
+    }
+    
     // -- MARK: Picker view data souorce
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -343,6 +363,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
     
     // -- MARK: IBAction
     @IBAction func nextButtonTapped(_ sender: Any) {
+        print(empVacationDetails)
         if let numOfDays = numOfDays.text, let leaveStartDate = leaveStartDatePickerView.text, let returnDate = ReturnDatePickerView.text, let vacationType = vacationTypePickerView.text, let exitReEntryDays = exitReEntryDays.text{
             empVacationDetails.Number_Days = numOfDays
             empVacationDetails.Leave_Start_Dt = leaveStartDate
@@ -400,7 +421,7 @@ extension VacationsDetailsViewController{
         guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        let contentInset = UIEdgeInsets(top: 0, left: 8, bottom: frame.height, right: 0)
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
         scrollView.contentInset = contentInset
     }
     

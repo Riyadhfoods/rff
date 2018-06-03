@@ -35,4 +35,66 @@ func emptyMessage(message: String, viewController: UIViewController, tableView: 
     tableView.separatorStyle = .none;
 }
 
+// Localization
+
+func getString(englishString: String, arabicString: String, language: Int) -> String{
+    return language == 1 ? englishString : arabicString
+}
+
+func setlanguageForTitle(label: UILabel, titleEnglish: String, titleArabic: String, language: Int){
+    if language == 1{
+        label.text = titleEnglish
+        label.textAlignment = .left
+    } else {
+        label.text = titleArabic
+        label.textAlignment = .right
+    }
+}
+
+func setlanguageForTitle(txt: UITextField, titleEnglish: String, titleArabic: String, language: Int){
+    if language == 1{
+        txt.text = titleEnglish
+        txt.textAlignment = .left
+    } else {
+        txt.text = titleArabic
+        txt.textAlignment = .right
+    }
+}
+
+func setUpHeaderLabel(label: UILabel, language: Int){
+    if language == 1{
+        label.textAlignment = .left
+    } else {
+        label.textAlignment = .right
+    }
+}
+
+func setUpHeaderLabel(txt: UITextField, language: Int){
+    if language == 1{
+        txt.textAlignment = .left
+    } else {
+        txt.textAlignment = .right
+    }
+}
+
+func changeBoldFont(labelLeft: UILabel, labelRight: UILabel, langauge: Int){
+    if langauge == 1{
+        labelLeft.font = UIFont.boldSystemFont(ofSize: 15)
+        labelRight.font = UIFont.systemFont(ofSize: 15)
+    } else {
+        labelRight.font = UIFont.boldSystemFont(ofSize: 15)
+        labelLeft.font = UIFont.systemFont(ofSize: 15)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 

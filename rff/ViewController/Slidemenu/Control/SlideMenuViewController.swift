@@ -127,11 +127,9 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
             Section(name: "الصلاحيات", items: ["تغيير كلمة السر"], isExpanded: false),
             Section(name: "قائمة المهام", items: ["البريد الوارد"], isExpanded: false),
             Section(name: "إجراءات الموظف", items: [
-                    "موظف جديد",
-                    "نموذج اجازه",
-                    "سلفة",
+"نموذج اجازه",
+"سلفة",
                     "قائمة السلف",
-                    "استقالة",
                     "المخالفات",
                     "نموذج العودة من الاجازه",
                     "عرض الراتب",
@@ -148,14 +146,6 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
                     "حساب العمل الاضافي",
                     "إحتساب التصفية",
                     "الحضور و الانصراف"
-                ], isExpanded: false),
-            Section(name: "الإعتمادات", items: [
-                    "الموافقة",
-                    "ترحيل الرواتب",
-                    "إضافة نماذج",
-                    "احتساب الرواتب",
-                    "خصومات الراتب",
-                    "برنامج المستندات"
                 ], isExpanded: false),
             Section(name: "المشتريات", items: [
                     "اوامر الشراء",

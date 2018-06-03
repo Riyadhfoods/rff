@@ -16,6 +16,7 @@ class InboxTableViewController: UITableViewController {
     var categoryIndexSelected: Int = 0
     
     let mainBackgroundColor = AppDelegate().mainBackgroundColor
+    let languageChosen = LoginViewController.languageChosen
     var navTitle: String = ""
     
     override func viewDidLoad() {
@@ -57,36 +58,20 @@ class InboxTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? InboxTableViewCell {
-            
-            cell.holderView.layer.cornerRadius = 5.0
-            cell.holderView.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
-            cell.holderView.layer.borderWidth = 1
-            
             cell.contentView.backgroundColor = UIColor.clear
             
             let emp_id = arrayOfInboxGrid[indexPath.row].empid
             let emp_name = arrayOfInboxGrid[indexPath.row].empname
             let date = arrayOfInboxGrid[indexPath.row].date
             
-            if LoginViewController.languageChosen == 1 {
-                cell.empIdEnglish.text = emp_id
-                cell.empNameEnglish.text = emp_name
-                cell.dateEnglish.text = date
-                cell.viewForm.setTitle("VIEW FORM", for: .normal)
-                
-                cell.empIdArabic.text = "Emp ID:"
-                cell.empNameArabic.text = "Emp Name:"
-                cell.dateArabic.text = "Date:"
-            } else {
-                cell.empIdEnglish.text = "رقم الموظف"
-                cell.empNameEnglish.text = "اسم الموظف"
-                cell.dateEnglish.text = "التاريخ"
-                
-                cell.empIdArabic.text = emp_id
-                cell.empNameArabic.text = emp_name
-                cell.dateArabic.text = date
-                cell.viewForm.setTitle("عرض النموذج", for: .normal)
-            }
+            cell.empIdEnglish.text = getString(englishString: emp_id, arabicString: "رقم الموظف", language: languageChosen)
+            cell.empNameEnglish.text = getString(englishString: emp_name, arabicString: "اسم الموظف", language: languageChosen)
+            cell.dateEnglish.text = getString(englishString: date, arabicString: "التاريخ", language: languageChosen)
+            cell.viewForm.setTitle(getString(englishString: "VIEW FORM", arabicString: "عرض النموذج", language: languageChosen), for: .normal)
+            
+            cell.empIdArabic.text = getString(englishString: "Emp ID:", arabicString: emp_id, language: languageChosen)
+            cell.empNameArabic.text = getString(englishString: "Emp Name:", arabicString: emp_name, language: languageChosen)
+            cell.dateArabic.text = getString(englishString: "Date:", arabicString: date, language: languageChosen)
             
             
             return cell

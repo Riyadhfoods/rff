@@ -96,7 +96,7 @@
                                                                         </stackView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="100" id="7un-r6-9PB"/>
+                                                                        <constraint firstAttribute="height" constant="83" id="7un-r6-9PB"/>
                                                                     </constraints>
                                                                 </stackView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4YR-tu-DDm">
@@ -123,7 +123,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="tZO-ij-tBZ" secondAttribute="bottom" constant="8" id="IiP-aU-lQL"/>
+                                                <constraint firstAttribute="bottom" secondItem="tZO-ij-tBZ" secondAttribute="bottom" constant="2" id="IiP-aU-lQL"/>
                                                 <constraint firstItem="tZO-ij-tBZ" firstAttribute="top" secondItem="kHi-UD-bfG" secondAttribute="top" constant="8" id="RJ3-vJ-2Tf"/>
                                                 <constraint firstAttribute="trailing" secondItem="tZO-ij-tBZ" secondAttribute="trailing" constant="16" id="TEI-Fl-ebV"/>
                                                 <constraint firstItem="tZO-ij-tBZ" firstAttribute="leading" secondItem="kHi-UD-bfG" secondAttribute="leading" constant="16" id="i36-GE-HOq"/>
@@ -131,10 +131,14 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="arabicDescription" destination="F7d-Na-HsZ" id="PML-gu-WR0"/>
-                                            <outlet property="count" destination="GUc-Iu-sGa" id="Xgc-gN-aNd"/>
-                                            <outlet property="englishDescription" destination="Toj-YE-rbe" id="eZR-dH-HpP"/>
+                                            <outlet property="arabicDescriptionLeft" destination="F7d-Na-HsZ" id="PML-gu-WR0"/>
+                                            <outlet property="arabicDescriptionRight" destination="8hX-OP-Ohd" id="lGy-Yk-jcx"/>
+                                            <outlet property="countLeft" destination="GUc-Iu-sGa" id="f9O-Il-2RD"/>
+                                            <outlet property="countRight" destination="u8a-wi-0BT" id="aJd-Ej-JzD"/>
+                                            <outlet property="englishDescriptionLeft" destination="Toj-YE-rbe" id="eZR-dH-HpP"/>
+                                            <outlet property="englishDescriptionRight" destination="XbC-ah-jfq" id="K6C-yN-dLW"/>
                                             <outlet property="holderView" destination="tZO-ij-tBZ" id="VQO-Sr-Q94"/>
+                                            <outlet property="viewButton" destination="4YR-tu-DDm" id="0Ik-Wy-M7h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
