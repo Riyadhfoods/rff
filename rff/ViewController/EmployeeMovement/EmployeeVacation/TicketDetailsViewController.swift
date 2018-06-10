@@ -9,6 +9,11 @@
 import UIKit
 import NotificationCenter
 
+protocol ticketRequestDelegate{
+    func getTicketRequest(ticketRequest: Int)
+    func changeSettlementBaseOnTicketRequest(newSettlmentAmount: String)
+}
+
 class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate {
     // -- MARK: IBOutlets
     
@@ -74,6 +79,15 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     var webservice = Login()
     var ticketdependentArray = [DepVacTicket]()
     var isKeyboardPresent = false
+    
+    var delegate: ticketRequestDelegate?
+    var delegateId: String = ""
+    var newSettlementAmount: String = ""
+    
+    // 0 --> no and 1 --> yes
+    var requiredVisaSelected: Int = 0
+    // 0 --> no and 1 --> yes
+    var exitReEntryVisaSelected: Int = 0
     
     // -- MARK: viewDidLoad
     
@@ -193,6 +207,12 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
             cell.ticketNumberLeft.text = getString(englishString: "Ticket:", arabicString: ticket, language: languageChosen)
             cell.dependentNameLeft.text = getString(englishString: "Name:", arabicString: dependentName, language: languageChosen)
             
+            cell.visaNoButton.addTarget(self, action: #selector(visaNoButtonTapped(sender:)), for: .touchUpInside)
+            cell.visaNoButton.tag = indexPath.row
+            
+            cell.visaYesButton.addTarget(self, action: #selector(visaYesButtonTapped(sender:)), for: .touchUpInside)
+            cell.visaYesButton.tag = indexPath.row
+            
             changeBoldFont(labelLeft: cell.ticketNumberLeft, labelRight: cell.ticketNumberRight, langauge: languageChosen)
             changeBoldFont(labelLeft: cell.dependentNameLeft, labelRight: cell.dependentNameRight, langauge: languageChosen)
             
@@ -201,31 +221,128 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         return UITableViewCell()
     }
     
-    // -- MARK: IBActions
+    @objc func visaNoButtonTapped(sender: UIButton){
+        visaButtonTapped(row: sender.tag, visaSelected: 0)
+    }
     
+    @objc func visaYesButtonTapped(sender: UIButton){
+        visaButtonTapped(row: sender.tag, visaSelected: 1)
+    }
+    
+    func visaButtonTapped(row: Int, visaSelected: Int){
+        requiredVisaSelected = visaSelected
+        ticketdependentArray[row].RequireVisa = requiredVisaSelected
+    }
+    
+    
+    // -- MARK: IBActions
+    var ticketRequest: Int = 0
     @IBAction func byCompanyButtonTapped(_ sender: Any) {
         byCompanyButton.backgroundColor = mainBackgroundColor
         cashButton.backgroundColor = .white
+        ticketRequest = 1
+        
+        delegate?.getTicketRequest(ticketRequest: ticketRequest)
+        changeSettlementAmount(ticket: ticketRequest)
+        print(empVacationDetails.TotalSettlementAmount)
     }
     
     @IBAction func cashButtonTapped(_ sender: Any) {
         byCompanyButton.backgroundColor = .white
         cashButton.backgroundColor = mainBackgroundColor
+        ticketRequest = 0
+        
+        delegate?.getTicketRequest(ticketRequest: ticketRequest)
+        changeSettlementAmount(ticket: ticketRequest)
+        print(empVacationDetails.TotalSettlementAmount)
+    }
+    
+    func changeSettlementAmount(ticket: Int){
+        if let userId = AuthServices.currentUserId{
+            let settlementAmountChange =  webservice.get_settlement_details(vacationtype: empVacationDetails.Vac_Type, langid: languageChosen, emp_no: userId, startdate: empVacationDetails.Leave_Start_Dt, ticket: ticket)
+            
+            newSettlementAmount = settlementAmountChange.TotalSettlementAmount
+            delegate?.changeSettlementBaseOnTicketRequest(newSettlmentAmount: newSettlementAmount)
+            empVacationDetails.TotalSettlementAmount = settlementAmountChange.TotalSettlementAmount
+        }
     }
     
     @IBAction func exitYesButtonTapped(_ sender: Any) {
         ExitYesButton.backgroundColor = mainBackgroundColor
         exitNoBuuton.backgroundColor = .white
+        exitReEntryVisaSelected = 1
     }
     
     @IBAction func exitNoButtonTapped(_ sender: Any) {
         ExitYesButton.backgroundColor = .white
         exitNoBuuton.backgroundColor = mainBackgroundColor
+        exitReEntryVisaSelected = 0
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
         empVacationDetails.DependentVactionTicket = ticketdependentArray
         print(empVacationDetails)
+        print("Ticket Request = \(ticketRequest)")
+        print("Delegate Id = \(delegateId)")
+        
+        let editSettlementAmountString = (empVacationDetails.TotalSettlementAmount).replacingOccurrences(of: ",", with: "")
+        let settlementAmountDouble = (editSettlementAmountString as NSString).doubleValue
+        
+        let pid = webservice.SubmitEmpVacation(
+            emp_no: "\(empVacationDetails.Emp_Id)",
+            delegateid: delegateId,
+            vacationtype: empVacationDetails.Vac_Type,
+            tickekreq: ticketRequest,
+            settlementamt: settlementAmountDouble,
+            leavestartdate: empVacationDetails.Leave_Start_Dt,
+            leavertndate: empVacationDetails.Leave_Return_Dt,
+            numberofdays: empVacationDetails.Number_Days,
+            dependenttck: empVacationDetails.Dependent_Ticket,
+            exitreentry: exitReEntryVisaSelected,
+            comment: comment.text,
+            error: "")
+        
+        empVacationDetails.PID = pid.PID
+        empVacationDetails.Error = pid.Error
+        
+        print(empVacationDetails)
+        
+        if empVacationDetails.Error == ""{
+            let alertTitle = getString(englishString: "Alert", arabicString: "تنبيه", language: languageChosen)
+            let messageTitle = getString(englishString: "You have already applied for vacation", arabicString: "لقد تقدمت بطلب عطله مسبقاً", language: languageChosen)
+            AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: messageTitle, actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
+            
+        } else if empVacationDetails.Error == "1"{
+            for ticketdep in empVacationDetails.DependentVactionTicket{
+                _ = webservice.UpdateVisaReq(
+                    emp_id: "\(empVacationDetails.Emp_Id)",
+                    dep_name: ticketdep.DependentName,
+                    value: requiredVisaSelected, error: "")
+            }
+        }
+        
+        if empVacationDetails.Vac_Type == "10" {
+            _ = webservice.save_settlement(
+                emp_id: "\(empVacationDetails.Emp_Id)",
+                pid: empVacationDetails.PID,
+                sbasic: empVacationDetails.SBasic,
+                sallowances: empVacationDetails.SAllowances,
+                stotal: empVacationDetails.STotal,
+                snet: empVacationDetails.SNet,
+                vbasic: empVacationDetails.VBasic,
+                vallowances: empVacationDetails.VAllowances,
+                vtotal: empVacationDetails.VTotal,
+                vnet: empVacationDetails.VNet,
+                ticketprice: empVacationDetails.TicketPrice,
+                ticketamount: empVacationDetails.TicketAmount,
+                ticketpercent: empVacationDetails.TicketPercent,
+                diffticketamount: empVacationDetails.DiffTicketAmount,
+                netticketp: empVacationDetails.NetTicketPrice,
+                error: "")
+        }
+        
+        let alertTitle = getString(englishString: "Vacation applied successfully", arabicString: "تم تسليم طلب الاجازة بنجاح", language: languageChosen)
+        AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: "", actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
     }
     
     // -- MARK: Handle Keyboard

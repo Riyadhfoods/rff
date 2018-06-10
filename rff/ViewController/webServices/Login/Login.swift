@@ -48,8 +48,11 @@
             
             let xmlElement = xmlResult?.element
             let str = xmlElement?.text
-            let xmlElementFirst = xmlElement?.children[0] as!TextElement
-            return xmlElementFirst.text
+            if let str = str {
+                let xmlElementFirst = xmlElement?.children[0] as!TextElement
+                return xmlElementFirst.text
+            }
+            
         }
         catch
         {
@@ -490,6 +493,74 @@
                         rItem1.extradays =  strVal
                     }
                         // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Error" {
+                        rItem1.Error =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "PID" {
+                        rItem1.PID =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "TotalSettlementAmount" {
+                        rItem1.TotalSettlementAmount =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "DiffTicketAmount" {
+                        rItem1.DiffTicketAmount =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "NetTicketPrice" {
+                        rItem1.NetTicketPrice =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "TicketPercent" {
+                        rItem1.TicketPercent =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "TicketAmount" {
+                        rItem1.TicketAmount =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "TicketPrice" {
+                        rItem1.TicketPrice =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "VNet" {
+                        rItem1.VNet =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "VAllowances" {
+                        rItem1.VAllowances =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "VTotal" {
+                        rItem1.VTotal =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "VBasic" {
+                        rItem1.VBasic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SNet" {
+                        rItem1.SNet =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "STotal" {
+                        rItem1.STotal =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SAllowances" {
+                        rItem1.SAllowances =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SBasic" {
+                        rItem1.SBasic =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SDeduction" {
+                        rItem1.SDeduction =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
                     else if elemName == "Emp_Id" {
                         rItem1.Emp_Id = strVal.toInt()!
                     }
@@ -601,7 +672,10 @@
                     else if elemName == "SettlementAmount" {
                         rItem1.SettlementAmount =  strVal
                     }
-
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "Dependent_Ticket" {
+                        rItem1.Dependent_Ticket =  strVal
+                    }
                 }
                 returnValue.append(rItem1)
                 
@@ -610,6 +684,7 @@
         return returnValue
     }
     public func EmpVacArrFromXML(data: Data)-> [EmpVac] {
+        
         let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
         return EmpVacArrFromXMLString( xmlToParse : xmlToParse)
     }
@@ -689,6 +764,57 @@
                 }
                 else if elemName == "extradays" {
                     returnValue.extradays =  strVal
+                }
+                else if elemName == "Error" {
+                    returnValue.Error =  strVal
+                }
+                else if elemName == "PID" {
+                    returnValue.PID =  strVal
+                }
+                else if elemName == "TotalSettlementAmount" {
+                    returnValue.TotalSettlementAmount =  strVal
+                }
+                else if elemName == "DiffTicketAmount" {
+                    returnValue.DiffTicketAmount =  strVal
+                }
+                else if elemName == "NetTicketPrice" {
+                    returnValue.NetTicketPrice =  strVal
+                }
+                else if elemName == "TicketPercent" {
+                    returnValue.TicketPercent =  strVal
+                }
+                else if elemName == "TicketAmount" {
+                    returnValue.TicketAmount =  strVal
+                }
+                else if elemName == "TicketPrice" {
+                    returnValue.TicketPrice =  strVal
+                }
+                else if elemName == "VNet" {
+                    returnValue.VNet =  strVal
+                }
+                else if elemName == "VAllowances" {
+                    returnValue.VAllowances =  strVal
+                }
+                else if elemName == "VTotal" {
+                    returnValue.VTotal =  strVal
+                }
+                else if elemName == "VBasic" {
+                    returnValue.VBasic =  strVal
+                }
+                else if elemName == "SNet" {
+                    returnValue.SNet =  strVal
+                }
+                else if elemName == "STotal" {
+                    returnValue.STotal =  strVal
+                }
+                else if elemName == "SAllowances" {
+                    returnValue.SAllowances =  strVal
+                }
+                else if elemName == "SBasic" {
+                    returnValue.SBasic =  strVal
+                }
+                else if elemName == "SDeduction" {
+                    returnValue.SDeduction =  strVal
                 }
                 else if elemName == "Emp_Id" {
                     returnValue.Emp_Id = strVal.toInt()!
@@ -810,7 +936,6 @@
         let returnValue:EmpVac=EmpVacFromXML(data : responseData)
         return returnValue
     }
-    
     public func GetEmpVacationTickets(emp_id:String, langId:Int)-> [DepVacTicket]{
         var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
         
@@ -833,6 +958,27 @@
         
         let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
         let returnValue:[DepVacTicket]=depVacTicketArrFromXML(data : responseData)
+        return returnValue
+    }
+    public func BindVacationType_DDL(langid:Int)-> [EmpVac]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<BindVacationType_DDL xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "</BindVacationType_DDL>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/BindVacationType_DDL"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[EmpVac]=EmpVacArrFromXML(data : responseData)
         return returnValue
     }
     public func depVacTicketArrFromXMLString(xmlToParse:String)->[DepVacTicket] {
@@ -863,7 +1009,7 @@
                         
                     }
                     elemName = elem1!.name
-                        // Array Propert of returnValue subProperty for rItem1
+                    // Array Propert of returnValue subProperty for rItem1
                     if elemName == "RequireVisa" {
                         rItem1.RequireVisa = strVal.toInt()!
                     }
@@ -891,29 +1037,203 @@
         }
         return returnValue
     }
+    
     public func depVacTicketArrFromXML(data: Data)-> [DepVacTicket] {
         let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
         return depVacTicketArrFromXMLString( xmlToParse : xmlToParse)
     }
-    public func BindVacationType_DDL(langid:Int)-> [EmpVac]{
+
+    public func SubmitEmpVacation(emp_no:String, delegateid:String, vacationtype:String, tickekreq:Int, settlementamt:Double, leavestartdate:String, leavertndate:String, numberofdays:String, dependenttck:String, exitreentry:Int, comment:String, error:String)-> EmpVac{
         var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
         
         soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
         soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
         soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
         soapReqXML += " <soap:Body>"
-        soapReqXML += "<BindVacationType_DDL xmlns=\"http://tempuri.org/\">"
-        soapReqXML += "<langid>"
-        soapReqXML += String(langid)
-        soapReqXML += "</langid>"
-        soapReqXML += "</BindVacationType_DDL>"
+        soapReqXML += "<SubmitEmpVacation xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<emp_no>"
+        soapReqXML += emp_no
+        soapReqXML += "</emp_no>"
+        soapReqXML += "<delegateid>"
+        soapReqXML += delegateid
+        soapReqXML += "</delegateid>"
+        soapReqXML += "<vacationtype>"
+        soapReqXML += vacationtype
+        soapReqXML += "</vacationtype>"
+        soapReqXML += "<tickekreq>"
+        soapReqXML += String(tickekreq)
+        soapReqXML += "</tickekreq>"
+        soapReqXML += "<settlementamt>"
+        soapReqXML += String(settlementamt)
+        soapReqXML += "</settlementamt>"
+        soapReqXML += "<leavestartdate>"
+        soapReqXML += leavestartdate
+        soapReqXML += "</leavestartdate>"
+        soapReqXML += "<leavertndate>"
+        soapReqXML += leavertndate
+        soapReqXML += "</leavertndate>"
+        soapReqXML += "<numberofdays>"
+        soapReqXML += numberofdays
+        soapReqXML += "</numberofdays>"
+        soapReqXML += "<dependenttck>"
+        soapReqXML += dependenttck
+        soapReqXML += "</dependenttck>"
+        soapReqXML += "<exitreentry>"
+        soapReqXML += String(exitreentry)
+        soapReqXML += "</exitreentry>"
+        soapReqXML += "<comment>"
+        soapReqXML += comment
+        soapReqXML += "</comment>"
+        soapReqXML += "<error>"
+        soapReqXML += error
+        soapReqXML += "</error>"
+        soapReqXML += "</SubmitEmpVacation>"
         soapReqXML += "</soap:Body>"
         soapReqXML += "</soap:Envelope>"
         
-        let soapAction :String = "http://tempuri.org/BindVacationType_DDL"
+        let soapAction :String = "http://tempuri.org/SubmitEmpVacation"
         
         let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
-        let returnValue:[EmpVac]=EmpVacArrFromXML(data : responseData)
+        let returnValue:EmpVac=EmpVacFromXML(data : responseData)
         return returnValue
+    }
+    public func get_settlement_details(vacationtype:String, langid:Int, emp_no:String, startdate:String, ticket:Int)-> EmpVac{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<get_settlement_details xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<vacationtype>"
+        soapReqXML += vacationtype
+        soapReqXML += "</vacationtype>"
+        soapReqXML += "<langid>"
+        soapReqXML += String(langid)
+        soapReqXML += "</langid>"
+        soapReqXML += "<emp_no>"
+        soapReqXML += emp_no
+        soapReqXML += "</emp_no>"
+        soapReqXML += "<startdate>"
+        soapReqXML += startdate
+        soapReqXML += "</startdate>"
+        soapReqXML += "<ticket>"
+        soapReqXML += String(ticket)
+        soapReqXML += "</ticket>"
+        soapReqXML += "</get_settlement_details>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/get_settlement_details"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:EmpVac=EmpVacFromXML(data : responseData)
+        return returnValue
+    }
+    public func save_settlement(emp_id:String, pid:String, sbasic:String, sallowances:String, stotal:String, snet:String, vbasic:String, vallowances:String, vtotal:String, vnet:String, ticketprice:String, ticketamount:String, ticketpercent:String, diffticketamount:String, netticketp:String, error:String)-> String{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<save_settlement xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<emp_id>"
+        soapReqXML += emp_id
+        soapReqXML += "</emp_id>"
+        soapReqXML += "<pid>"
+        soapReqXML += pid
+        soapReqXML += "</pid>"
+        soapReqXML += "<sbasic>"
+        soapReqXML += sbasic
+        soapReqXML += "</sbasic>"
+        soapReqXML += "<sallowances>"
+        soapReqXML += sallowances
+        soapReqXML += "</sallowances>"
+        soapReqXML += "<stotal>"
+        soapReqXML += stotal
+        soapReqXML += "</stotal>"
+        soapReqXML += "<snet>"
+        soapReqXML += snet
+        soapReqXML += "</snet>"
+        soapReqXML += "<vbasic>"
+        soapReqXML += vbasic
+        soapReqXML += "</vbasic>"
+        soapReqXML += "<vallowances>"
+        soapReqXML += vallowances
+        soapReqXML += "</vallowances>"
+        soapReqXML += "<vtotal>"
+        soapReqXML += vtotal
+        soapReqXML += "</vtotal>"
+        soapReqXML += "<vnet>"
+        soapReqXML += vnet
+        soapReqXML += "</vnet>"
+        soapReqXML += "<ticketprice>"
+        soapReqXML += ticketprice
+        soapReqXML += "</ticketprice>"
+        soapReqXML += "<ticketamount>"
+        soapReqXML += ticketamount
+        soapReqXML += "</ticketamount>"
+        soapReqXML += "<ticketpercent>"
+        soapReqXML += ticketpercent
+        soapReqXML += "</ticketpercent>"
+        soapReqXML += "<diffticketamount>"
+        soapReqXML += diffticketamount
+        soapReqXML += "</diffticketamount>"
+        soapReqXML += "<netticketp>"
+        soapReqXML += netticketp
+        soapReqXML += "</netticketp>"
+        soapReqXML += "<error>"
+        soapReqXML += error
+        soapReqXML += "</error>"
+        soapReqXML += "</save_settlement>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/save_settlement"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+//        let strVal :String? = stringFromXML(data : responseData);
+//        if strVal == nil {
+//
+//            return  ""
+//        }
+//        let returnValue:String = strVal!
+        return ""
+    }
+    public func UpdateVisaReq(emp_id:String, dep_name:String, value:Int, error:String) -> String{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<UpdateVisaReq xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<emp_id>"
+        soapReqXML += emp_id
+        soapReqXML += "</emp_id>"
+        soapReqXML += "<dep_name>"
+        soapReqXML += dep_name
+        soapReqXML += "</dep_name>"
+        soapReqXML += "<value>"
+        soapReqXML += String(value)
+        soapReqXML += "</value>"
+        soapReqXML += "<error>"
+        soapReqXML += error
+        soapReqXML += "</error>"
+        soapReqXML += "</UpdateVisaReq>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/UpdateVisaReq"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+//        let strVal :String? = stringFromXML(data : responseData);
+//        if strVal == nil {
+//
+//            return  ""
+//        }
+//        let returnValue:String = strVal!
+        return ""
     }
  }

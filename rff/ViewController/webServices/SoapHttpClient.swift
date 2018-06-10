@@ -1,8 +1,12 @@
 import Foundation
+
+let dataCache = NSCache<AnyObject, AnyObject>()
+
 public class SoapHttpClient {
     public static private(set) var StatusCode:Int?
     public static private(set) var ErrorString:String?
     public static private(set) var StatusDescription:String?
+    
     
     public class func HasError()->Bool{
         return (self.StatusCode != nil) && (self.StatusCode !=  200);
@@ -37,16 +41,14 @@ public class SoapHttpClient {
         self.ResponseData = nil;
         self.ResponseString = nil;
         
-        //let semaphore = dispatch_semaphore_create(0);
+        var responseData : Data = Data()
+        
         let semaphore = DispatchSemaphore.init(value: 0)
         let url = URL.init(string: WebServiceUrl)
-        //let req = NSMutableURLRequest(URL: NSURL(string: WebServiceUrl)!)
         let req = NSMutableURLRequest(url: url!)
         
-        //let session = NSURLSession.sharedSession()
         let session = URLSession.shared
         req.httpMethod = "POST"
-        //req.httpBody = SoapMessage.dataUsingEncoding(NSUTF8StringEncoding)
         req.httpBody = SoapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
         req.addValue(Host, forHTTPHeaderField: "Host")
         req.addValue("text/xml;charset =utf-8", forHTTPHeaderField: "Content-Type")
@@ -55,29 +57,24 @@ public class SoapHttpClient {
         req.addValue(String(contentLength), forHTTPHeaderField: "Content-Length")
         req.addValue(SoapAction, forHTTPHeaderField: "SOAPAction")
         
-        var responseData : Data = Data()
         let task_ = session.dataTask(with: req as URLRequest){ (data, response, error) in
-            
+            if let response = response{
+                print("Response = \(response)")
+            }
             self.Error=error
             
             if let httpResponse = response as? HTTPURLResponse {
-                //print("statusCode: \(httpResponse.statusCode)")
                 self.StatusCode = httpResponse.statusCode
-                
                 if httpResponse.statusCode != 200 {
                     self.StatusCode=httpResponse.statusCode
                     self.ErrorString=httpResponse.description
                     
                     responseData = Data()
                     self.ResponseData = Data()
-                }
-                else
-                {
+                } else {
                     responseData = data!
                     self.ResponseData = data
                     let responseString =  String.init(data: data!, encoding: String.Encoding.utf8)
-                    //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                    //self.ResponseString =  responseString as! String
                     self.ResponseString = responseString!
                 }
             }
@@ -85,34 +82,10 @@ public class SoapHttpClient {
         }
         task_.resume()
         
-        //        var responseData:NSData=NSData()
-        //        let task = session.dataTaskWithRequest(req, completionHandler: {data, response, error -> Void in
-        //            self.Error = error
-        //            if let httpResponse = response as? NSHTTPURLResponse {
-        //                self.StatusCode=httpResponse.statusCode;
-        //
-        //                if httpResponse.statusCode != 200 {
-        //                    self.StatusCode=httpResponse.statusCode
-        //                    self.ErrorString=httpResponse.description
-        //                    responseData=NSData()
-        //                    self.ResponseData = NSData()
-        //                }
-        //                else
-        //                {
-        //                    responseData = data!
-        //                    self.ResponseData = data
-        //                    let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-        //                    self.ResponseString =  responseString as! String
-        //                }
-        //            }
-        //            dispatch_semaphore_signal(semaphore);
-        //        })
-        //        task.resume()
-        
         semaphore.wait()
-        //dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         return responseData
     }
+    
     public class func downloadString(host:String, url:String, soapAction:String, soapMessage:String)->String{
         let responseData       = SoapHttpClient.callWS(Host : host,WebServiceUrl:url,SoapAction:soapAction, SoapMessage:soapMessage)
         //let responseString     = NSString(data: responseData , encoding: NSUTF8StringEncoding)

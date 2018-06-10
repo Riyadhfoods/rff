@@ -16,13 +16,30 @@
 		C00707FA20A05F2800320ED4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00707F920A05F2800320ED4 /* SWRevealViewController.m */; };
 		C00707FE20A0617000320ED4 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00707FD20A0617000320ED4 /* SlideMenuViewController.swift */; };
 		C007080020A0619500320ED4 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00707FF20A0619500320ED4 /* HeaderTableViewCell.swift */; };
+		C008654D20C84E93006CD88E /* SalesInboxWebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008654C20C84E93006CD88E /* SalesInboxWebPageViewController.swift */; };
+		C008655020C9440C006CD88E /* SalesPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008654F20C9440C006CD88E /* SalesPersonViewController.swift */; };
+		C008655220C94415006CD88E /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008655120C94415006CD88E /* StoreViewController.swift */; };
+		C008655420C94426006CD88E /* CreditDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008655320C94426006CD88E /* CreditDetailsViewController.swift */; };
+		C008655620C94438006CD88E /* AddItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008655520C94438006CD88E /* AddItemsViewController.swift */; };
+		C008655820C94455006CD88E /* ItemsSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008655720C94455006CD88E /* ItemsSelectedViewController.swift */; };
+		C008655A20C94472006CD88E /* ItemsSelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008655920C94472006CD88E /* ItemsSelectedCell.swift */; };
 		C013CC4620BEAE3200B08289 /* DepVacTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C013CC4520BEAE3100B08289 /* DepVacTicket.swift */; };
+		C0234D3A20C5237E008BB55B /* RevealMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0234D3920C5237E008BB55B /* RevealMenu.swift */; };
 		C035313E20B183A100E0DBD9 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035313D20B183A100E0DBD9 /* AuthServices.swift */; };
 		C035314920B1875700E0DBD9 /* SoapHttpClientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */; };
 		C035314A20B1875700E0DBD9 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314420B1875700E0DBD9 /* Login.swift */; };
 		C035314B20B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314620B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift */; };
 		C035314C20B1875700E0DBD9 /* SoapHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314720B1875700E0DBD9 /* SoapHttpClient.swift */; };
 		C035314D20B1875700E0DBD9 /* SWXMLHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C035314820B1875700E0DBD9 /* SWXMLHash.swift */; };
+		C03C7C0820C7D96E00D8248C /* ReturnStyleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C0720C7D96E00D8248C /* ReturnStyleTableViewController.swift */; };
+		C03C7C0A20C7D98000D8248C /* ReturnStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C0920C7D98000D8248C /* ReturnStyleCell.swift */; };
+		C03C7C0D20C7D9FF00D8248C /* OrderStyleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C0C20C7D9FF00D8248C /* OrderStyleTableViewController.swift */; };
+		C03C7C0F20C7DA0B00D8248C /* OrderStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C0E20C7DA0B00D8248C /* OrderStyleCell.swift */; };
+		C03C7C1120C7DA2A00D8248C /* TansferStyleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1020C7DA2A00D8248C /* TansferStyleTableViewController.swift */; };
+		C03C7C1320C7DA3D00D8248C /* TransferStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1220C7DA3D00D8248C /* TransferStyleCell.swift */; };
+		C03C7C1820C7F75100D8248C /* Sales.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1620C7F75100D8248C /* Sales.swift */; };
+		C03C7C1920C7F75100D8248C /* ArrayOfSales.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1720C7F75100D8248C /* ArrayOfSales.swift */; };
+		C03C7C1B20C7F7E000D8248C /* SalesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1A20C7F7E000D8248C /* SalesModel.swift */; };
 		C061756D209EF792007F8E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061756C209EF792007F8E59 /* AppDelegate.swift */; };
 		C061756F209EF792007F8E59 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061756E209EF792007F8E59 /* LoginViewController.swift */; };
 		C0617572209EF792007F8E59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0617570209EF792007F8E59 /* Main.storyboard */; };
@@ -30,10 +47,8 @@
 		C078EB6A20A84F6A00E0B812 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB6920A84F6A00E0B812 /* Home.storyboard */; };
 		C078EB6C20A84FC200E0B812 /* Master.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB6B20A84FC200E0B812 /* Master.storyboard */; };
 		C078EB6E20A84FFC00E0B812 /* Tracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB6D20A84FFC00E0B812 /* Tracking.storyboard */; };
-		C078EB7020A8509300E0B812 /* NewEmployee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB6F20A8509300E0B812 /* NewEmployee.storyboard */; };
 		C078EB7220A850BE00E0B812 /* EmployeeVacation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7120A850BE00E0B812 /* EmployeeVacation.storyboard */; };
 		C078EB7420A850E200E0B812 /* Loan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7320A850E200E0B812 /* Loan.storyboard */; };
-		C078EB7620A8510100E0B812 /* LoanList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7520A8510100E0B812 /* LoanList.storyboard */; };
 		C078EB7820A8512D00E0B812 /* Resign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7720A8512D00E0B812 /* Resign.storyboard */; };
 		C078EB7A20A8516400E0B812 /* EmployeeViolation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7920A8516400E0B812 /* EmployeeViolation.storyboard */; };
 		C078EB7C20A8518D00E0B812 /* ReturnFromVacation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB7B20A8518D00E0B812 /* ReturnFromVacation.storyboard */; };
@@ -49,12 +64,6 @@
 		C078EB9020A8540500E0B812 /* OverTimeCalculation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB8F20A8540500E0B812 /* OverTimeCalculation.storyboard */; };
 		C078EB9220A8542900E0B812 /* SettleCalculation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9120A8542900E0B812 /* SettleCalculation.storyboard */; };
 		C078EB9420A8546E00E0B812 /* AttendanceClearance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9320A8546E00E0B812 /* AttendanceClearance.storyboard */; };
-		C078EB9620A854A700E0B812 /* ApprovalAction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9520A854A700E0B812 /* ApprovalAction.storyboard */; };
-		C078EB9820A854CD00E0B812 /* AssignApprovalAction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9720A854CD00E0B812 /* AssignApprovalAction.storyboard */; };
-		C078EB9A20A854F000E0B812 /* AddForms.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9920A854F000E0B812 /* AddForms.storyboard */; };
-		C078EB9C20A8551100E0B812 /* SalaryCalculation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9B20A8551100E0B812 /* SalaryCalculation.storyboard */; };
-		C078EB9E20A8554D00E0B812 /* SalaryDeductionRule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9D20A8554D00E0B812 /* SalaryDeductionRule.storyboard */; };
-		C078EBA020A8557000E0B812 /* HRDocExpiry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EB9F20A8557000E0B812 /* HRDocExpiry.storyboard */; };
 		C078EBA220A855B500E0B812 /* PurchaseInbox.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EBA120A855B500E0B812 /* PurchaseInbox.storyboard */; };
 		C078EBA420A855D700E0B812 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EBA320A855D700E0B812 /* Purchase.storyboard */; };
 		C078EBA620A8560200E0B812 /* Purchase SystemRFF.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C078EBA520A8560200E0B812 /* Purchase SystemRFF.storyboard */; };
@@ -105,12 +114,6 @@
 		C08A26A520A6E4810028052C /* OverTimeCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26A420A6E4810028052C /* OverTimeCalcViewController.swift */; };
 		C08A26A720A6E48D0028052C /* SettleCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26A620A6E48D0028052C /* SettleCalcViewController.swift */; };
 		C08A26A920A6E4A00028052C /* AttendanceClearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26A820A6E4A00028052C /* AttendanceClearanceViewController.swift */; };
-		C08A26AB20A6E6690028052C /* ApprovalActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26AA20A6E6690028052C /* ApprovalActionViewController.swift */; };
-		C08A26AD20A6E67F0028052C /* AssignApprovalActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26AC20A6E67F0028052C /* AssignApprovalActionViewController.swift */; };
-		C08A26AF20A6E68A0028052C /* AddFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26AE20A6E68A0028052C /* AddFormsViewController.swift */; };
-		C08A26B120A6E69C0028052C /* SalaryCalcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26B020A6E69C0028052C /* SalaryCalcViewController.swift */; };
-		C08A26B320A6E6B20028052C /* SalaryDeductionRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26B220A6E6B20028052C /* SalaryDeductionRuleViewController.swift */; };
-		C08A26B520A6E6C10028052C /* HRDocExpiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26B420A6E6C10028052C /* HRDocExpiryViewController.swift */; };
 		C08A26B720A6E6DE0028052C /* PurchaseInboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26B620A6E6DE0028052C /* PurchaseInboxViewController.swift */; };
 		C08A26B920A6E6E80028052C /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26B820A6E6E80028052C /* PurchaseViewController.swift */; };
 		C08A26BB20A6E6FF0028052C /* PurchaseSystemRiyadhFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A26BA20A6E6FF0028052C /* PurchaseSystemRiyadhFoodViewController.swift */; };
@@ -174,7 +177,15 @@
 		C00707F920A05F2800320ED4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		C00707FD20A0617000320ED4 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		C00707FF20A0619500320ED4 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		C008654C20C84E93006CD88E /* SalesInboxWebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesInboxWebPageViewController.swift; sourceTree = "<group>"; };
+		C008654F20C9440C006CD88E /* SalesPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesPersonViewController.swift; sourceTree = "<group>"; };
+		C008655120C94415006CD88E /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		C008655320C94426006CD88E /* CreditDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDetailsViewController.swift; sourceTree = "<group>"; };
+		C008655520C94438006CD88E /* AddItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemsViewController.swift; sourceTree = "<group>"; };
+		C008655720C94455006CD88E /* ItemsSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSelectedViewController.swift; sourceTree = "<group>"; };
+		C008655920C94472006CD88E /* ItemsSelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSelectedCell.swift; sourceTree = "<group>"; };
 		C013CC4520BEAE3100B08289 /* DepVacTicket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepVacTicket.swift; sourceTree = "<group>"; };
+		C0234D3920C5237E008BB55B /* RevealMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealMenu.swift; sourceTree = "<group>"; };
 		C035313D20B183A100E0DBD9 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoapHttpClientExtension.swift; sourceTree = "<group>"; };
 		C035314420B1875700E0DBD9 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -182,6 +193,15 @@
 		C035314620B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SWXMLHash+TypeConversion.swift"; sourceTree = "<group>"; };
 		C035314720B1875700E0DBD9 /* SoapHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoapHttpClient.swift; sourceTree = "<group>"; };
 		C035314820B1875700E0DBD9 /* SWXMLHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWXMLHash.swift; sourceTree = "<group>"; };
+		C03C7C0720C7D96E00D8248C /* ReturnStyleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnStyleTableViewController.swift; sourceTree = "<group>"; };
+		C03C7C0920C7D98000D8248C /* ReturnStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnStyleCell.swift; sourceTree = "<group>"; };
+		C03C7C0C20C7D9FF00D8248C /* OrderStyleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStyleTableViewController.swift; sourceTree = "<group>"; };
+		C03C7C0E20C7DA0B00D8248C /* OrderStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStyleCell.swift; sourceTree = "<group>"; };
+		C03C7C1020C7DA2A00D8248C /* TansferStyleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TansferStyleTableViewController.swift; sourceTree = "<group>"; };
+		C03C7C1220C7DA3D00D8248C /* TransferStyleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferStyleCell.swift; sourceTree = "<group>"; };
+		C03C7C1620C7F75100D8248C /* Sales.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sales.swift; sourceTree = "<group>"; };
+		C03C7C1720C7F75100D8248C /* ArrayOfSales.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayOfSales.swift; sourceTree = "<group>"; };
+		C03C7C1A20C7F7E000D8248C /* SalesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesModel.swift; sourceTree = "<group>"; };
 		C0617569209EF792007F8E59 /* rff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C061756C209EF792007F8E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C061756E209EF792007F8E59 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -191,10 +211,8 @@
 		C078EB6920A84F6A00E0B812 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		C078EB6B20A84FC200E0B812 /* Master.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Master.storyboard; sourceTree = "<group>"; };
 		C078EB6D20A84FFC00E0B812 /* Tracking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tracking.storyboard; sourceTree = "<group>"; };
-		C078EB6F20A8509300E0B812 /* NewEmployee.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewEmployee.storyboard; sourceTree = "<group>"; };
 		C078EB7120A850BE00E0B812 /* EmployeeVacation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmployeeVacation.storyboard; sourceTree = "<group>"; };
 		C078EB7320A850E200E0B812 /* Loan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Loan.storyboard; sourceTree = "<group>"; };
-		C078EB7520A8510100E0B812 /* LoanList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoanList.storyboard; sourceTree = "<group>"; };
 		C078EB7720A8512D00E0B812 /* Resign.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Resign.storyboard; sourceTree = "<group>"; };
 		C078EB7920A8516400E0B812 /* EmployeeViolation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmployeeViolation.storyboard; sourceTree = "<group>"; };
 		C078EB7B20A8518D00E0B812 /* ReturnFromVacation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReturnFromVacation.storyboard; sourceTree = "<group>"; };
@@ -210,12 +228,6 @@
 		C078EB8F20A8540500E0B812 /* OverTimeCalculation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OverTimeCalculation.storyboard; sourceTree = "<group>"; };
 		C078EB9120A8542900E0B812 /* SettleCalculation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettleCalculation.storyboard; sourceTree = "<group>"; };
 		C078EB9320A8546E00E0B812 /* AttendanceClearance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AttendanceClearance.storyboard; sourceTree = "<group>"; };
-		C078EB9520A854A700E0B812 /* ApprovalAction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ApprovalAction.storyboard; sourceTree = "<group>"; };
-		C078EB9720A854CD00E0B812 /* AssignApprovalAction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AssignApprovalAction.storyboard; sourceTree = "<group>"; };
-		C078EB9920A854F000E0B812 /* AddForms.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddForms.storyboard; sourceTree = "<group>"; };
-		C078EB9B20A8551100E0B812 /* SalaryCalculation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SalaryCalculation.storyboard; sourceTree = "<group>"; };
-		C078EB9D20A8554D00E0B812 /* SalaryDeductionRule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SalaryDeductionRule.storyboard; sourceTree = "<group>"; };
-		C078EB9F20A8557000E0B812 /* HRDocExpiry.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HRDocExpiry.storyboard; sourceTree = "<group>"; };
 		C078EBA120A855B500E0B812 /* PurchaseInbox.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PurchaseInbox.storyboard; sourceTree = "<group>"; };
 		C078EBA320A855D700E0B812 /* Purchase.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Purchase.storyboard; sourceTree = "<group>"; };
 		C078EBA520A8560200E0B812 /* Purchase SystemRFF.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Purchase SystemRFF.storyboard"; sourceTree = "<group>"; };
@@ -266,12 +278,6 @@
 		C08A26A420A6E4810028052C /* OverTimeCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverTimeCalcViewController.swift; sourceTree = "<group>"; };
 		C08A26A620A6E48D0028052C /* SettleCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettleCalcViewController.swift; sourceTree = "<group>"; };
 		C08A26A820A6E4A00028052C /* AttendanceClearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceClearanceViewController.swift; sourceTree = "<group>"; };
-		C08A26AA20A6E6690028052C /* ApprovalActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalActionViewController.swift; sourceTree = "<group>"; };
-		C08A26AC20A6E67F0028052C /* AssignApprovalActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignApprovalActionViewController.swift; sourceTree = "<group>"; };
-		C08A26AE20A6E68A0028052C /* AddFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormsViewController.swift; sourceTree = "<group>"; };
-		C08A26B020A6E69C0028052C /* SalaryCalcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryCalcViewController.swift; sourceTree = "<group>"; };
-		C08A26B220A6E6B20028052C /* SalaryDeductionRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryDeductionRuleViewController.swift; sourceTree = "<group>"; };
-		C08A26B420A6E6C10028052C /* HRDocExpiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRDocExpiryViewController.swift; sourceTree = "<group>"; };
 		C08A26B620A6E6DE0028052C /* PurchaseInboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInboxViewController.swift; sourceTree = "<group>"; };
 		C08A26B820A6E6E80028052C /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		C08A26BA20A6E6FF0028052C /* PurchaseSystemRiyadhFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSystemRiyadhFoodViewController.swift; sourceTree = "<group>"; };
@@ -356,7 +362,6 @@
 				C08A267B20A6E1D90028052C /* Tracking */,
 				C08A267920A6E1D00028052C /* EmployeeMovement */,
 				C08A267820A6E1CE0028052C /* Attendance */,
-				C08A267720A6E1CB0028052C /* Admin */,
 				C08A267620A6E1C70028052C /* PurchaseSystem */,
 				C08A267520A6E1C50028052C /* ITDepartment */,
 				C08A267420A6E1C20028052C /* PaymentRequisition */,
@@ -390,7 +395,6 @@
 				C078EB6620A84E7B00E0B812 /* Tracking */,
 				C078EB6520A84E7900E0B812 /* EmployeeMovement */,
 				C078EB6420A84E7600E0B812 /* Attendance */,
-				C078EB6320A84E7300E0B812 /* Admin */,
 				C078EB6220A84E7100E0B812 /* PurchaseSystem */,
 				C078EB6120A84E6E00E0B812 /* ITDepartment */,
 				C078EB6020A84E6B00E0B812 /* PaymentRequisition */,
@@ -421,6 +425,20 @@
 			path = Slidemenu;
 			sourceTree = "<group>";
 		};
+		C008654E20C943DC006CD88E /* sales order request */ = {
+			isa = PBXGroup;
+			children = (
+				C08A26DC20A6E8200028052C /* SalesOrderRequestsViewController.swift */,
+				C008654F20C9440C006CD88E /* SalesPersonViewController.swift */,
+				C008655120C94415006CD88E /* StoreViewController.swift */,
+				C008655320C94426006CD88E /* CreditDetailsViewController.swift */,
+				C008655520C94438006CD88E /* AddItemsViewController.swift */,
+				C008655720C94455006CD88E /* ItemsSelectedViewController.swift */,
+				C008655920C94472006CD88E /* ItemsSelectedCell.swift */,
+			);
+			path = "sales order request";
+			sourceTree = "<group>";
+		};
 		C035314020B183C300E0DBD9 /* Helper files */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,11 +446,41 @@
 				C035313D20B183A100E0DBD9 /* AuthServices.swift */,
 				C0B5359220B2B565007EF65F /* AlertMessage.swift */,
 				C0B90AD720B6C75300760FD0 /* BlackBox.swift */,
+				C0234D3920C5237E008BB55B /* RevealMenu.swift */,
 			);
 			path = "Helper files";
 			sourceTree = "<group>";
 		};
 		C035314220B1873600E0DBD9 /* webServices */ = {
+			isa = PBXGroup;
+			children = (
+				C03C7C1520C7F73500D8248C /* Sales */,
+				C03C7C1420C7F72700D8248C /* Login */,
+				C035314720B1875700E0DBD9 /* SoapHttpClient.swift */,
+				C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */,
+				C035314520B1875700E0DBD9 /* SWXMLHash.h */,
+				C035314820B1875700E0DBD9 /* SWXMLHash.swift */,
+				C035314620B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift */,
+			);
+			path = webServices;
+			sourceTree = "<group>";
+		};
+		C03C7C0B20C7D98900D8248C /* Sales Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				C08A26D420A6E7DB0028052C /* SalesInboxViewController.swift */,
+				C03C7C0720C7D96E00D8248C /* ReturnStyleTableViewController.swift */,
+				C03C7C0920C7D98000D8248C /* ReturnStyleCell.swift */,
+				C03C7C0C20C7D9FF00D8248C /* OrderStyleTableViewController.swift */,
+				C03C7C0E20C7DA0B00D8248C /* OrderStyleCell.swift */,
+				C03C7C1020C7DA2A00D8248C /* TansferStyleTableViewController.swift */,
+				C03C7C1220C7DA3D00D8248C /* TransferStyleCell.swift */,
+				C008654C20C84E93006CD88E /* SalesInboxWebPageViewController.swift */,
+			);
+			path = "Sales Inbox";
+			sourceTree = "<group>";
+		};
+		C03C7C1420C7F72700D8248C /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				C0CE40C520BC14C400A06CB4 /* ArrayOfEmpVac.swift */,
@@ -445,14 +493,19 @@
 				C005CB7020B40B7600875740 /* InboxGrid.swift */,
 				C005CB6F20B40B7500875740 /* ListType.swift */,
 				C035314420B1875700E0DBD9 /* Login.swift */,
-				C035314720B1875700E0DBD9 /* SoapHttpClient.swift */,
-				C035314320B1875700E0DBD9 /* SoapHttpClientExtension.swift */,
-				C035314520B1875700E0DBD9 /* SWXMLHash.h */,
-				C035314820B1875700E0DBD9 /* SWXMLHash.swift */,
-				C035314620B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift */,
 				C0CE40C620BC14C500A06CB4 /* Task_Inbox.swift */,
 			);
-			path = webServices;
+			path = Login;
+			sourceTree = "<group>";
+		};
+		C03C7C1520C7F73500D8248C /* Sales */ = {
+			isa = PBXGroup;
+			children = (
+				C03C7C1720C7F75100D8248C /* ArrayOfSales.swift */,
+				C03C7C1620C7F75100D8248C /* Sales.swift */,
+				C03C7C1A20C7F7E000D8248C /* SalesModel.swift */,
+			);
+			path = Sales;
 			sourceTree = "<group>";
 		};
 		C0617560209EF792007F8E59 = {
@@ -569,19 +622,6 @@
 			path = PurchaseSystem;
 			sourceTree = "<group>";
 		};
-		C078EB6320A84E7300E0B812 /* Admin */ = {
-			isa = PBXGroup;
-			children = (
-				C078EB9F20A8557000E0B812 /* HRDocExpiry.storyboard */,
-				C078EB9D20A8554D00E0B812 /* SalaryDeductionRule.storyboard */,
-				C078EB9B20A8551100E0B812 /* SalaryCalculation.storyboard */,
-				C078EB9920A854F000E0B812 /* AddForms.storyboard */,
-				C078EB9720A854CD00E0B812 /* AssignApprovalAction.storyboard */,
-				C078EB9520A854A700E0B812 /* ApprovalAction.storyboard */,
-			);
-			path = Admin;
-			sourceTree = "<group>";
-		};
 		C078EB6420A84E7600E0B812 /* Attendance */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,10 +647,8 @@
 				C078EB7B20A8518D00E0B812 /* ReturnFromVacation.storyboard */,
 				C078EB7920A8516400E0B812 /* EmployeeViolation.storyboard */,
 				C078EB7720A8512D00E0B812 /* Resign.storyboard */,
-				C078EB7520A8510100E0B812 /* LoanList.storyboard */,
 				C078EB7320A850E200E0B812 /* Loan.storyboard */,
 				C078EB7120A850BE00E0B812 /* EmployeeVacation.storyboard */,
-				C078EB6F20A8509300E0B812 /* NewEmployee.storyboard */,
 			);
 			path = EmployeeMovement;
 			sourceTree = "<group>";
@@ -667,11 +705,11 @@
 		C08A267120A6E1BC0028052C /* Sales */ = {
 			isa = PBXGroup;
 			children = (
-				C08A26D420A6E7DB0028052C /* SalesInboxViewController.swift */,
+				C03C7C0B20C7D98900D8248C /* Sales Inbox */,
 				C08A26D620A6E7EC0028052C /* SalesOrderApprovalViewController.swift */,
 				C08A26D820A6E7FC0028052C /* SalesReturnApprovalViewController.swift */,
 				C08A26DA20A6E80B0028052C /* SalesPromotionApprovalViewController.swift */,
-				C08A26DC20A6E8200028052C /* SalesOrderRequestsViewController.swift */,
+				C008654E20C943DC006CD88E /* sales order request */,
 				C08A26DE20A6E8340028052C /* ReturnOrderRequestsViewController.swift */,
 				C08A26E020A6E8510028052C /* PromotionRequestViewController.swift */,
 				C08A26E220A6E8660028052C /* OthaimSalesStatusViewController.swift */,
@@ -730,19 +768,6 @@
 				C08A26BA20A6E6FF0028052C /* PurchaseSystemRiyadhFoodViewController.swift */,
 			);
 			path = PurchaseSystem;
-			sourceTree = "<group>";
-		};
-		C08A267720A6E1CB0028052C /* Admin */ = {
-			isa = PBXGroup;
-			children = (
-				C08A26AA20A6E6690028052C /* ApprovalActionViewController.swift */,
-				C08A26AC20A6E67F0028052C /* AssignApprovalActionViewController.swift */,
-				C08A26AE20A6E68A0028052C /* AddFormsViewController.swift */,
-				C08A26B020A6E69C0028052C /* SalaryCalcViewController.swift */,
-				C08A26B220A6E6B20028052C /* SalaryDeductionRuleViewController.swift */,
-				C08A26B420A6E6C10028052C /* HRDocExpiryViewController.swift */,
-			);
-			path = Admin;
 			sourceTree = "<group>";
 		};
 		C08A267820A6E1CE0028052C /* Attendance */ = {
@@ -914,7 +939,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C078EB8220A8522700E0B812 /* SalaryChange.storyboard in Resources */,
-				C078EB9620A854A700E0B812 /* ApprovalAction.storyboard in Resources */,
 				C078EBCC20A85B9F00E0B812 /* PromotionRequest.storyboard in Resources */,
 				C078EBBA20A8596900E0B812 /* TaskDetails.storyboard in Resources */,
 				C078EB9020A8540500E0B812 /* OverTimeCalculation.storyboard in Resources */,
@@ -925,18 +949,15 @@
 				C078EB8C20A852EB00E0B812 /* InOutDeduction.storyboard in Resources */,
 				C078EBB220A858C000E0B812 /* NewPaymentReq.storyboard in Resources */,
 				C078EBA820A856BB00E0B812 /* ITRequest.storyboard in Resources */,
-				C078EB9E20A8554D00E0B812 /* SalaryDeductionRule.storyboard in Resources */,
 				C078EBC620A85B3900E0B812 /* SalesPromotionApproval.storyboard in Resources */,
 				C078EBAC20A8581D00E0B812 /* AddCategory.storyboard in Resources */,
 				C078EBA620A8560200E0B812 /* Purchase SystemRFF.storyboard in Resources */,
 				C078EBD420A85C3300E0B812 /* SalesStoreUpdate.storyboard in Resources */,
 				C078EBC020A85A8500E0B812 /* SalesInbox.storyboard in Resources */,
 				C0617577209EF793007F8E59 /* LaunchScreen.storyboard in Resources */,
-				C078EB9820A854CD00E0B812 /* AssignApprovalAction.storyboard in Resources */,
 				C078EB8820A8529A00E0B812 /* JobTitleChange.storyboard in Resources */,
 				C078EBA220A855B500E0B812 /* PurchaseInbox.storyboard in Resources */,
 				C078EBCE20A85BDB00E0B812 /* OthaimSalesStatus.storyboard in Resources */,
-				C078EB7020A8509300E0B812 /* NewEmployee.storyboard in Resources */,
 				C078EBD220A85C1600E0B812 /* SalesPersonAreaSetup.storyboard in Resources */,
 				C078EB7820A8512D00E0B812 /* Resign.storyboard in Resources */,
 				C078EBC820A85B5D00E0B812 /* SalesOrderRequest.storyboard in Resources */,
@@ -950,22 +971,18 @@
 				C078EBBE20A859DB00E0B812 /* MyComplain.storyboard in Resources */,
 				C078EBAE20A8583E00E0B812 /* MyRequests.storyboard in Resources */,
 				C078EBD620A85CB300E0B812 /* Citirix.storyboard in Resources */,
-				C078EBA020A8557000E0B812 /* HRDocExpiry.storyboard in Resources */,
 				C078EBC220A85AB800E0B812 /* SalesOrderApproval.storyboard in Resources */,
 				C078EB9220A8542900E0B812 /* SettleCalculation.storyboard in Resources */,
 				C078EBC420A85B1900E0B812 /* SalesReturnApproval.storyboard in Resources */,
 				C078EBB020A8586400E0B812 /* DeviceDetails.storyboard in Resources */,
 				C078EBD020A85BF700E0B812 /* SalesPlanSummay.storyboard in Resources */,
-				C078EB9C20A8551100E0B812 /* SalaryCalculation.storyboard in Resources */,
 				C078EBB820A8594500E0B812 /* NewTask.storyboard in Resources */,
 				C078EB8020A8520600E0B812 /* EmployeeInfo.storyboard in Resources */,
 				C0617572209EF792007F8E59 /* Main.storyboard in Resources */,
-				C078EB7620A8510100E0B812 /* LoanList.storyboard in Resources */,
 				C078EB6E20A84FFC00E0B812 /* Tracking.storyboard in Resources */,
 				C078EB6C20A84FC200E0B812 /* Master.storyboard in Resources */,
 				C078EB8A20A852CD00E0B812 /* BusinessTrip.storyboard in Resources */,
 				C078EB6A20A84F6A00E0B812 /* Home.storyboard in Resources */,
-				C078EB9A20A854F000E0B812 /* AddForms.storyboard in Resources */,
 				C078EB7420A850E200E0B812 /* Loan.storyboard in Resources */,
 				C078EB8620A8527900E0B812 /* TicketChange.storyboard in Resources */,
 				C078EB7220A850BE00E0B812 /* EmployeeVacation.storyboard in Resources */,
@@ -1024,14 +1041,15 @@
 				C08A26CB20A6E7850028052C /* UpdateBankStatusViewController.swift in Sources */,
 				C08A26B720A6E6DE0028052C /* PurchaseInboxViewController.swift in Sources */,
 				C035314D20B1875700E0DBD9 /* SWXMLHash.swift in Sources */,
-				C08A26AF20A6E68A0028052C /* AddFormsViewController.swift in Sources */,
 				C08A269120A6E38C0028052C /* LoanListViewController.swift in Sources */,
 				C08A269B20A6E4090028052C /* TicketChangeViewController.swift in Sources */,
-				C08A26B320A6E6B20028052C /* SalaryDeductionRuleViewController.swift in Sources */,
 				C08A26E920A6E8A10028052C /* SalesStoreUpdateViewController.swift in Sources */,
 				C08A26E320A6E8660028052C /* OthaimSalesStatusViewController.swift in Sources */,
 				C0D2ABA520A805EE001AE4FD /* InboxTableViewController.swift in Sources */,
+				C008655420C94426006CD88E /* CreditDetailsViewController.swift in Sources */,
+				C03C7C1320C7DA3D00D8248C /* TransferStyleCell.swift in Sources */,
 				C08A26D720A6E7EC0028052C /* SalesOrderApprovalViewController.swift in Sources */,
+				C008655620C94438006CD88E /* AddItemsViewController.swift in Sources */,
 				C0CE40CB20BC14C600A06CB4 /* ArrayOfTask_Inbox.swift in Sources */,
 				C0B90AD820B6C75300760FD0 /* BlackBox.swift in Sources */,
 				C08A26D320A6E7C60028052C /* MyComplainViewController.swift in Sources */,
@@ -1044,29 +1062,32 @@
 				C0CE40C820BC14C600A06CB4 /* EmpVac.swift in Sources */,
 				C08A269720A6E3D50028052C /* SalaryChangeViewController.swift in Sources */,
 				C0CE40CD20BC281200A06CB4 /* PendingInboxCell.swift in Sources */,
-				C08A26AB20A6E6690028052C /* ApprovalActionViewController.swift in Sources */,
 				C08A268B20A6E32B0028052C /* ResignViewController.swift in Sources */,
+				C008654D20C84E93006CD88E /* SalesInboxWebPageViewController.swift in Sources */,
 				C08A26E520A6E8760028052C /* SalesPlanSummaryViewController.swift in Sources */,
 				C08A269D20A6E41E0028052C /* JobTitleChangeViewController.swift in Sources */,
 				C0D2ABA720A80606001AE4FD /* InboxTableViewCell.swift in Sources */,
 				C035314A20B1875700E0DBD9 /* Login.swift in Sources */,
 				C013CC4620BEAE3200B08289 /* DepVacTicket.swift in Sources */,
 				C08A268120A6E2DE0028052C /* TrackingInboxViewController.swift in Sources */,
+				C008655A20C94472006CD88E /* ItemsSelectedCell.swift in Sources */,
 				C08A26DF20A6E8340028052C /* ReturnOrderRequestsViewController.swift in Sources */,
 				C08A268520A6E3080028052C /* EmployeeVacationViewController.swift in Sources */,
 				C08A26A520A6E4810028052C /* OverTimeCalcViewController.swift in Sources */,
 				C08A26BD20A6E7140028052C /* ITRequestViewController.swift in Sources */,
 				C08A26ED20A6E8B50028052C /* ReportViewController.swift in Sources */,
 				C005CB7420B40B7600875740 /* InboxGrid.swift in Sources */,
-				C08A26AD20A6E67F0028052C /* AssignApprovalActionViewController.swift in Sources */,
 				C08A26C520A6E7480028052C /* DeviceDetailsViewController.swift in Sources */,
+				C03C7C0820C7D96E00D8248C /* ReturnStyleTableViewController.swift in Sources */,
 				C08A26A720A6E48D0028052C /* SettleCalcViewController.swift in Sources */,
 				C0CE40CA20BC14C600A06CB4 /* Task_Inbox.swift in Sources */,
 				C0B90AD620B6C10000760FD0 /* VacationsDetailsViewController.swift in Sources */,
+				C03C7C1820C7F75100D8248C /* Sales.swift in Sources */,
 				C007080020A0619500320ED4 /* HeaderTableViewCell.swift in Sources */,
 				C035314B20B1875700E0DBD9 /* SWXMLHash+TypeConversion.swift in Sources */,
 				C061756F209EF792007F8E59 /* LoginViewController.swift in Sources */,
 				C00707FA20A05F2800320ED4 /* SWRevealViewController.m in Sources */,
+				C03C7C1120C7DA2A00D8248C /* TansferStyleTableViewController.swift in Sources */,
 				C035314C20B1875700E0DBD9 /* SoapHttpClient.swift in Sources */,
 				C0CE40C920BC14C600A06CB4 /* ArrayOfEmpVac.swift in Sources */,
 				C08A26A320A6E4700028052C /* AttendanceDetailsViewController.swift in Sources */,
@@ -1078,16 +1099,19 @@
 				C0FFEE2B20A4412C00712531 /* slideMenuExtension.swift in Sources */,
 				C08A26B920A6E6E80028052C /* PurchaseViewController.swift in Sources */,
 				C0D2ABA920A829A3001AE4FD /* WebFormViewController.swift in Sources */,
+				C03C7C1920C7F75100D8248C /* ArrayOfSales.swift in Sources */,
 				C0F8BC9F20BD708300791A8C /* VisaRequiresCell.swift in Sources */,
-				C08A26B520A6E6C10028052C /* HRDocExpiryViewController.swift in Sources */,
 				C08A267D20A6E2AB0028052C /* HomeViewController.swift in Sources */,
 				C08A26C720A6E75B0028052C /* NewPaymentReqViewController.swift in Sources */,
+				C0234D3A20C5237E008BB55B /* RevealMenu.swift in Sources */,
 				C0B7F4BE20A1A89F007D1F67 /* Section.swift in Sources */,
 				C08A26BF20A6E71D0028052C /* ITMasterFileViewController.swift in Sources */,
 				C08A26BB20A6E6FF0028052C /* PurchaseSystemRiyadhFoodViewController.swift in Sources */,
 				C08A26E720A6E88D0028052C /* SalesPersonAreaSetupViewController.swift in Sources */,
 				C0F4275B20AD9E4200FD7CDB /* PickerviewAction.swift in Sources */,
+				C008655220C94415006CD88E /* StoreViewController.swift in Sources */,
 				C005CB7620B40B7600875740 /* ArrayOfListType.swift in Sources */,
+				C008655820C94455006CD88E /* ItemsSelectedViewController.swift in Sources */,
 				C035313E20B183A100E0DBD9 /* AuthServices.swift in Sources */,
 				C08A26C120A6E72F0028052C /* AddCategoryViewController.swift in Sources */,
 				C0F6A7EF20BAD2820021EA2E /* TicketDetailsViewController.swift in Sources */,
@@ -1095,6 +1119,7 @@
 				C0D090B820B6D7ED0049226F /* ArrayOfString.swift in Sources */,
 				C08A26A920A6E4A00028052C /* AttendanceClearanceViewController.swift in Sources */,
 				C08A269920A6E3F70028052C /* VacationDaysUpdateViewController.swift in Sources */,
+				C008655020C9440C006CD88E /* SalesPersonViewController.swift in Sources */,
 				C08A268720A6E3140028052C /* LoanViewController.swift in Sources */,
 				C08A26E120A6E8510028052C /* PromotionRequestViewController.swift in Sources */,
 				C08A26CF20A6E7A10028052C /* TaskDetailsViewController.swift in Sources */,
@@ -1104,7 +1129,11 @@
 				C09F1E8320A984E4005F4C23 /* EmployeeInfoTableViewCell.swift in Sources */,
 				C08A26D920A6E7FC0028052C /* SalesReturnApprovalViewController.swift in Sources */,
 				C08A269F20A6E4310028052C /* BusinessTripViewController.swift in Sources */,
+				C03C7C1B20C7F7E000D8248C /* SalesModel.swift in Sources */,
+				C03C7C0A20C7D98000D8248C /* ReturnStyleCell.swift in Sources */,
+				C03C7C0F20C7DA0B00D8248C /* OrderStyleCell.swift in Sources */,
 				C08A26C320A6E73B0028052C /* MyRequestsViewController.swift in Sources */,
+				C03C7C0D20C7D9FF00D8248C /* OrderStyleTableViewController.swift in Sources */,
 				C08A269320A6E3AC0028052C /* SalaryPreviewViewController.swift in Sources */,
 				C035314920B1875700E0DBD9 /* SoapHttpClientExtension.swift in Sources */,
 				C061756D209EF792007F8E59 /* AppDelegate.swift in Sources */,
@@ -1112,7 +1141,6 @@
 				C08A26A120A6E4440028052C /* InOutDeductionViewController.swift in Sources */,
 				C08A268D20A6E3420028052C /* EmployeeViolationViewController.swift in Sources */,
 				C08A26D120A6E7BC0028052C /* NewComplainViewController.swift in Sources */,
-				C08A26B120A6E69C0028052C /* SalaryCalcViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,6 +1289,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3TR82ZN3B8;
 				INFOPLIST_FILE = rff/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1283,6 +1312,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3TR82ZN3B8;
 				INFOPLIST_FILE = rff/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

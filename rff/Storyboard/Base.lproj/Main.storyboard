@@ -112,15 +112,25 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cBz-VQ-LyO">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.23000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="bUc-Qw-Ou3" secondAttribute="bottom" id="4qC-D0-Fu0"/>
+                                                                    <constraint firstItem="zch-dE-CYG" firstAttribute="leading" secondItem="cBz-VQ-LyO" secondAttribute="trailing" constant="-30" id="60O-mM-TJJ"/>
                                                                     <constraint firstItem="bUc-Qw-Ou3" firstAttribute="leading" secondItem="09P-2w-z8j" secondAttribute="leading" constant="8" id="AsU-n2-gBE"/>
+                                                                    <constraint firstItem="cBz-VQ-LyO" firstAttribute="leading" secondItem="09P-2w-z8j" secondAttribute="leading" id="CB8-dJ-6fu"/>
+                                                                    <constraint firstItem="cBz-VQ-LyO" firstAttribute="top" secondItem="09P-2w-z8j" secondAttribute="top" id="RDH-3d-hn0"/>
                                                                     <constraint firstAttribute="trailing" secondItem="zch-dE-CYG" secondAttribute="trailing" id="UaG-x6-Cd3"/>
                                                                     <constraint firstItem="zch-dE-CYG" firstAttribute="centerY" secondItem="09P-2w-z8j" secondAttribute="centerY" id="a6D-qv-q4h"/>
                                                                     <constraint firstItem="zch-dE-CYG" firstAttribute="leading" secondItem="bUc-Qw-Ou3" secondAttribute="trailing" constant="5" id="byt-m7-ove"/>
                                                                     <constraint firstItem="bUc-Qw-Ou3" firstAttribute="top" secondItem="09P-2w-z8j" secondAttribute="top" id="evW-Jd-rNf"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="cBz-VQ-LyO" secondAttribute="bottom" id="rCH-SW-zZz"/>
                                                                     <constraint firstAttribute="height" constant="50" id="ufB-tM-Ey4"/>
                                                                 </constraints>
                                                             </view>
@@ -142,14 +152,24 @@
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CLi-bd-V46">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.23000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="2iT-jT-fzB" firstAttribute="leading" secondItem="tsg-aR-UUV" secondAttribute="leading" constant="8" id="2Tg-Ll-SiS"/>
                                                                     <constraint firstAttribute="bottom" secondItem="2iT-jT-fzB" secondAttribute="bottom" id="5lV-hK-Pm3"/>
                                                                     <constraint firstAttribute="trailing" secondItem="5fJ-iv-T0Q" secondAttribute="trailing" id="MaU-c3-b8f"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="CLi-bd-V46" secondAttribute="bottom" id="SZ5-Ux-alD"/>
                                                                     <constraint firstItem="2iT-jT-fzB" firstAttribute="top" secondItem="tsg-aR-UUV" secondAttribute="top" id="cfw-Xu-Tnk"/>
+                                                                    <constraint firstItem="CLi-bd-V46" firstAttribute="top" secondItem="tsg-aR-UUV" secondAttribute="top" id="eN0-Pv-DOs"/>
                                                                     <constraint firstItem="5fJ-iv-T0Q" firstAttribute="centerY" secondItem="tsg-aR-UUV" secondAttribute="centerY" id="hv6-t7-2D8"/>
+                                                                    <constraint firstItem="5fJ-iv-T0Q" firstAttribute="leading" secondItem="CLi-bd-V46" secondAttribute="trailing" constant="-30" id="pYA-eH-Wpy"/>
+                                                                    <constraint firstItem="CLi-bd-V46" firstAttribute="leading" secondItem="tsg-aR-UUV" secondAttribute="leading" id="sF7-bP-aed"/>
                                                                     <constraint firstItem="5fJ-iv-T0Q" firstAttribute="leading" secondItem="2iT-jT-fzB" secondAttribute="trailing" constant="5" id="ukp-cj-1uA"/>
                                                                 </constraints>
                                                             </view>
@@ -201,9 +221,9 @@
                     <connections>
                         <outlet property="buttonHeight" destination="D2Q-Lc-SYn" id="gH2-ku-jZn"/>
                         <outlet property="companyDropdownImage" destination="zch-dE-CYG" id="40l-AQ-ySi"/>
-                        <outlet property="companyPickerView" destination="bUc-Qw-Ou3" id="JhD-ax-kSj"/>
+                        <outlet property="companyTextfield" destination="bUc-Qw-Ou3" id="JhD-ax-kSj"/>
                         <outlet property="languangeDropdownImage" destination="5fJ-iv-T0Q" id="27S-5O-gxw"/>
-                        <outlet property="languangePickerView" destination="2iT-jT-fzB" id="uqW-kn-nMf"/>
+                        <outlet property="languangeTextfield" destination="2iT-jT-fzB" id="uqW-kn-nMf"/>
                         <outlet property="logoHeight" destination="oYf-Vh-Z5c" id="cvg-nq-h3f"/>
                         <outlet property="logoHolderHeight" destination="INF-cs-Klj" id="VgZ-jl-0X5"/>
                         <outlet property="logoHolderView" destination="yRg-RX-C15" id="wXi-Zy-zgH"/>
@@ -212,6 +232,8 @@
                         <outlet property="logoWidth" destination="ywa-0Q-8l3" id="qPF-Ob-2ai"/>
                         <outlet property="passwordTextfield" destination="RpM-ny-esP" id="AYc-DL-a5x"/>
                         <outlet property="pickerViewHeight" destination="ufB-tM-Ey4" id="iHU-kx-QDs"/>
+                        <outlet property="showCompanyPickerTextField" destination="cBz-VQ-LyO" id="JWg-j5-n9A"/>
+                        <outlet property="showLanguangePickerTextField" destination="CLi-bd-V46" id="hmB-tP-MgW"/>
                         <outlet property="textfieldHeight" destination="sBa-EF-Kun" id="Uuh-U2-bO6"/>
                         <outlet property="usernameTextfield" destination="OAA-Je-EIr" id="thZ-vQ-MXr"/>
                         <segue destination="qZR-YD-fdJ" kind="show" identifier="showHomePage" id="OEq-46-kDG"/>
@@ -408,9 +430,7 @@
                         <segue destination="717-Zo-86N" kind="custom" identifier="showChangePassword" customClass="SWRevealViewControllerSeguePushController" id="xhz-mw-dZM"/>
                         <segue destination="rIL-ek-B3A" kind="custom" identifier="showHome" customClass="SWRevealViewControllerSeguePushController" id="blt-EB-Nwg"/>
                         <segue destination="K7C-ib-rEG" kind="custom" identifier="showTrackingInbox" customClass="SWRevealViewControllerSeguePushController" id="jfE-Ye-ODK"/>
-                        <segue destination="Qy9-la-J3S" kind="custom" identifier="showNewEmployee" customClass="SWRevealViewControllerSeguePushController" id="sad-3l-6Qd"/>
                         <segue destination="s75-t3-mNL" kind="custom" identifier="showEmployeeVacation" customClass="SWRevealViewControllerSeguePushController" id="z7y-tF-YPF"/>
-                        <segue destination="JNW-Gu-WyH" kind="custom" identifier="showLoanList" customClass="SWRevealViewControllerSeguePushController" id="ioT-IJ-fGL"/>
                         <segue destination="0Sx-nY-QLc" kind="custom" identifier="showResign" customClass="SWRevealViewControllerSeguePushController" id="Tru-G2-Zc3"/>
                         <segue destination="9q2-l7-dXd" kind="custom" identifier="showEmployeeViolation" customClass="SWRevealViewControllerSeguePushController" id="Z4Z-8T-ZsE"/>
                         <segue destination="7NK-HI-D5R" kind="custom" identifier="showReturnFromVacation" customClass="SWRevealViewControllerSeguePushController" id="iwu-zy-fww"/>
@@ -425,12 +445,6 @@
                         <segue destination="EeM-lZ-TdV" kind="custom" identifier="showOverTimeCalc" customClass="SWRevealViewControllerSeguePushController" id="Szv-MQ-5AY"/>
                         <segue destination="OTC-0K-HVV" kind="custom" identifier="showSettleCalc" customClass="SWRevealViewControllerSeguePushController" id="Yw7-4D-xPx"/>
                         <segue destination="TOP-C3-bD7" kind="custom" identifier="showAttendanceClearance" customClass="SWRevealViewControllerSeguePushController" id="uoW-vj-cEA"/>
-                        <segue destination="qxd-yl-cHz" kind="custom" identifier="showApprovalAction" customClass="SWRevealViewControllerSeguePushController" id="qID-uJ-0tr"/>
-                        <segue destination="NXK-r6-xPz" kind="custom" identifier="showAssignApprovalAction" customClass="SWRevealViewControllerSeguePushController" id="xqT-hi-K1V"/>
-                        <segue destination="vHd-Bf-Gwx" kind="custom" identifier="showAddForm" customClass="SWRevealViewControllerSeguePushController" id="cNh-Vd-4tU"/>
-                        <segue destination="N3D-yI-MVN" kind="custom" identifier="showSalaryCalc" customClass="SWRevealViewControllerSeguePushController" id="WGP-cP-guP"/>
-                        <segue destination="Bv7-jP-cqI" kind="custom" identifier="showSalaryDeductionRule" customClass="SWRevealViewControllerSeguePushController" id="k4v-sg-iga"/>
-                        <segue destination="9pc-X0-m9y" kind="custom" identifier="showHRDocExpiry" customClass="SWRevealViewControllerSeguePushController" id="zJ9-jX-XAW"/>
                         <segue destination="2Cw-K5-hC2" kind="custom" identifier="showLoan" customClass="SWRevealViewControllerSeguePushController" id="Exv-MN-Iew"/>
                         <segue destination="om2-DH-1Rz" kind="custom" identifier="showPurchaseInbox" customClass="SWRevealViewControllerSeguePushController" id="Ezi-X3-5hX"/>
                         <segue destination="bRQ-Xv-1yb" kind="custom" identifier="showPurchase" customClass="SWRevealViewControllerSeguePushController" id="Q8j-YG-GKf"/>
@@ -491,14 +505,6 @@
             </objects>
             <point key="canvasLocation" x="4417" y="1980"/>
         </scene>
-        <!--NewEmployee-->
-        <scene sceneID="RFJ-q5-KSN">
-            <objects>
-                <viewControllerPlaceholder storyboardName="NewEmployee" id="Qy9-la-J3S" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hwf-5N-68x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4406" y="2354"/>
-        </scene>
         <!--EmployeeVacation-->
         <scene sceneID="93u-lz-Eet">
             <objects>
@@ -514,14 +520,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNr-06-lcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4879" y="2354"/>
-        </scene>
-        <!--LoanList-->
-        <scene sceneID="xCR-h4-sSu">
-            <objects>
-                <viewControllerPlaceholder storyboardName="LoanList" id="JNW-Gu-WyH" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mpw-AW-B8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5046" y="2354"/>
         </scene>
         <!--Resign-->
         <scene sceneID="Qfh-Bv-s8d">
@@ -642,54 +640,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klH-Ja-cGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1754" y="1290"/>
-        </scene>
-        <!--ApprovalAction-->
-        <scene sceneID="Laa-eL-sX6">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ApprovalAction" id="qxd-yl-cHz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OF1-L4-BZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-446" y="1621"/>
-        </scene>
-        <!--AssignApprovalAction-->
-        <scene sceneID="eWf-6x-rqE">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AssignApprovalAction" id="NXK-r6-xPz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SWd-P3-Xf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-597" y="1621"/>
-        </scene>
-        <!--AddForms-->
-        <scene sceneID="WzB-sP-0Ti">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AddForms" id="vHd-Bf-Gwx" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ajj-sU-IhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-813" y="1621"/>
-        </scene>
-        <!--SalaryCalculation-->
-        <scene sceneID="0qW-1Z-SLa">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SalaryCalculation" id="N3D-yI-MVN" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ble-kk-3BN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1041" y="1621"/>
-        </scene>
-        <!--SalaryDeductionRule-->
-        <scene sceneID="nuS-w7-4Uu">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SalaryDeductionRule" id="Bv7-jP-cqI" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XjK-Hj-XsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1290" y="1621"/>
-        </scene>
-        <!--HRDocExpiry-->
-        <scene sceneID="myH-fg-Tvu">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HRDocExpiry" id="9pc-X0-m9y" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Sp-je-vUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1544" y="1621"/>
         </scene>
         <!--PurchaseInbox-->
         <scene sceneID="s6y-Nc-BRy">

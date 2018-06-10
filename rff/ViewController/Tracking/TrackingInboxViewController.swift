@@ -18,6 +18,11 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var searchButtonOutlet: UIButton!
     @IBOutlet weak var returnButtonOutlet: UIButton!
     
+    // TextField Action
+    @IBOutlet weak var showListPickerTextField: UITextField!
+    @IBOutlet weak var showCategoryPickerTextField: UITextField!
+    
+    
     let pickerViewAction = PickerviewAction()
     
     let toolBar: UIToolbar = {
@@ -67,6 +72,8 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
         setCustomNav(navItem: navigationItem)
         listTextfield.tintColor = .clear
         categoryTextfield.tintColor = .clear
+        showListPickerTextField.tintColor = .clear
+        showCategoryPickerTextField.tintColor = .clear
         
         setUpPickerView()
         setupLanguagChange()
@@ -84,14 +91,14 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     func setUpPickerView(){
         pickerViewAction.showPickView(
-            txtfield: listTextfield,
+            txtfield: showListPickerTextField,
             pickerview: pickViewList,
             viewController: self,
             cancelSelector: #selector(cancelClick),
             doneSelector: #selector(doneClick))
         
         pickerViewAction.showPickView(
-            txtfield: categoryTextfield,
+            txtfield: showCategoryPickerTextField,
             pickerview: pickViewCategory,
             viewController: self,
             cancelSelector: #selector(cancelClick),
@@ -135,29 +142,29 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     @objc func cancelClick(){
         if pickview == pickViewList{
-            listTextfield.resignFirstResponder()
+            showListPickerTextField.resignFirstResponder()
             return
         }
-        categoryTextfield.resignFirstResponder()
+        showCategoryPickerTextField.resignFirstResponder()
     }
     
     @objc func doneClick(){
         if pickview == pickViewList{
             if listRowIndex == 0 {
                 listTextfield.text = arrayOfList[0].listname
-                listTextfield.resignFirstResponder()
+                showListPickerTextField.resignFirstResponder()
             } else {
                 listTextfield.text = listTextChosen
-                listTextfield.resignFirstResponder()
+                showListPickerTextField.resignFirstResponder()
             }
             return
         }
         if CategopryRowIndex == 0 {
             categoryTextfield.text = categoryArray[0]
-            categoryTextfield.resignFirstResponder()
+            showCategoryPickerTextField.resignFirstResponder()
         } else {
             categoryTextfield.text = categoryTextChosen
-            categoryTextfield.resignFirstResponder()
+            showCategoryPickerTextField.resignFirstResponder()
         }
     }
     

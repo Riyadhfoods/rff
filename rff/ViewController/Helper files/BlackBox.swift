@@ -87,6 +87,30 @@ func changeBoldFont(labelLeft: UILabel, labelRight: UILabel, langauge: Int){
     }
 }
 
+func changeBoldFontAndColor(labelLeft: UILabel, labelRight: UILabel, langauge: Int){
+    if langauge == 1{
+        labelLeft.font = UIFont.boldSystemFont(ofSize: 17)
+        labelLeft.textColor = .black
+        labelRight.font = UIFont.systemFont(ofSize: 17)
+        labelRight.textColor = AppDelegate().mainBackgroundColor
+    } else {
+        labelRight.font = UIFont.boldSystemFont(ofSize: 17)
+        labelRight.textColor = .black
+        labelLeft.font = UIFont.systemFont(ofSize: 17)
+        labelLeft.textColor = AppDelegate().mainBackgroundColor
+    }
+}
+
+func changeTitlePositionIfArabic(labelOne: UILabel, labelTwo: UILabel, titleEnglish: String, titleArabic: String, language: Int){
+    if language == 1{
+        labelOne.text = titleEnglish
+        labelOne.textAlignment = .left
+    } else {
+        labelTwo.text = titleArabic
+        labelTwo.textAlignment = .right
+    }
+}
+
 
 
 

@@ -30,6 +30,9 @@ class VisaRequiresCell: UITableViewCell {
     
     let langauge = LoginViewController.languageChosen
     
+    // 0 --> No , 1 --> Yes
+    var requiredVisaSelected: Int = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,15 +49,18 @@ class VisaRequiresCell: UITableViewCell {
         
         setlanguageForTitle(label: requireVisa, titleEnglish: "Require Visa", titleArabic: "طلب التأشيرة", language: langauge)
     }
-    
+
     @IBAction func visaYesButtonTapped(_ sender: Any) {
         visaYesButton.backgroundColor = mainBackgroundColor
         visaNoButton.backgroundColor = .white
     }
-    
+
     @IBAction func visaNoButtonTapped(_ sender: Any) {
         visaYesButton.backgroundColor = .white
         visaNoButton.backgroundColor = mainBackgroundColor
     }
+    
+    
+    
 
 }

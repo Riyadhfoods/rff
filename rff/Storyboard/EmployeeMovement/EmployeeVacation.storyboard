@@ -83,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WQ-Rt-DeS">
-                                <rect key="frame" x="8" y="64" width="359" height="603"/>
+                                <rect key="frame" x="8" y="64" width="359" height="587"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NkK-We-gQM">
                                         <rect key="frame" x="8" y="16" width="343" height="88"/>
@@ -368,15 +368,25 @@
                                                                                             <constraint firstAttribute="width" constant="30" id="qqG-BY-Ewh"/>
                                                                                         </constraints>
                                                                                     </imageView>
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ABr-7z-V0K">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="305" height="30"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <textInputTraits key="textInputTraits"/>
+                                                                                    </textField>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
                                                                                     <constraint firstItem="YkM-gD-FlX" firstAttribute="top" secondItem="d76-9m-b0u" secondAttribute="top" id="1Yd-gr-p47"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="G8R-Se-bBT" secondAttribute="trailing" id="1z6-tV-m1T"/>
                                                                                     <constraint firstItem="G8R-Se-bBT" firstAttribute="centerY" secondItem="d76-9m-b0u" secondAttribute="centerY" id="3Kd-C0-rdJ"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="ABr-7z-V0K" secondAttribute="trailing" id="56V-wf-9uJ"/>
                                                                                     <constraint firstItem="YkM-gD-FlX" firstAttribute="leading" secondItem="d76-9m-b0u" secondAttribute="leading" id="DNP-zD-DNj"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="YkM-gD-FlX" secondAttribute="bottom" id="V5V-OR-fCn"/>
+                                                                                    <constraint firstItem="ABr-7z-V0K" firstAttribute="leading" secondItem="d76-9m-b0u" secondAttribute="leading" id="WcJ-Ic-hZa"/>
+                                                                                    <constraint firstItem="ABr-7z-V0K" firstAttribute="top" secondItem="d76-9m-b0u" secondAttribute="top" id="doK-dW-gvM"/>
                                                                                     <constraint firstItem="G8R-Se-bBT" firstAttribute="leading" secondItem="YkM-gD-FlX" secondAttribute="trailing" constant="5" id="eyY-pS-sRW"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="ABr-7z-V0K" secondAttribute="bottom" id="g99-G8-a4T"/>
                                                                                 </constraints>
                                                                             </view>
                                                                         </subviews>
@@ -540,7 +550,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="7WQ-Rt-DeS" secondAttribute="bottom" id="bsR-jo-bGf"/>
+                            <constraint firstAttribute="bottom" secondItem="7WQ-Rt-DeS" secondAttribute="bottom" constant="16" id="bsR-jo-bGf"/>
                             <constraint firstItem="7WQ-Rt-DeS" firstAttribute="top" secondItem="ZGB-Zf-Ql6" secondAttribute="top" id="l5y-l0-kPu"/>
                             <constraint firstItem="7WQ-Rt-DeS" firstAttribute="leading" secondItem="ZGB-Zf-Ql6" secondAttribute="leading" constant="8" id="w1f-rk-UhX"/>
                             <constraint firstItem="ZGB-Zf-Ql6" firstAttribute="trailing" secondItem="7WQ-Rt-DeS" secondAttribute="trailing" constant="8" id="ylq-dh-ofA"/>
@@ -569,6 +579,7 @@
                         <outlet property="settlementAmount" destination="l5M-mt-oiK" id="Djk-if-6m4"/>
                         <outlet property="settlementDetailsHeader" destination="5l2-vY-0gQ" id="pV7-5X-Dx8"/>
                         <outlet property="settlementTitle" destination="1GF-Kg-vJW" id="TPJ-d9-qtF"/>
+                        <outlet property="showVacationTypePickerTextField" destination="ABr-7z-V0K" id="ZgG-Lk-a4v"/>
                         <outlet property="vacationDetailsHeader" destination="05q-fL-J4R" id="aX8-eU-JCc"/>
                         <outlet property="vacationDetailsStackViewWidth" destination="c8w-FG-uRz" id="r1r-py-zRm"/>
                         <outlet property="vacationTypeDropdown" destination="G8R-Se-bBT" id="lfs-EN-bVb"/>
@@ -590,7 +601,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctl-d3-Q8c">
-                                <rect key="frame" x="8" y="64" width="359" height="603"/>
+                                <rect key="frame" x="8" y="64" width="359" height="587"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6GQ-dU-Vsi">
                                         <rect key="frame" x="16" y="8" width="320" height="383"/>
@@ -919,7 +930,7 @@
                                                                                                                             <rect key="frame" x="2.5" y="2" width="18" height="18"/>
                                                                                                                             <color key="backgroundColor" red="0.41176470590000003" green="0.51764705879999995" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                                             <connections>
-                                                                                                                                <action selector="visaYesButtonTapped:" destination="8zD-gp-fX8" eventType="touchUpInside" id="AMC-bt-XXF"/>
+                                                                                                                                <action selector="visaYesButtonTapped:" destination="8zD-gp-fX8" eventType="touchUpInside" id="G2c-an-mNM"/>
                                                                                                                             </connections>
                                                                                                                         </button>
                                                                                                                     </subviews>
@@ -963,7 +974,7 @@
                                                                                                                             <rect key="frame" x="2" y="2" width="18" height="18"/>
                                                                                                                             <color key="backgroundColor" red="0.41176470590000003" green="0.51764705879999995" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                                             <connections>
-                                                                                                                                <action selector="visaNoButtonTapped:" destination="8zD-gp-fX8" eventType="touchUpInside" id="6CA-l6-5kb"/>
+                                                                                                                                <action selector="visaNoButtonTapped:" destination="8zD-gp-fX8" eventType="touchUpInside" id="Seh-3g-MU2"/>
                                                                                                                             </connections>
                                                                                                                         </button>
                                                                                                                     </subviews>
@@ -1149,7 +1160,7 @@
                         <constraints>
                             <constraint firstItem="ctl-d3-Q8c" firstAttribute="top" secondItem="7OW-PZ-hzk" secondAttribute="top" id="1UB-Zg-j7Q"/>
                             <constraint firstItem="ctl-d3-Q8c" firstAttribute="leading" secondItem="7OW-PZ-hzk" secondAttribute="leading" constant="8" id="T33-5X-5hD"/>
-                            <constraint firstItem="7OW-PZ-hzk" firstAttribute="bottom" secondItem="ctl-d3-Q8c" secondAttribute="bottom" id="Xgg-Q3-9iC"/>
+                            <constraint firstItem="7OW-PZ-hzk" firstAttribute="bottom" secondItem="ctl-d3-Q8c" secondAttribute="bottom" constant="16" id="Xgg-Q3-9iC"/>
                             <constraint firstItem="7OW-PZ-hzk" firstAttribute="trailing" secondItem="ctl-d3-Q8c" secondAttribute="trailing" constant="8" id="zJm-V7-7GY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7OW-PZ-hzk"/>

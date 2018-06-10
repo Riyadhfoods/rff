@@ -15,9 +15,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet weak var companyPickerView: UITextField!
+    @IBOutlet weak var companyTextfield: UITextField!
     @IBOutlet weak var companyDropdownImage: UIImageView!
-    @IBOutlet weak var languangePickerView: UITextField!
+    @IBOutlet weak var languangeTextfield: UITextField!
     @IBOutlet weak var languangeDropdownImage: UIImageView!
     
     // MARK: Constrians
@@ -28,6 +28,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var textfieldHeight: NSLayoutConstraint!
     @IBOutlet weak var pickerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var buttonHeight: NSLayoutConstraint!
+    
+    // TextField Action
+    @IBOutlet weak var showCompanyPickerTextField: UITextField!
+    @IBOutlet weak var showLanguangePickerTextField: UITextField!
     
     
     let activityIndicator: UIActivityIndicatorView = {
@@ -79,6 +83,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         usernameTextfield.delegate = self
         passwordTextfield.delegate = self
         
+        showCompanyPickerTextField.tintColor = .clear
+        showLanguangePickerTextField.tintColor = .clear
+        
         setUpPickerView()
         setUpUserNameToolBar()
     }
@@ -118,57 +125,47 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func setUpPickerView(){
-        pickerViewAction.showPickView(txtfield: companyPickerView, pickerview: pickViewCompay, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)
-        pickerViewAction.showPickView(txtfield: languangePickerView, pickerview: pickViewLanguage, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)
+        pickerViewAction.showPickView(txtfield: showCompanyPickerTextField, pickerview: pickViewCompay, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)
+        pickerViewAction.showPickView(txtfield: showLanguangePickerTextField, pickerview: pickViewLanguage, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: nil)
     }
     
     @objc func cancelClick(){
         if pickview == pickViewCompay{
-            companyPickerView.resignFirstResponder()
+            showCompanyPickerTextField.resignFirstResponder()
             return
         }
-        languangePickerView.resignFirstResponder()
+        showLanguangePickerTextField.resignFirstResponder()
     }
     
     func setUpUserNameToolBar(){
-        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(doneClick))
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextClick))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([spaceButton, nextButton], animated: false)
         usernameTextfield.inputAccessoryView = toolBar
     }
     
-    @objc func doneClick(){
+    @objc func nextClick(){
         passwordTextfield.becomeFirstResponder()
     }
     
     // -- MARK: IBActions
     
     @IBAction func loginButton(_ sender: Any) {
-        
-        // Activity Indicator
-        activityIndicator.center = view.center
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        
         guard let usernametext = usernameTextfield.text, let passwordText = passwordTextfield.text else {
-            activityIndicator.stopAnimating()
             return
         }
         
         if usernametext.isEmpty || passwordText.isEmpty {
-            activityIndicator.stopAnimating()
             AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: "Username or password is empty", actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
         }
         
-        if let language = languangePickerView.text{
+        if let language = languangeTextfield.text{
             LoginViewController.languageChosen = setLanguageChosen(languagetextfield: language)
         }
         
         AuthServices().checkUserId(id: usernametext, password: passwordText, onSeccuss: {
-            self.activityIndicator.stopAnimating()
             self.performSegue(withIdentifier: "showHomePage", sender: nil)
         }) { (error) in
-            self.activityIndicator.stopAnimating()
             AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
         }
     }
@@ -197,10 +194,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pickViewCompay{
-            companyPickerView.text = companyArray[row]
+            companyTextfield.text = companyArray[row]
             cancelClick()
         } else {
-            languangePickerView.text =  languageArray[row]
+            languangeTextfield.text =  languageArray[row]
             cancelClick()
         }
     }

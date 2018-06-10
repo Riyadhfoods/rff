@@ -2,6 +2,23 @@ import Foundation
 public class EmpVac{
     public var exitrentry : String = ""
     public var extradays : String = ""
+    public var Error : String = ""
+    public var PID : String = ""
+    public var TotalSettlementAmount : String = ""
+    public var DiffTicketAmount : String = ""
+    public var NetTicketPrice : String = ""
+    public var TicketPercent : String = ""
+    public var TicketAmount : String = ""
+    public var TicketPrice : String = ""
+    public var VNet : String = ""
+    public var VAllowances : String = ""
+    public var VTotal : String = ""
+    public var VBasic : String = ""
+    public var SNet : String = ""
+    public var STotal : String = ""
+    public var SAllowances : String = ""
+    public var SBasic : String = ""
+    public var SDeduction : String = ""
     public var Emp_Id : Int = 0
     public var Emp_Ename : String = ""
     public var Emp_AName : String = ""
@@ -47,6 +64,23 @@ extension EmpVac: CustomStringConvertible{
         return """
         exitrentry = \(exitrentry)
         extradays = \(extradays)
+        Error = \(Error)
+        PID = \(PID)
+        TotalSettlementAmount = \(TotalSettlementAmount)
+        DiffTicketAmount = \(DiffTicketAmount)
+        NetTicketPrice = \(NetTicketPrice)
+        TicketPercent = \(TicketPercent)
+        TicketAmount = \(TicketAmount)
+        TicketPrice = \(TicketPrice)
+        VNet = \(VNet)
+        VAllowances = \(VAllowances)
+        VTotal = \(VTotal)
+        VBasic = \(VBasic)
+        SNet = \(SNet)
+        STotal = \(STotal)
+        SAllowances = \(SAllowances)
+        SBasic = \(SBasic)
+        SDeduction = \(SDeduction)
         Emp_Id = \(Emp_Id)
         Emp_Ename = \(Emp_Ename)
         Emp_AName = \(Emp_AName)
