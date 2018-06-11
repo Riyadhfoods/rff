@@ -20,16 +20,10 @@ class SalesInboxWebPageViewController: UIViewController {
         super.viewDidLoad()
         print("url string is \(urlString)")
         
-        if let url = URL(string: urlString), let userId = AuthServices.currentUserId{
-            let cookieStorage = HTTPCookieStorage.shared
-            let cookieHeaderField = ["Set-Cookie": "empNo=" + userId + ";"]
-            let cookie = HTTPCookie.cookies(withResponseHeaderFields: cookieHeaderField, for: url)
-            cookieStorage.setCookies(cookie, for: url, mainDocumentURL: nil)
+        if let url = URL(string: urlString){
+            let request = URLRequest(url: url)
             
-            let request = NSMutableURLRequest(url: url)
-            request.setValue("empNo=" + userId, forHTTPHeaderField: "Cookie")
-            
-            salesInboxWebView.load(request as URLRequest)
+            salesInboxWebView.load(request)
         }
     }
 

@@ -20,6 +20,7 @@ class CreditDetailsViewController: UIViewController {
     @IBOutlet weak var upTo120Right: UILabel!
     @IBOutlet weak var moreThan90Right: UILabel!
     @IBOutlet weak var statusRight: UILabel!
+    @IBOutlet weak var viewHolder: UIView!
     
     // -- MARK: Variables
     
@@ -27,8 +28,9 @@ class CreditDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        viewHolder.layer.cornerRadius = 5.0
+        viewHolder.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
+        viewHolder.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {

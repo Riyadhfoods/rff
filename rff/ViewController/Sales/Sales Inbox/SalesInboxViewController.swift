@@ -22,6 +22,7 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     // -- MARK: variables
     
     let screenSize = AppDelegate().screenSize
+    let languageChosen = LoginViewController.languageChosen
     let segueId_transferStyle = "showTransferStyle"
     let segueId_orderStyle = "showOrderStyle"
     let segueId_returnStyle = "showReturnStyle"
@@ -97,9 +98,16 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
 
     @IBAction func searchButtonTapped(_ sender: Any) {
-        //activityIndicator.startAnimating()
+        if ListTextfield.text == selectListArray[0]{
+            let alertTitle = getString(englishString: "Alert", arabicString: "تنبيه", language: languageChosen)
+            let alertMessage = getString(englishString: "Select a list first", arabicString: "اختر من القائمة اولاً", language: languageChosen)
+            
+            AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
+        }
+        
         if let userId = AuthServices.currentUserId, let searchText = seachTextfield.text{
-            salesArray = salesWebservice.GetSalesInbox(id: selectedListIndex, emp_id: userId, searchtext: searchText, activityIndicator: activityIndicator)
+            salesArray = salesWebservice.GetSalesInbox(id: selectedListIndex, emp_id: userId, searchtext: searchText, index: 0, activityIndicator: activityIndicator)
+                //salesWebservice.GetSalesInbox(id: selectedListIndex, emp_id: userId, searchtext: searchText, index: 0)
         } else {
             return
         }

@@ -32,14 +32,19 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var offerYesButton: UIButton!
     @IBOutlet weak var offerNoButton: UIButton!
     
+    @IBOutlet weak var stackviewWidth: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     // -- MARK: Variables
     
+    let screenSize = AppDelegate().screenSize
     let salespersonPickerView: UIPickerView = UIPickerView()
     let customerPickerView: UIPickerView = UIPickerView()
     var salespersonTextChosen: String?
     var customerTextChosen: String?
     var salespersonArray = [String]()
     var customerArray = [String]()
+    var selectedRow: Int = 0
     
     let deliveryDatePickerView: UIDatePicker = UIDatePicker()
     
@@ -60,10 +65,13 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
         showcustomerPickerViewTextfield.tintColor = .clear
         deliveryDateTextfield.tintColor = .clear
         
-        setUpdefaultValueForText()
+        setUpWidth()
         setUpPickerView()
         setUpSelectors()
         setupDatePicker()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
+        view.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,9 +81,12 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // -- MARK: Set ups
     
-    func setUpdefaultValueForText(){
-        salespersonTextChosen = salespersonArray[0]
-        customerTextChosen = customerArray[0]
+    @objc func didTapView(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    func setUpWidth(){
+        stackviewWidth.constant = screenSize.width - 32
     }
     
     func setUpPickerView(){
@@ -132,10 +143,10 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @objc func doneClick(){
         if pickerview == salespersonPickerView{
-            salespersonTextfield.text = salespersonTextChosen
+            salespersonTextfield.text = salespersonArray[selectedRow]
             showsalespersonPickerViewTextfield.resignFirstResponder()
         } else {
-            customerTextfield.text = customerTextChosen
+            customerTextfield.text = customerArray[selectedRow]
             showcustomerPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -174,13 +185,7 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == salespersonPickerView{
-            salespersonTextfield.text = salespersonArray[row]
-            salespersonTextChosen = salespersonArray[row]
-        } else {
-            customerTextfield.text = customerArray[row]
-            customerTextChosen = customerArray[row]
-        }
+        selectedRow = row
     }
     
     // -- MARK: IBActions
@@ -210,6 +215,46 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
 }
 
+
+extension SalesPersonViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
+    }
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillShow(notification: notification)
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillHide(notification: notification)
+        }
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: Notification){
+        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+        scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: Notification){
+        scrollView.contentInset = UIEdgeInsets.zero
+    }
+}
 
 
 

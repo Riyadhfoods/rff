@@ -8,6 +8,17 @@
 
 import Foundation
 public class SalesModel{
+    public var totalrows : Int = 0
+    public var currentrows : String = ""
+    public var OrderID : String = ""
+    public var ReqDate : String = ""
+    public var DeliveryDate : String = ""
+    public var SO_EmpCreated: String = ""
+    public var SO_Comment : String = ""
+    public var SO_CustomerName : String = ""
+    public var SO_Items : String = ""
+    public var SO_Status : String = ""
+    public var SO_Url: String = ""
     public var ID : Int = 0
     public var EmpCreated : String = ""
     public var CustomerName : String = ""

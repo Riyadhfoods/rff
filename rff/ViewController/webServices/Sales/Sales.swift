@@ -148,7 +148,50 @@
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1
-                    if elemName == "ID" {
+                    if elemName == "totalrows" {
+                        rItem1.totalrows = strVal.toInt()!
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "currentrows" {
+                        rItem1.currentrows =  strVal
+                    }
+                    else if elemName == "OrderID" {
+                        rItem1.OrderID =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "ReqDate" {
+                        rItem1.ReqDate =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "DeliveryDate" {
+                        rItem1.DeliveryDate =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_EmpCreated" {
+                        rItem1.SO_EmpCreated =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_Comment" {
+                        rItem1.SO_Comment =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_CustomerName" {
+                        rItem1.SO_CustomerName =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_Items" {
+                        rItem1.SO_Items =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_Status" {
+                        rItem1.SO_Status =  strVal
+                    }
+                        // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "SO_Url" {
+                        rItem1.SO_Url =  strVal
+                    }
+                    // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "ID" {
                         rItem1.ID = strVal.toInt()!
                     }
                         // Array Propert of returnValue subProperty for rItem1
@@ -182,7 +225,7 @@
                     }
                         // Array Propert of returnValue subProperty for rItem1
                     else if elemName == "URL" {
-                        rItem1.URL =  strVal.replacingOccurrences(of: "192.168.0.18", with: "82.118.166.164")
+                        rItem1.URL =  strVal
                     }
                         // Array Propert of returnValue subProperty for rItem1
                     else if elemName == "RequestDate" {
@@ -205,8 +248,30 @@
         let xmlToParse   = String.init(data: data, encoding: String.Encoding.utf8)!
         return SalesArrFromXMLString( xmlToParse : xmlToParse)
     }
-    public func GetSalesInbox(id:Int, emp_id:String, searchtext:String, activityIndicator: UIActivityIndicatorView)-> [SalesModel]{
-        activityIndicator.startAnimating()
+    
+    public func SalesOrder(empno:Int)-> [SalesModel]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<SalesOrder xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<empno>"
+        soapReqXML += String(empno)
+        soapReqXML += "</empno>"
+        soapReqXML += "</SalesOrder>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/SalesOrder"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[SalesModel] = SalesArrFromXML(data : responseData)
+        return returnValue
+    }
+    
+    public func GetSalesInbox(id:Int, emp_id:String, searchtext:String, index:Int)-> [SalesModel]{
         var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
 
         soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
@@ -223,6 +288,9 @@
         soapReqXML += "<searchtext>"
         soapReqXML += searchtext
         soapReqXML += "</searchtext>"
+        soapReqXML += "<index>"
+        soapReqXML += String(index)
+        soapReqXML += "</index>"
         soapReqXML += "</GetSalesInbox>"
         soapReqXML += "</soap:Body>"
         soapReqXML += "</soap:Envelope>"
@@ -231,7 +299,38 @@
 
         let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
         let returnValue:[SalesModel]=SalesArrFromXML(data : responseData)
-        activityIndicator.stopAnimating()
+        return returnValue
+    }
+    
+    public func GetSalesInbox(id:Int, emp_id:String, searchtext:String, index:Int, activityIndicator: UIActivityIndicatorView)-> [SalesModel]{
+        var soapReqXML:String = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+        
+        soapReqXML  += "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
+        soapReqXML  += " xmlns:xsd =\"http://www.w3.org/2001/XMLSchema\""
+        soapReqXML  += " xmlns:soap =\"http://schemas.xmlsoap.org/soap/envelope/\">"
+        soapReqXML += " <soap:Body>"
+        soapReqXML += "<GetSalesInbox xmlns=\"http://tempuri.org/\">"
+        soapReqXML += "<id>"
+        soapReqXML += String(id)
+        soapReqXML += "</id>"
+        soapReqXML += "<emp_id>"
+        soapReqXML += emp_id
+        soapReqXML += "</emp_id>"
+        soapReqXML += "<searchtext>"
+        soapReqXML += searchtext
+        soapReqXML += "</searchtext>"
+        soapReqXML += "<index>"
+        soapReqXML += String(index)
+        soapReqXML += "</index>"
+        soapReqXML += "</GetSalesInbox>"
+        soapReqXML += "</soap:Body>"
+        soapReqXML += "</soap:Envelope>"
+        
+        let soapAction :String = "http://tempuri.org/GetSalesInbox"
+        
+        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML, activityIndicator: activityIndicator)
+        //SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        let returnValue:[SalesModel]=SalesArrFromXML(data : responseData)
         return returnValue
     }
  }

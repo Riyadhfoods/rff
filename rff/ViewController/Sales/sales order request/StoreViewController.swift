@@ -21,8 +21,12 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var merchandiserTextfield: UITextField!
     @IBOutlet weak var showMerchandiserPickerViewTextfield: UITextField!
     
+    @IBOutlet weak var stackviewWidth: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     // -- MARK: Variables
     
+    let screenSize = AppDelegate().screenSize
     let storePickerView: UIPickerView = UIPickerView()
     let cityPickerView: UIPickerView = UIPickerView()
     let salesPersonPickerView: UIPickerView = UIPickerView()
@@ -35,6 +39,7 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var cityArray = [String]()
     var salesPersonArray = [String]()
     var merchandiserArray = [String]()
+    var selectedRow: Int = 0
     
     // To keep track
     var pickerview: UIPickerView = UIPickerView()
@@ -56,8 +61,11 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         salesPersonArray = ["cccccccccc"]
         merchandiserArray = ["ddddddddddd"]
         
-        setUpdefaultValueForText()
+        setUpWidth()
         setUpPickerView()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
+        view.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,11 +75,12 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // -- MARK: Set ups
     
-    func setUpdefaultValueForText(){
-        storeTextChosen = storeArray[0]
-        cityTextChosen = cityArray[0]
-        salesPersonTextChosen = salesPersonArray[0]
-        merchandiserTextChosen = merchandiserArray[0]
+    @objc func didTapView(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    func setUpWidth(){
+        stackviewWidth.constant = screenSize.width - 32
     }
     
     func setUpPickerView(){
@@ -87,16 +96,16 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @objc func doneClick(){
         if pickerview == storePickerView{
-            storeTextfield.text = storeTextChosen
+            storeTextfield.text = storeArray[selectedRow]
             showStorePickerViewTextfield.resignFirstResponder()
         } else if pickerview == cityPickerView{
-            cityTextfield.text = cityTextChosen
+            cityTextfield.text = cityArray[selectedRow]
             showCityPickerViewTextfield.resignFirstResponder()
         } else if pickerview == salesPersonPickerView{
-            salesPersonTextfield.text = salesPersonTextChosen
+            salesPersonTextfield.text = salesPersonArray[selectedRow]
             showSalesPersonPickerViewTextfield.resignFirstResponder()
         } else {
-            merchandiserTextfield.text = merchandiserTextChosen
+            merchandiserTextfield.text = merchandiserArray[selectedRow]
             showMerchandiserPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -143,19 +152,7 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == storePickerView{
-            storeTextfield.text = storeArray[row]
-            storeTextChosen = storeArray[row]
-        } else if pickerView == cityPickerView{
-            cityTextfield.text = cityArray[row]
-            cityTextChosen = cityArray[row]
-        } else if pickerView == salesPersonPickerView{
-            salesPersonTextfield.text = salesPersonArray[row]
-            salesPersonTextChosen = salesPersonArray[row]
-        } else {
-            merchandiserTextfield.text = merchandiserArray[row]
-            merchandiserTextChosen = merchandiserArray[row]
-        }
+        selectedRow = row
     }
     
     // -- MARK: IBActions
@@ -163,4 +160,44 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBAction func nextButtonTapped(_ sender: Any) {
     }
     
+}
+
+extension StoreViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
+    }
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillShow(notification: notification)
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillHide(notification: notification)
+        }
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: Notification){
+        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+        scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: Notification){
+        scrollView.contentInset = UIEdgeInsets.zero
+    }
 }

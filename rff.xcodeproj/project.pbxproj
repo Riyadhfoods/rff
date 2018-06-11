@@ -12,6 +12,8 @@
 		C005CB7420B40B7600875740 /* InboxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C005CB7020B40B7600875740 /* InboxGrid.swift */; };
 		C005CB7520B40B7600875740 /* ArrayOfInboxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C005CB7120B40B7600875740 /* ArrayOfInboxGrid.swift */; };
 		C005CB7620B40B7600875740 /* ArrayOfListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C005CB7220B40B7600875740 /* ArrayOfListType.swift */; };
+		C005D5D820CD0C6D00E1740A /* SalesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C005D5D720CD0C6D00E1740A /* SalesRequest.swift */; };
+		C005D5DD20CD331300E1740A /* OrderPagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C005D5DC20CD331300E1740A /* OrderPagesCell.swift */; };
 		C00707F220A04B6C00320ED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C00707F120A04B6C00320ED4 /* Assets.xcassets */; };
 		C00707FA20A05F2800320ED4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C00707F920A05F2800320ED4 /* SWRevealViewController.m */; };
 		C00707FE20A0617000320ED4 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00707FD20A0617000320ED4 /* SlideMenuViewController.swift */; };
@@ -40,6 +42,7 @@
 		C03C7C1820C7F75100D8248C /* Sales.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1620C7F75100D8248C /* Sales.swift */; };
 		C03C7C1920C7F75100D8248C /* ArrayOfSales.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1720C7F75100D8248C /* ArrayOfSales.swift */; };
 		C03C7C1B20C7F7E000D8248C /* SalesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03C7C1A20C7F7E000D8248C /* SalesModel.swift */; };
+		C05777AB20CE79CB00423FE7 /* SalesOrderApprovalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05777AA20CE79CB00423FE7 /* SalesOrderApprovalCell.swift */; };
 		C061756D209EF792007F8E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061756C209EF792007F8E59 /* AppDelegate.swift */; };
 		C061756F209EF792007F8E59 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061756E209EF792007F8E59 /* LoginViewController.swift */; };
 		C0617572209EF792007F8E59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0617570209EF792007F8E59 /* Main.storyboard */; };
@@ -148,6 +151,8 @@
 		C0B7F4BE20A1A89F007D1F67 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B7F4BD20A1A89F007D1F67 /* Section.swift */; };
 		C0B90AD620B6C10000760FD0 /* VacationsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B90AD520B6C10000760FD0 /* VacationsDetailsViewController.swift */; };
 		C0B90AD820B6C75300760FD0 /* BlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B90AD720B6C75300760FD0 /* BlackBox.swift */; };
+		C0BE2E4420CDD540005F8B4A /* TransferPagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BE2E4320CDD540005F8B4A /* TransferPagesCell.swift */; };
+		C0BE2E4620CDD553005F8B4A /* ReturnPagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BE2E4520CDD553005F8B4A /* ReturnPagesCell.swift */; };
 		C0CE40C820BC14C600A06CB4 /* EmpVac.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE40C420BC14C400A06CB4 /* EmpVac.swift */; };
 		C0CE40C920BC14C600A06CB4 /* ArrayOfEmpVac.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE40C520BC14C400A06CB4 /* ArrayOfEmpVac.swift */; };
 		C0CE40CA20BC14C600A06CB4 /* Task_Inbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE40C620BC14C500A06CB4 /* Task_Inbox.swift */; };
@@ -171,6 +176,8 @@
 		C005CB7020B40B7600875740 /* InboxGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxGrid.swift; sourceTree = "<group>"; };
 		C005CB7120B40B7600875740 /* ArrayOfInboxGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayOfInboxGrid.swift; sourceTree = "<group>"; };
 		C005CB7220B40B7600875740 /* ArrayOfListType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayOfListType.swift; sourceTree = "<group>"; };
+		C005D5D720CD0C6D00E1740A /* SalesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesRequest.swift; sourceTree = "<group>"; };
+		C005D5DC20CD331300E1740A /* OrderPagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPagesCell.swift; sourceTree = "<group>"; };
 		C00707F120A04B6C00320ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C00707F720A05F2700320ED4 /* rff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rff-Bridging-Header.h"; sourceTree = "<group>"; };
 		C00707F820A05F2800320ED4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -202,6 +209,7 @@
 		C03C7C1620C7F75100D8248C /* Sales.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sales.swift; sourceTree = "<group>"; };
 		C03C7C1720C7F75100D8248C /* ArrayOfSales.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayOfSales.swift; sourceTree = "<group>"; };
 		C03C7C1A20C7F7E000D8248C /* SalesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesModel.swift; sourceTree = "<group>"; };
+		C05777AA20CE79CB00423FE7 /* SalesOrderApprovalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesOrderApprovalCell.swift; sourceTree = "<group>"; };
 		C0617569209EF792007F8E59 /* rff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C061756C209EF792007F8E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C061756E209EF792007F8E59 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +320,8 @@
 		C0B7F4BD20A1A89F007D1F67 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		C0B90AD520B6C10000760FD0 /* VacationsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationsDetailsViewController.swift; sourceTree = "<group>"; };
 		C0B90AD720B6C75300760FD0 /* BlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBox.swift; sourceTree = "<group>"; };
+		C0BE2E4320CDD540005F8B4A /* TransferPagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPagesCell.swift; sourceTree = "<group>"; };
+		C0BE2E4520CDD553005F8B4A /* ReturnPagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnPagesCell.swift; sourceTree = "<group>"; };
 		C0CE40C420BC14C400A06CB4 /* EmpVac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpVac.swift; sourceTree = "<group>"; };
 		C0CE40C520BC14C400A06CB4 /* ArrayOfEmpVac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayOfEmpVac.swift; sourceTree = "<group>"; };
 		C0CE40C620BC14C500A06CB4 /* Task_Inbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task_Inbox.swift; sourceTree = "<group>"; };
@@ -348,6 +358,36 @@
 				3EC8D7ADA73DE9FF7FE35C01 /* Pods-rff.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C005D5D920CD32DE00E1740A /* order */ = {
+			isa = PBXGroup;
+			children = (
+				C03C7C0C20C7D9FF00D8248C /* OrderStyleTableViewController.swift */,
+				C03C7C0E20C7DA0B00D8248C /* OrderStyleCell.swift */,
+				C005D5DC20CD331300E1740A /* OrderPagesCell.swift */,
+			);
+			path = order;
+			sourceTree = "<group>";
+		};
+		C005D5DA20CD32EB00E1740A /* return */ = {
+			isa = PBXGroup;
+			children = (
+				C03C7C0720C7D96E00D8248C /* ReturnStyleTableViewController.swift */,
+				C03C7C0920C7D98000D8248C /* ReturnStyleCell.swift */,
+				C0BE2E4520CDD553005F8B4A /* ReturnPagesCell.swift */,
+			);
+			path = return;
+			sourceTree = "<group>";
+		};
+		C005D5DB20CD32F500E1740A /* transfer */ = {
+			isa = PBXGroup;
+			children = (
+				C03C7C1020C7DA2A00D8248C /* TansferStyleTableViewController.swift */,
+				C03C7C1220C7DA3D00D8248C /* TransferStyleCell.swift */,
+				C0BE2E4320CDD540005F8B4A /* TransferPagesCell.swift */,
+			);
+			path = transfer;
 			sourceTree = "<group>";
 		};
 		C00707EC20A0110600320ED4 /* ViewController */ = {
@@ -447,6 +487,7 @@
 				C0B5359220B2B565007EF65F /* AlertMessage.swift */,
 				C0B90AD720B6C75300760FD0 /* BlackBox.swift */,
 				C0234D3920C5237E008BB55B /* RevealMenu.swift */,
+				C005D5D720CD0C6D00E1740A /* SalesRequest.swift */,
 			);
 			path = "Helper files";
 			sourceTree = "<group>";
@@ -469,12 +510,9 @@
 			isa = PBXGroup;
 			children = (
 				C08A26D420A6E7DB0028052C /* SalesInboxViewController.swift */,
-				C03C7C0720C7D96E00D8248C /* ReturnStyleTableViewController.swift */,
-				C03C7C0920C7D98000D8248C /* ReturnStyleCell.swift */,
-				C03C7C0C20C7D9FF00D8248C /* OrderStyleTableViewController.swift */,
-				C03C7C0E20C7DA0B00D8248C /* OrderStyleCell.swift */,
-				C03C7C1020C7DA2A00D8248C /* TansferStyleTableViewController.swift */,
-				C03C7C1220C7DA3D00D8248C /* TransferStyleCell.swift */,
+				C005D5DA20CD32EB00E1740A /* return */,
+				C005D5D920CD32DE00E1740A /* order */,
+				C005D5DB20CD32F500E1740A /* transfer */,
 				C008654C20C84E93006CD88E /* SalesInboxWebPageViewController.swift */,
 			);
 			path = "Sales Inbox";
@@ -506,6 +544,15 @@
 				C03C7C1A20C7F7E000D8248C /* SalesModel.swift */,
 			);
 			path = Sales;
+			sourceTree = "<group>";
+		};
+		C05777A920CE799F00423FE7 /* sales order approval */ = {
+			isa = PBXGroup;
+			children = (
+				C08A26D620A6E7EC0028052C /* SalesOrderApprovalViewController.swift */,
+				C05777AA20CE79CB00423FE7 /* SalesOrderApprovalCell.swift */,
+			);
+			path = "sales order approval";
 			sourceTree = "<group>";
 		};
 		C0617560209EF792007F8E59 = {
@@ -706,7 +753,7 @@
 			isa = PBXGroup;
 			children = (
 				C03C7C0B20C7D98900D8248C /* Sales Inbox */,
-				C08A26D620A6E7EC0028052C /* SalesOrderApprovalViewController.swift */,
+				C05777A920CE799F00423FE7 /* sales order approval */,
 				C08A26D820A6E7FC0028052C /* SalesReturnApprovalViewController.swift */,
 				C08A26DA20A6E80B0028052C /* SalesPromotionApprovalViewController.swift */,
 				C008654E20C943DC006CD88E /* sales order request */,
@@ -1049,9 +1096,12 @@
 				C008655420C94426006CD88E /* CreditDetailsViewController.swift in Sources */,
 				C03C7C1320C7DA3D00D8248C /* TransferStyleCell.swift in Sources */,
 				C08A26D720A6E7EC0028052C /* SalesOrderApprovalViewController.swift in Sources */,
+				C0BE2E4420CDD540005F8B4A /* TransferPagesCell.swift in Sources */,
 				C008655620C94438006CD88E /* AddItemsViewController.swift in Sources */,
 				C0CE40CB20BC14C600A06CB4 /* ArrayOfTask_Inbox.swift in Sources */,
 				C0B90AD820B6C75300760FD0 /* BlackBox.swift in Sources */,
+				C005D5D820CD0C6D00E1740A /* SalesRequest.swift in Sources */,
+				C05777AB20CE79CB00423FE7 /* SalesOrderApprovalCell.swift in Sources */,
 				C08A26D320A6E7C60028052C /* MyComplainViewController.swift in Sources */,
 				C08A26EB20A6E8AC0028052C /* CitrixViewController.swift in Sources */,
 				C08A26DD20A6E8200028052C /* SalesOrderRequestsViewController.swift in Sources */,
@@ -1088,6 +1138,7 @@
 				C061756F209EF792007F8E59 /* LoginViewController.swift in Sources */,
 				C00707FA20A05F2800320ED4 /* SWRevealViewController.m in Sources */,
 				C03C7C1120C7DA2A00D8248C /* TansferStyleTableViewController.swift in Sources */,
+				C0BE2E4620CDD553005F8B4A /* ReturnPagesCell.swift in Sources */,
 				C035314C20B1875700E0DBD9 /* SoapHttpClient.swift in Sources */,
 				C0CE40C920BC14C600A06CB4 /* ArrayOfEmpVac.swift in Sources */,
 				C08A26A320A6E4700028052C /* AttendanceDetailsViewController.swift in Sources */,
@@ -1126,6 +1177,7 @@
 				C08A267F20A6E2CA0028052C /* ChangePasswordViewController.swift in Sources */,
 				C0B5359320B2B565007EF65F /* AlertMessage.swift in Sources */,
 				C0FFEE2D20A45FDE00712531 /* MenuImage.swift in Sources */,
+				C005D5DD20CD331300E1740A /* OrderPagesCell.swift in Sources */,
 				C09F1E8320A984E4005F4C23 /* EmployeeInfoTableViewCell.swift in Sources */,
 				C08A26D920A6E7FC0028052C /* SalesReturnApprovalViewController.swift in Sources */,
 				C08A269F20A6E4310028052C /* BusinessTripViewController.swift in Sources */,

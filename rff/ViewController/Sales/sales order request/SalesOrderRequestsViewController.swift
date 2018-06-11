@@ -37,6 +37,10 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
     var branchArray = [String]()
     var docIdArray = [String]()
     var locCodeArray = [String]()
+    var selectedRow: Int = 0
+    
+    @IBOutlet weak var stackviewWidth: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // To keep track
     var pickerview: UIPickerView = UIPickerView()
@@ -53,23 +57,29 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
         showDocIdPickerViewTextfield.tintColor = .clear
         showLocCodePickerViewTextfield.tintColor = .clear
         
-        companyArray = ["rff"]
-        branchArray = ["riyadh"]
-        docIdArray = ["AAAA"]
+        stackviewWidth.constant = screenSize.width - 32
+        
+        companyArray = ["rff1", "rff2", "rff3"]
+        branchArray = ["riyadh1", "riyadh2", "riyadh3"]
+        docIdArray = ["AAAA1", "AAAA2", "AAAA3"]
         locCodeArray = ["6565"]
         
-        setUpdefaultValueForText()
+        setUpWidth()
         setUpPickerView()
         sideMenus()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
+        view.addGestureRecognizer(tapGesture)
     }
     
     // -- MARK: Set ups
     
-    func setUpdefaultValueForText(){
-        companyTextChosen = companyArray[0]
-        branchTextChosen = branchArray[0]
-        docIdTextChosen = docIdArray[0]
-        LocCodeTextChosen = locCodeArray[0]
+    @objc func didTapView(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    func setUpWidth(){
+        stackviewWidth.constant = screenSize.width - 32
     }
     
     func setUpPickerView(){
@@ -85,16 +95,16 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
     
     @objc func doneClick(){
         if pickerview == companyPickerView{
-            companyTextfield.text = companyTextChosen
+            companyTextfield.text = companyArray[selectedRow]
             showCompanyPickerViewTextfield.resignFirstResponder()
         } else if pickerview == branchPickerView{
-            branchTextfield.text = branchTextChosen
+            branchTextfield.text = branchArray[selectedRow]
             showBranchPickerViewTextfield.resignFirstResponder()
         } else if pickerview == docIdPickerView{
-            docIdTextfield.text = docIdTextChosen
+            docIdTextfield.text = docIdArray[selectedRow]
             showDocIdPickerViewTextfield.resignFirstResponder()
         } else {
-            LocCodeTextfield.text = LocCodeTextChosen
+            LocCodeTextfield.text = locCodeArray[selectedRow]
             showLocCodePickerViewTextfield.resignFirstResponder()
         }
     }
@@ -141,19 +151,7 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == companyPickerView{
-            companyTextfield.text = companyArray[row]
-            companyTextChosen = companyArray[row]
-        } else if pickerView == branchPickerView{
-            branchTextfield.text = branchArray[row]
-            branchTextChosen = branchArray[row]
-        } else if pickerView == docIdPickerView{
-            docIdTextfield.text = docIdArray[row]
-            docIdTextChosen = docIdArray[row]
-        } else {
-            LocCodeTextfield.text = locCodeArray[row]
-            LocCodeTextChosen = locCodeArray[row]
-        }
+        selectedRow = row
     }
     
     // -- MARK: IBAction
@@ -174,5 +172,45 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
             revealViewController().rearViewRevealWidth = screenSize.width * 0.75
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+}
+
+extension SalesOrderRequestsViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
+    }
+    
+    func addObservers(){
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillShow(notification: notification)
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
+            (notification) in
+            self.keyboardWillHide(notification: notification)
+        }
+    }
+    
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func keyboardWillShow(notification: Notification){
+        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+        scrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: Notification){
+        scrollView.contentInset = UIEdgeInsets.zero
     }
 }

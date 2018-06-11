@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ItemsSelectedViewController: UIViewController {
+class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // -- MARK: IBOutlets
     
     @IBOutlet weak var itemsTableView: UITableView!
     
     // -- MARK: Variables
+    
+    let cellId = "cell_addedItem"
     
     // -- MARk: viewDidLoad
     
@@ -27,6 +29,20 @@ class ItemsSelectedViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // -- MARK: Tableview data source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ItemsSelectedCell{
+            
+            return cell
+        }
+        return UITableViewCell()
     }
     
     // -- MARK: IBOutlets
