@@ -47,7 +47,7 @@ class EmployeeInfoViewController: UIViewController, UITableViewDataSource, UITab
         employeeInfoListItem.delegate = self
         employeeInfoListItem.dataSource = self
         
-        sideMenus()
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: Table view data source
@@ -63,17 +63,6 @@ class EmployeeInfoViewController: UIViewController, UITableViewDataSource, UITab
             return cell
         }
         return UITableViewCell()
-    }
-    
-    // -- MARK: Slide Menu
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     // -- MARK: IBActions

@@ -34,27 +34,9 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         oldPasswordTextfield.delegate = self
         newPasswordTextfield.delegate = self
         
-        // Change the language to the correspanding language chosen
-        setlanguageForTitle(label: oldPasswordLabel, titleEnglish: "Old password", titleArabic: "الرقم السري القديم", language: languageChosen)
-        setlanguageForTitle(label: newPasswordLabel, titleEnglish: "New Password", titleArabic: "الرقم السري الجديد", language: languageChosen)
-        
-        buttonTitle = getString(englishString: "CHANGE", arabicString: "تغيير", language: languageChosen)
-        changeButtonOutlet.setTitle(buttonTitle, for: .normal)
-        
         setCustomNav(navItem: navigationItem)
         
-        sideMenus()
-    }
-    
-    // -- MARK: Slide Menu
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: IBActions

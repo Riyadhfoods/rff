@@ -42,7 +42,7 @@ class AttendanceDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sideMenus()
+        setSlideMenu(controller: self, menuButton: menuBtn)
         setUpSelectors()
     }
     
@@ -69,18 +69,6 @@ class AttendanceDetailsViewController: UIViewController {
         
         selectorButtonOut.layer.cornerRadius = cornerRadiusValueView
         selectorButtonOut.backgroundColor = .white
-    }
-    
-    // -- MARK: Slide menu
-    
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     // -- MARK: IBActions

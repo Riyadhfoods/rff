@@ -15,15 +15,15 @@ extension SlideMenuViewController {
     @objc func toggleSection(sender: UIButton) {
         let tappedSection = sender.tag
         
-        if tappedSection == 0 || tappedSection == 12 || tappedSection == 13{
+        if tappedSection == 0 || tappedSection == 11{
             guard let identifier =  getSectionidentifierWithNoChild(tappedSection) else {return}
             performSegue(withIdentifier: identifier, sender: nil)
         } else {
-            guard let isExpanded = sectionsEnglish[tappedSection].isExpanded else { return }
-            sectionsEnglish[tappedSection].isExpanded = !isExpanded
+            guard let isExpanded = sections[tappedSection].isExpanded else { return }
+            sections[tappedSection].isExpanded = !isExpanded
             
             listTableview.beginUpdates()
-            for i in 0 ..< sectionsEnglish[tappedSection].items.count {
+            for i in 0 ..< sections[tappedSection].items.count {
                 listTableview.reloadRows(at: [IndexPath(row: i, section: tappedSection)], with: .fade)
             }
             listTableview.rectForHeader(inSection: tappedSection)
@@ -39,8 +39,6 @@ extension SlideMenuViewController {
         case 0:
             identifier = "showHome"
         case 11:
-            identifier = "showCitirix"
-        case 12:
             identifier = "showReport"
         default:
             break

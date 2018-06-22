@@ -36,7 +36,7 @@ class PickerviewAction{
         if doneSelector != nil {
             let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let doneButton = UIBarButtonItem(title: getString(englishString: "Done", arabicString: "تم", language: language), style: .plain, target: viewController, action: doneSelector)
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+            toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
         } else {
             toolBar.setItems([cancelButton], animated: false)
         }

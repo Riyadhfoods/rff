@@ -12,15 +12,15 @@ class AlertMessage{
     func showAlertMessage(alertTitle: String, alertMessage: String, actionTitle: String?, onAction: (() -> Void)?, cancelAction: String?, _ viewController: UIViewController){
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
-        if let cancelAction = cancelAction{
-            let cancel = UIAlertAction(title: cancelAction, style: .cancel, handler: nil)
-            alert.addAction(cancel)
-        }
-        
         if let actionTitle = actionTitle{
             let action = UIAlertAction(title: actionTitle, style: .default) { (action) in
                 onAction?() }
             alert.addAction(action)
+        }
+        
+        if let cancelAction = cancelAction{
+            let cancel = UIAlertAction(title: cancelAction, style: .cancel, handler: nil)
+            alert.addAction(cancel)
         }
         
         viewController.present(alert, animated: true, completion: nil)

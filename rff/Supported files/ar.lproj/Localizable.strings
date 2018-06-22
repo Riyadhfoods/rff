@@ -1,0 +1,95 @@
+/* 
+  Localizable.strings
+  rff
+
+  Created by Riyadh Foods Industrial Co. on 18/06/2018.
+  Copyright © 2018 Riyadh Foods Industrial Co. All rights reserved.
+*/
+
+"Old password" = "الرقم السري القديم";
+"New Password" =  "الرقم السري الجديد";
+"CHANGE" = "تغيير";
+
+// Menu items
+"HOME" = "الرئيسية";
+"MASTER" = "الصلاحيات";
+"Change Password" = "تغيير كلمة السر";
+"TRACKING" = "قائمة المهام";
+"Inbox" = "البريد الوارد";
+"EMPLOYEE MOVEMENT" = "إجراءات الموظف";
+"Employee Vacation" = "نموذج اجازه";
+"Loan" = "سلف";
+"Resign" = "استقالة";
+"Employee violation" = "المخالفات";
+"Return from Vacation" = "نموذج العودة من الاجازة";
+"Salary Preview" = "عرض الراتب";
+"Employee Info" = "معلومات الموظف";
+"Salary Change" = "تعديل الراتب";
+"Vacation Days Update" = "تحديث ايام الاجازة";
+"Ticket Change" = "تغيير التذكرة";
+"Job Title Change" = "تغيير المسمى الوظيفي";
+"Business Trip" = "رحلة عمل";
+"In Out Deduction" = "In Out Deduction";
+"ATTENDANCE" = "الحضور و الانصراف";
+"Attendance Details" = "تفاصيل الحضور";
+"OverTime Calculation" = "حساب العمل الاضافي";
+"Settle Calculation" = "إحتساب التصفية";
+"Attendance Clearance" = "الحضور و الانصراف";
+"PURCHASE SYSTEM" = "المشتريات";
+"Purchase Inbox" = "اوامر الشراء";
+"Purchase" = "المشتريات";
+"Purchase System-Riyadh Food" = "نظام الشراء لشركة الرياض فود";
+"IT DEPARTMENT" = "تقنية المعلومات";
+"IT Request" = "طلبات التقنية";
+"IT-Master File" = "القائمة الرئيسية";
+"Add Category" = "إضافة صنف";
+"My Requests" = "طلباتي";
+"Device Details" = "تفاصيل الجهاز";
+"PAYMENT REQUISITION" = "طلبات الصرف";
+"New Payment-Req" = "طلب صرف جديد";
+"Track Payment-Req" = "متابعة طلبات الصرف";
+"Update Bank Status" = "تحديث حالة البنك";
+"TASK" = "المهام";
+"New Task" = "مهمة جديدة";
+"Task Details" = "تفاصيل المهمة";
+"COMPLAIN" = "الشكاوي";
+"New Complain" = "شكوى جديدة";
+"My Complains" = "شكوى";
+"SALES" = "المبيعات";
+"Sales Inbox" = "الموافقة على طلب المبيعات";
+"Sales Order Approval" = "الموافقة على طلبات المرتجعات";
+"Sales Promotion Approval" = "الموافقة على عروض البيع";
+"Sales Order Requests" = "طلبات شركة الرياض للاغذية";
+"Return Order Requests" = "طلبات ارجاع شركة الرياض للاغذية";
+"Promotion Request" = "برنامج العروض";
+"Othaim Sales Status" = "حالة مبيعات العثيم";
+"Sales Plan Summary" = "ملخض خطة المبيعات";
+"Sales Person Area Setup" = "إعداد منطقة مندوب مبيعات";
+"Sales Store Update" = "تحديث مستودع المبيعات";
+"REPORT" = "التقارير";
+
+// Helper files
+"SignOut" = "تسجيل خروج";
+"Are you sure you want to sign out?" = "هل انت متأكد من تسجيل الخروج؟";
+"Yes" = "نعم";
+"Cancel" = "إلغاء";
+
+// Home
+"Home" = "الرئيسية";
+"No data" = "لا توجد بيانات";
+"English Description:" = "الوصف بالانجليزي:";
+"Arabic Description:" = "الوصف بالعربي:";
+"Count:" = "العدد:";
+"CLICK TO VIEW" = "اضغط للعرض";
+
+
+
+
+
+
+
+
+
+
+
+

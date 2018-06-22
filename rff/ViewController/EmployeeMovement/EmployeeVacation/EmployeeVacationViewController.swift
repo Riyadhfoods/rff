@@ -23,17 +23,7 @@ class EmployeeVacationViewController: UIViewController {
         // Changing the back button of the navigation contoller
         setCustomNav(navItem: navigationItem)
         addVacationButtonOutlet.setTitle(getString(englishString: "ADD VACATION", arabicString: "إضافة اجازه", language: languageChosen), for: .normal)
-        sideMenus()
-    }
-    
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     @IBAction func signOutBuuttonTapped(_ sender: Any) {

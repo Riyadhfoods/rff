@@ -46,7 +46,7 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         setCustomNav(navItem: navigationItem)
         setUpPickerView()
-        sideMenus()
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: Setups
@@ -81,16 +81,6 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedListIndex = row
-    }
-    
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     @IBAction func signOutBuuttonTapped(_ sender: Any) {

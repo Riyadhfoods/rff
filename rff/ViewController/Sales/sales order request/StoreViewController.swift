@@ -27,6 +27,7 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // -- MARK: Variables
     
     let screenSize = AppDelegate().screenSize
+    let webservice = Sales()
     let storePickerView: UIPickerView = UIPickerView()
     let cityPickerView: UIPickerView = UIPickerView()
     let salesPersonPickerView: UIPickerView = UIPickerView()
@@ -35,11 +36,17 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var cityTextChosen: String?
     var salesPersonTextChosen: String?
     var merchandiserTextChosen: String?
-    var storeArray = [String]()
-    var cityArray = [String]()
-    var salesPersonArray = [String]()
-    var merchandiserArray = [String]()
+    var storeArray = [SalesModel]()
+    var storeIdArray = [String]()
+    var cityArray = [SalesModel]()
+    var salesPersonArray = [SalesModel]()
+    var merchandiserArray = [SalesModel]()
     var selectedRow: Int = 0
+    
+    var salesSelecteedRow: Int = 0
+    var citySelectedRow: Int = 0
+    var salesperosnSelectedRow: Int = 0
+    var merSelectedRow: Int = 0
     
     // To keep track
     var pickerview: UIPickerView = UIPickerView()
@@ -56,11 +63,7 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         showSalesPersonPickerViewTextfield.tintColor = .clear
         showMerchandiserPickerViewTextfield.tintColor = .clear
         
-        storeArray = ["aaaaaaaaaaa"]
-        cityArray = ["bbbbbbbbb"]
-        salesPersonArray = ["cccccccccc"]
-        merchandiserArray = ["ddddddddddd"]
-        
+        setupArrays()
         setUpWidth()
         setUpPickerView()
         
@@ -74,6 +77,14 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     // -- MARK: Set ups
+    
+    func setupArrays(){
+        storeArray = webservice.BindDdlStore(customerid: salesDetails.CustomerInFull)
+        storeIdArray = ["Select store id"]
+        for store in storeArray{
+            storeIdArray.append(store.StoreID)
+        }
+    }
     
     @objc func didTapView(gesture: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -96,16 +107,16 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @objc func doneClick(){
         if pickerview == storePickerView{
-            storeTextfield.text = storeArray[selectedRow]
+            storeTextfield.text = storeIdArray[salesSelecteedRow]
             showStorePickerViewTextfield.resignFirstResponder()
         } else if pickerview == cityPickerView{
-            cityTextfield.text = cityArray[selectedRow]
+            cityTextfield.text = cityArray.isEmpty ? "Select city" : cityArray[citySelectedRow].City
             showCityPickerViewTextfield.resignFirstResponder()
         } else if pickerview == salesPersonPickerView{
-            salesPersonTextfield.text = salesPersonArray[selectedRow]
+            salesPersonTextfield.text = salesPersonArray.isEmpty ? "Select sales person" : salesPersonArray[salesperosnSelectedRow].SalesPersonStore
             showSalesPersonPickerViewTextfield.resignFirstResponder()
         } else {
-            merchandiserTextfield.text = merchandiserArray[selectedRow]
+            merchandiserTextfield.text = merchandiserArray.isEmpty ? "Select merchandiser" : merchandiserArray[merSelectedRow].Merchandiser
             showMerchandiserPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -129,6 +140,7 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        self.pickerview = pickerView
         if pickerView == storePickerView{
             return storeArray.count
         } else if pickerView == cityPickerView{
@@ -140,24 +152,74 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.pickerview = pickerView
         if pickerView == storePickerView{
-            return storeArray[row]
+            return storeIdArray[row]
         } else if pickerView == cityPickerView{
-            return cityArray[row]
+            return cityArray[row].City
         } else if pickerView == salesPersonPickerView{
-            return salesPersonArray[row]
+            return salesPersonArray[row].SalesPersonStore
         }
-        return merchandiserArray[row]
+        return merchandiserArray[row].Merchandiser
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
+        
+        if pickerView == storePickerView{
+            salesSelecteedRow = row
+            storeTextfield.text = storeIdArray[row]
+            cityArray = webservice.BindCity(storevalue: storeIdArray[row], customer: salesDetails.CustomerInFull)
+            if !cityArray.isEmpty{
+                cityTextfield.text = cityArray[0].City
+                salesPersonArray = webservice.BindSalesPersonforStore(customer: salesDetails.CustomerInFull, city: cityArray[0].City, store: storeIdArray[row])
+                if !salesPersonArray.isEmpty{
+                    salesPersonTextfield.text = salesPersonArray[0].SalesPersonStore
+                    merchandiserArray = webservice.BindMerchandiser(customer: salesDetails.CustomerInFull, city: cityArray[0].City, store: storeIdArray[row], salesperson: salesPersonArray[0].SalesPersonStore)
+                    if !merchandiserArray.isEmpty{
+                        merchandiserTextfield.text = merchandiserArray[0].Merchandiser
+                    }
+                }
+            }
+        } else if pickerView == cityPickerView{
+            citySelectedRow = row
+            if  !cityArray.isEmpty{
+                salesPersonArray = webservice.BindSalesPersonforStore(customer: salesDetails.CustomerInFull, city: cityArray[row].City, store: storeIdArray[salesSelecteedRow])
+                if !salesPersonArray.isEmpty{
+                    salesPersonTextfield.text = salesPersonArray[0].SalesPersonStore
+                    merchandiserArray = webservice.BindMerchandiser(customer: salesDetails.CustomerInFull, city: cityArray[row].City, store: storeIdArray[salesSelecteedRow], salesperson: salesPersonArray[0].SalesPersonStore)
+                    if !merchandiserArray.isEmpty{
+                        merchandiserTextfield.text = merchandiserArray[0].Merchandiser
+                    }
+                }
+            }
+        } else if pickerView == salesPersonPickerView {
+            if !salesPersonArray.isEmpty{
+                salesperosnSelectedRow = row
+                merchandiserArray = webservice.BindMerchandiser(customer: salesDetails.CustomerInFull, city: cityArray[citySelectedRow].City, store: storeIdArray[salesSelecteedRow], salesperson: salesPersonArray[row].SalesPersonStore)
+                if !merchandiserArray.isEmpty{
+                    merchandiserTextfield.text = merchandiserArray[0].Merchandiser
+                }
+            }
+        } else {
+            merSelectedRow = row
+        }
     }
     
     // -- MARK: IBActions
 
     @IBAction func nextButtonTapped(_ sender: Any) {
+        if let storeTxt = storeTextfield.text,
+            let cityTxt = cityTextfield.text,
+            let salespersonTxt = salesPersonTextfield.text,
+            let merTxt = merchandiserTextfield.text{
+            
+            salesDetails.StoreID = storeTxt
+            salesDetails.City = cityTxt
+            salesDetails.SalesPersonStore = salespersonTxt
+            salesDetails.Merchandiser = merTxt
+            
+        }
+        performSegue(withIdentifier: "showCreditDetails", sender: nil)
     }
     
 }
@@ -165,39 +227,15 @@ class StoreViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 extension StoreViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addObservers()
+        addObservers(onShow: { frame in
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+            self.scrollView.contentInset = contentInset
+        }, onHide: { _ in
+            self.scrollView.contentInset = UIEdgeInsets.zero
+        })
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeObservers()
-    }
-    
-    func addObservers(){
-        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
-            (notification) in
-            self.keyboardWillShow(notification: notification)
-        }
-        
-        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
-            (notification) in
-            self.keyboardWillHide(notification: notification)
-        }
-    }
-    
-    func removeObservers(){
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func keyboardWillShow(notification: Notification){
-        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
-        scrollView.contentInset = contentInset
-    }
-    
-    func keyboardWillHide(notification: Notification){
-        scrollView.contentInset = UIEdgeInsets.zero
     }
 }

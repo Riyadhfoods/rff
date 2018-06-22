@@ -24,6 +24,9 @@ class CreditDetailsViewController: UIViewController {
     
     // -- MARK: Variables
     
+    let webservice = Sales()
+    var creditDetailsArray = [SalesModel]()
+    
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -31,15 +34,33 @@ class CreditDetailsViewController: UIViewController {
         viewHolder.layer.cornerRadius = 5.0
         viewHolder.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
         viewHolder.layer.borderWidth = 1
+        
+        setupCreditDetails()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setupCreditDetails(){
+        creditDetailsArray = webservice.BindCustomerAgingGV(cutomerid: salesDetails.CustomerInFull)
+        if creditDetailsArray.isEmpty{
+            return
+        }
+        creditLimitRight.text = creditDetailsArray[0].CreditLimit
+        totalDueRight.text = creditDetailsArray[0].ToTalDue
+        upTo31Right.text = creditDetailsArray[0].ZEROTO31days
+        upTo60Right.text = creditDetailsArray[0].ThirtyOneTo60Days
+        upTo90Right.text = creditDetailsArray[0].SIXTYOneTo90Days
+        upTo120Right.text = creditDetailsArray[0].NINETYOneTo120Days
+        moreThan90Right.text = creditDetailsArray[0].Above120DAYS
+        statusRight.text = creditDetailsArray[0].CustomerAgying_Status
+    }
 
     // -- MARK: IBActions
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "showAddItems", sender: nil)
     }
 }

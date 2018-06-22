@@ -21,6 +21,8 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
     let cellId = "cell_salesOrderApproval"
     let webService = Sales()
     var salesOrderDetails: [SalesModel] = [SalesModel]()
+    var urlSrtingArray = [String]()
+    var rowIndexSelected = 0
     
     // -- MARK: viewDidLoad
     
@@ -29,10 +31,10 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
         
         if let userId = AuthServices.currentUserId{
             if let userIdInt = Int(userId){
-                salesOrderDetails = webService.SalesOrder(empno: userIdInt)
+                salesOrderDetails = webService.SalesOrderApprove(empno: userIdInt)
             }
         }
-        sideMenus()
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: Table view data source
@@ -53,19 +55,26 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
             cell.date.text = salesOrderDetails[indexPath.row].DeliveryDate
             cell.status.text = salesOrderDetails[indexPath.row].SO_Status
             cell.comment.text = salesOrderDetails[indexPath.row].SO_Comment
+            cell.selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
+            cell.selectButton.tag = indexPath.row
+            
+            urlSrtingArray.append(salesOrderDetails[indexPath.row].SO_Url)
             
             return cell
         }
         return UITableViewCell()
     }
     
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+    // -- MARK: objc functions
+    
+    @objc func selectButtonTapped(sender: UIButton){
+        rowIndexSelected = sender.tag
+        performSegue(withIdentifier: "showSalesOrderApproval", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? WebSalesOrderApprovalViewController{
+            vc.urlString = self.urlSrtingArray[rowIndexSelected]
         }
     }
     

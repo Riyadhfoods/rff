@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -199,26 +198,35 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Copyright RiyadhFoods Company 2016- All Right Reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I0b-X6-FaS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Copyright RiyadhFoods Company 2016- All Right Reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I0b-X6-FaS">
                                 <rect key="frame" x="16" y="636.5" width="350" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mey-vs-mXU">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.41176470590000003" green="0.51764705879999995" blue="0.36078431370000003" alpha="0.69868364726027399" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.41176470588235292" green="0.51764705882352935" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8z8-kp-YpP" secondAttribute="trailing" constant="16" id="2EY-7U-s1w"/>
+                            <constraint firstItem="mey-vs-mXU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3bi-tK-07R"/>
                             <constraint firstItem="I0b-X6-FaS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="8vf-mH-UvK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mey-vs-mXU" secondAttribute="bottom" id="GBQ-rh-BhA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mey-vs-mXU" secondAttribute="trailing" id="MNY-bS-XhO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="I0b-X6-FaS" secondAttribute="trailing" constant="9" id="Tmi-qO-Gns"/>
                             <constraint firstItem="8z8-kp-YpP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="bok-f8-8op"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="I0b-X6-FaS" secondAttribute="bottom" constant="16" id="ovN-CR-DJZ"/>
+                            <constraint firstItem="mey-vs-mXU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u6n-9Q-ha0"/>
                             <constraint firstItem="8z8-kp-YpP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="yBc-8h-jRk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="mey-vs-mXU" id="9G2-NV-i3L"/>
                         <outlet property="buttonHeight" destination="D2Q-Lc-SYn" id="gH2-ku-jZn"/>
                         <outlet property="companyDropdownImage" destination="zch-dE-CYG" id="40l-AQ-ySi"/>
                         <outlet property="companyTextfield" destination="bUc-Qw-Ou3" id="JhD-ax-kSj"/>
@@ -256,6 +264,7 @@
                     <connections>
                         <segue destination="Sxd-VO-JSn" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="aEj-wQ-GXN"/>
                         <segue destination="rIL-ek-B3A" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="RZ6-CK-JbD"/>
+                        <segue destination="Sxd-VO-JSn" kind="show" identifier="sw_right" customClass="SWRevealViewControllerSegueSetController" id="aOq-qD-Zs6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdn-Pk-QVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -473,7 +482,6 @@
                         <segue destination="XYw-qH-Srs" kind="custom" identifier="showSalesPlanSummay" customClass="SWRevealViewControllerSeguePushController" id="iHD-9e-Wvj"/>
                         <segue destination="zGc-0D-vRf" kind="custom" identifier="showSalesPersonAreaSetup" customClass="SWRevealViewControllerSeguePushController" id="yOt-vV-QfN"/>
                         <segue destination="Vcr-8t-gHJ" kind="custom" identifier="showSalesStoreUpdate" customClass="SWRevealViewControllerSeguePushController" id="Guu-8w-Gcl"/>
-                        <segue destination="ugw-NE-2MV" kind="custom" identifier="showCitirix" customClass="SWRevealViewControllerSeguePushController" id="mZ5-P4-5Zb"/>
                         <segue destination="wRJ-sM-osd" kind="custom" identifier="showReport" customClass="SWRevealViewControllerSeguePushController" id="SAK-om-aVt"/>
                     </connections>
                 </viewController>
@@ -849,14 +857,6 @@
             </objects>
             <point key="canvasLocation" x="-1846" y="2565"/>
         </scene>
-        <!--Citirix-->
-        <scene sceneID="mjE-GS-stA">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Citirix" id="ugw-NE-2MV" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pym-5k-C4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-370" y="2870"/>
-        </scene>
         <!--Report-->
         <scene sceneID="FJS-HE-ehL">
             <objects>
@@ -874,5 +874,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RZ6-CK-JbD"/>
+        <segue reference="aOq-qD-Zs6"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -35,6 +35,39 @@ func emptyMessage(message: String, viewController: UIViewController, tableView: 
     tableView.separatorStyle = .none;
 }
 
+let tb: UIToolbar = {
+    let tb = UIToolbar()
+    tb.barStyle = .default
+    tb.isTranslucent = true
+    tb.tintColor = UIColor.black
+    tb.sizeToFit()
+    tb.isUserInteractionEnabled = true
+    
+    return tb
+}()
+
+func setUpKeyboardToolBar(textfield: UITextField, viewController: Any?, cancelTitle: String?, cancelSelector: Selector?, doneTitle: String?, doneSelector: Selector?){
+    
+    var items: [UIBarButtonItem] = [UIBarButtonItem]()
+    var doneButton = UIBarButtonItem()
+    var cancelButton = UIBarButtonItem()
+    let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
+    if doneSelector != nil {
+        doneButton = UIBarButtonItem(title: doneTitle, style: .plain, target: viewController, action: doneSelector)
+        items.append(doneButton)
+    }
+    
+    if cancelTitle != nil && cancelSelector != nil {
+        cancelButton = UIBarButtonItem(title: cancelTitle, style: .plain, target: viewController, action: cancelSelector)
+        items.append(spaceButton)
+        items.append(cancelButton)
+    }
+    tb.setItems(items, animated: false)
+    textfield.inputAccessoryView = tb
+}
+
+
 // Localization
 
 func getString(englishString: String, arabicString: String, language: Int) -> String{
@@ -111,6 +144,22 @@ func changeTitlePositionIfArabic(labelOne: UILabel, labelTwo: UILabel, titleEngl
     }
 }
 
+// Slide Menu
+func setSlideMenu(controller: UIViewController, menuButton: UIBarButtonItem){
+    if controller.revealViewController() != nil{
+        menuButton.target = controller.revealViewController()
+        
+        if LanguageManger.shared.currentLanguage == .en {
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        } else {
+            menuButton.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+        }
+        
+        controller.revealViewController().rearViewRevealWidth = AppDelegate().screenSize.width * 0.75
+        controller.revealViewController().rightViewRevealWidth = AppDelegate().screenSize.width * 0.75
+        controller.view.addGestureRecognizer(controller.revealViewController().panGestureRecognizer())
+    }
+}
 
 
 

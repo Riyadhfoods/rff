@@ -22,7 +22,6 @@ class SalesInboxWebPageViewController: UIViewController {
         
         if let url = URL(string: urlString){
             let request = URLRequest(url: url)
-            
             salesInboxWebView.load(request)
         }
     }
@@ -30,21 +29,6 @@ class SalesInboxWebPageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setCookie(key: String, value: AnyObject) {
-        let cookieProps: [HTTPCookiePropertyKey : Any] = [
-            HTTPCookiePropertyKey.domain: urlString,
-            HTTPCookiePropertyKey.path: "/",
-            HTTPCookiePropertyKey.name: key,
-            HTTPCookiePropertyKey.value: value,
-            HTTPCookiePropertyKey.secure: "TRUE",
-            HTTPCookiePropertyKey.expires: NSDate(timeIntervalSinceNow: ExpTime)
-        ]
-        
-        if let cookie = HTTPCookie(properties: cookieProps) {
-            HTTPCookieStorage.shared.setCookie(cookie)
-        }
     }
 
 }

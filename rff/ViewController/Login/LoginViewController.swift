@@ -19,6 +19,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var companyDropdownImage: UIImageView!
     @IBOutlet weak var languangeTextfield: UITextField!
     @IBOutlet weak var languangeDropdownImage: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: Constrians
     @IBOutlet weak var logoHeight: NSLayoutConstraint!
@@ -32,16 +33,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // TextField Action
     @IBOutlet weak var showCompanyPickerTextField: UITextField!
     @IBOutlet weak var showLanguangePickerTextField: UITextField!
-    
-    
-    let activityIndicator: UIActivityIndicatorView = {
-        let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
-        ai.hidesWhenStopped = true
-        ai.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        
-        return ai
-    }()
     
     let toolBar: UIToolbar = {
         let tb = UIToolbar()
@@ -76,6 +67,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.stopAnimating()
+        
         logoHolderView.layer.cornerRadius = 153.41 / 2
         setUpLayout()
         
@@ -88,6 +81,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         setUpPickerView()
         setUpUserNameToolBar()
+        //setupDefaultLanguage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +89,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         usernameTextfield.text = ""
         passwordTextfield.text = ""
+        setupDefaultLanguage()
+        languangeTextfield.text = languageArray[0]
+    }
+    
+    func setupDefaultLanguage(){
+        LoginViewController.languageChosen = 1
+        setLanguage()
     }
     
     func isLoggedIn(){
@@ -151,22 +152,26 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // -- MARK: IBActions
     
     @IBAction func loginButton(_ sender: Any) {
+        activityIndicator.startAnimating()
+        view.bringSubview(toFront: activityIndicator)
+        
         guard let usernametext = usernameTextfield.text, let passwordText = passwordTextfield.text else {
             return
         }
         
         if usernametext.isEmpty || passwordText.isEmpty {
             AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: "Username or password is empty", actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
-        }
-        
-        if let language = languangeTextfield.text{
-            LoginViewController.languageChosen = setLanguageChosen(languagetextfield: language)
-        }
-        
-        AuthServices().checkUserId(id: usernametext, password: passwordText, onSeccuss: {
-            self.performSegue(withIdentifier: "showHomePage", sender: nil)
-        }) { (error) in
-            AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
+        } else {
+            if let language = languangeTextfield.text{
+                LoginViewController.languageChosen = setLanguageChosen(languagetextfield: language)
+            }
+            
+            AuthServices().checkUserId(id: usernametext, password: passwordText, onSeccuss: {
+                self.setLanguage()
+                self.performSegue(withIdentifier: "showHomePage", sender: nil)
+            }, onError: { (error) in
+                AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
+            }, activityIndicator: activityIndicator)
         }
     }
     
@@ -232,6 +237,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let dismissButton = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
         alert.addAction(dismissButton)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setLanguage(){
+        let selectedLanguage: Languages = LoginViewController.languageChosen == 1 ? .en : .ar
+        LanguageManger.shared.setLanguage(language: selectedLanguage)
     }
 }
 

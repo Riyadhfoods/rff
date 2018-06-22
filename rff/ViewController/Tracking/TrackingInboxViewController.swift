@@ -77,7 +77,7 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
         
         setUpPickerView()
         setupLanguagChange()
-        sideMenus()
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: Setups
@@ -200,17 +200,6 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
             categoryTextChosen =  categoryArray[row]
             categoryIndexSelected = row - 1
             CategopryRowIndex = row
-        }
-    }
-    
-    // -- MARK: Slide Menu
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
     }
     

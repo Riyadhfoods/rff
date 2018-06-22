@@ -59,7 +59,7 @@ public class SoapHttpClient {
         
         let task_ = session.dataTask(with: req as URLRequest){ (data, response, error) in
             if let response = response{
-                print("Response = \(response)")
+//                print("Response = \(response)")
             }
             self.Error=error
             
@@ -114,9 +114,6 @@ public class SoapHttpClient {
         let task_ = session.dataTask(with: req as URLRequest){ (data, response, error) in
             DispatchQueue.main.async {
                 activityIndicator.stopAnimating()
-            }
-            if let response = response{
-                print("Response = \(response)")
             }
             self.Error=error
             

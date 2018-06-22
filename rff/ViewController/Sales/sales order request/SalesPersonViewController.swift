@@ -37,16 +37,21 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // -- MARK: Variables
     
+    let webservice = Sales()
     let screenSize = AppDelegate().screenSize
     let salespersonPickerView: UIPickerView = UIPickerView()
     let customerPickerView: UIPickerView = UIPickerView()
+   
     var salespersonTextChosen: String?
     var customerTextChosen: String?
-    var salespersonArray = [String]()
-    var customerArray = [String]()
+    var salespersonArray = [SalesModel]()
+    var customerArray = [SalesModel]()
+    var salespersonNamesArray = [String]()
+    var customerNamesArray = [String]()
     var selectedRow: Int = 0
     
     let deliveryDatePickerView: UIDatePicker = UIDatePicker()
+    let currentDate = Date()
     
     // To keep track
     var pickerview: UIPickerView = UIPickerView()
@@ -58,12 +63,12 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        salespersonArray = ["aaaaaaaaaaa"]
-        customerArray = ["bbbbbbbbbb"]
+        setupArrays()
         
         showsalespersonPickerViewTextfield.tintColor = .clear
         showcustomerPickerViewTextfield.tintColor = .clear
         deliveryDateTextfield.tintColor = .clear
+        deliveryDateTextfield.text = getStringDate(date: currentDate)
         
         setUpWidth()
         setUpPickerView()
@@ -83,6 +88,33 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @objc func didTapView(gesture: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    func setupArrays(){
+        salespersonArray = webservice.BindSalesOrderSalesPerson()
+        for salespreson in salespersonArray{
+            salespersonNamesArray.append(salespreson.SalesPerson + salespreson.SalesPersonId)
+        }
+        customerNamesArray = ["Select customer"]
+        
+        if salespersonArray.isEmpty{
+            salespersonTextfield.text = "No salespreson aviable"
+        } else {
+            salespersonTextfield.text = salespersonNamesArray[0]
+            getCustomers(salesperson: salespersonNamesArray[0])
+        }
+    }
+    
+    func getCustomers(salesperson: String){
+        customerArray = webservice.BindSalesOrderCustomers(salesperson: salesperson)
+        if customerArray.isEmpty {
+            customerNamesArray = ["Select customer"]
+        } else {
+            customerNamesArray = ["Select customer"]
+            for customer in customerArray{
+                customerNamesArray.append(customer.CustomerName + customer.CustomerId)
+            }
+        }
     }
     
     func setUpWidth(){
@@ -105,9 +137,9 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
         innerSelectorSuperMarketNo.layer.cornerRadius = cornerRadiusValueInner
         
         superMarketYesButton.layer.cornerRadius = cornerRadiusValueView
-        superMarketYesButton.backgroundColor = mainBackgroundColor
+        superMarketYesButton.backgroundColor = .white
         superMarketNoButton.layer.cornerRadius = cornerRadiusValueView
-        superMarketNoButton.backgroundColor = .white
+        superMarketNoButton.backgroundColor = mainBackgroundColor
         
         selectorOfferYes.layer.cornerRadius = cornerRadiusValueHolder
         selectorOfferNo.layer.cornerRadius = cornerRadiusValueHolder
@@ -115,38 +147,33 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
         innerSelectorOfferNo.layer.cornerRadius = cornerRadiusValueInner
         
         offerYesButton.layer.cornerRadius = cornerRadiusValueView
-        offerYesButton.backgroundColor = mainBackgroundColor
+        offerYesButton.backgroundColor = .white
         offerNoButton.layer.cornerRadius = cornerRadiusValueView
-        offerNoButton.backgroundColor = .white
+        offerNoButton.backgroundColor = mainBackgroundColor
     }
     
     func setupDatePicker(){
-        let leaveTitle = getString(englishString: "Leave Start Date", arabicString: "تاريخ بداية الإجازة", language: languageChosen)
-        
-        PickerviewAction().showDatePicker(txtfield: deliveryDateTextfield, datePicker: deliveryDatePickerView, title: leaveTitle, viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
+        PickerviewAction().showDatePicker(txtfield: deliveryDateTextfield, datePicker: deliveryDatePickerView, title: "Delivery Date", viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
     }
     
     @objc func handleDatePicker(sender: UIDatePicker){
-        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let currentDate = Date()
-        var dateComponents = DateComponents()
-        let minDate = calendar.date(byAdding: dateComponents, to: currentDate)
-        
-        self.deliveryDatePickerView.minimumDate = minDate
-        
+        deliveryDateTextfield.text = getStringDate(date: sender.date)
+    }
+    
+    func getStringDate(date: Date) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        deliveryDateTextfield.text = dateFormatter.string(from: sender.date)
+        return dateFormatter.string(from: date)
     }
     
     // -- MARK: objc functions
     
     @objc func doneClick(){
         if pickerview == salespersonPickerView{
-            salespersonTextfield.text = salespersonArray[selectedRow]
+            salespersonTextfield.text = salespersonNamesArray[selectedRow]
             showsalespersonPickerViewTextfield.resignFirstResponder()
         } else {
-            customerTextfield.text = customerArray[selectedRow]
+            customerTextfield.text = customerNamesArray[selectedRow]
             showcustomerPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -171,21 +198,24 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == salespersonPickerView{
-            return salespersonArray.count
+            return salespersonNamesArray.count
         }
-        return customerArray.count
+        return customerNamesArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.pickerview = pickerView
         if pickerView == salespersonPickerView{
-            return salespersonArray[row]
+            return salespersonNamesArray[row]
         }
-        return customerArray[row]
+        return customerNamesArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
+        if pickerView == salespersonPickerView{
+            getCustomers(salesperson: salespersonNamesArray[row])
+        }
     }
     
     // -- MARK: IBActions
@@ -211,48 +241,27 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        if let salespersonText = salespersonTextfield.text, let customerText = customerTextfield.text, let deliveryDate = deliveryDateTextfield.text{
+            salesDetails.SalesPersonInFull = salespersonText
+            salesDetails.CustomerInFull = customerText
+            salesDetails.DeliveryDate = deliveryDate
+        }
+        performSegue(withIdentifier: "showStoreDetails", sender: nil)
     }
-    
 }
-
-
 extension SalesPersonViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addObservers()
+        addObservers(onShow: { frame in
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+            self.scrollView.contentInset = contentInset
+        }, onHide: { _ in
+            self.scrollView.contentInset = UIEdgeInsets.zero
+        })
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeObservers()
-    }
-    
-    func addObservers(){
-        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) {
-            (notification) in
-            self.keyboardWillShow(notification: notification)
-        }
-        
-        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) {
-            (notification) in
-            self.keyboardWillHide(notification: notification)
-        }
-    }
-    
-    func removeObservers(){
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func keyboardWillShow(notification: Notification){
-        guard let userInfo = notification.userInfo, let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
-        scrollView.contentInset = contentInset
-    }
-    
-    func keyboardWillHide(notification: Notification){
-        scrollView.contentInset = UIEdgeInsets.zero
     }
 }
 

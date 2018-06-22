@@ -26,7 +26,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     let contentWidth = AppDelegate().screenSize.width * 0.19
     let cellId_header = "cellId_header"
     let cell_list = "cell_list"
-    var sectionsEnglish = [Section]()
+    var sections = [Section]()
     var sectionsArabic = [Section]()
     var menuImages = [MenuImage]()
     
@@ -49,13 +49,11 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         setupListMenuImage()
         
         setupWidth()
-        
-        print("Slide menu language selected \(languageChosen)")
     }
     
     // -- MARK: Setups
     func setupListMenuData(){
-        sectionsEnglish = [
+        sections = [
             Section(name: "HOME", items: []),
             Section(name: "MASTER", items: ["Change Password"], isExpanded: false),
             Section(name: "TRACKING", items: ["Inbox"]),
@@ -118,75 +116,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
                     "Sales Person Area Setup",
                     "Sales Store Update"
                 ]),
-            Section(name: "CITRIX", items: [], isExpanded: false),
             Section(name: "REPORT", items: [], isExpanded: false)
-        ]
-        
-        sectionsArabic = [
-            Section(name: "الرئيسية", items: [], isExpanded: false),
-            Section(name: "الصلاحيات", items: ["تغيير كلمة السر"], isExpanded: false),
-            Section(name: "قائمة المهام", items: ["البريد الوارد"], isExpanded: false),
-            Section(name: "إجراءات الموظف", items: [
-"نموذج اجازه",
-"سلفة",
-                    "قائمة السلف",
-                    "المخالفات",
-                    "نموذج العودة من الاجازه",
-                    "عرض الراتب",
-                    "معلومات الموظف",
-                    "تعديل الراتب",
-                    "تحديث ايام الاجازه",
-                    "تغيير تذكرة",
-                    "تغيير المسمى الوظيفي",
-                    "رحلة عمل",
-                    "طلب اذن خروج"
-                ], isExpanded: false),
-            Section(name: "الحضور و الانصراف", items: [
-                    "تفاصيل الحضور",
-                    "حساب العمل الاضافي",
-                    "إحتساب التصفية",
-                    "الحضور و الانصراف"
-                ], isExpanded: false),
-            Section(name: "المشتريات", items: [
-                    "اوامر الشراء",
-                    "المشتريات",
-                    "نظام الشراء لشركة الرياض للاغذية"
-                ], isExpanded: false),
-            Section(name: "تقنية المعلومات", items: [
-                    "طلبات التقنية",
-                    "القائمة الرئيسية",
-                    "إضافة صنف",
-                    "طلباتي",
-                    "تفاصيل الجهاز"
-                ], isExpanded: false),
-            Section(name: "طلبات الصرف", items: [
-                    "طلب صرف جديد",
-                    "متابعة طلبات الصرف",
-                    "تحديث حالة البنك"
-                ], isExpanded: false),
-            Section(name: "المهام", items: [
-                    "مهمة جديدة",
-                    "تفاصيل المهمة",
-                ], isExpanded: false),
-            Section(name: "الشكاوي", items: [
-                    "شكوى جديدة",
-                    "شكوى",
-                ], isExpanded: false),
-            Section(name: "المبيعات", items: [
-                    "المبيعات",
-                    "الموافقة على طلب المبيعات",
-                    "الموافقة على طلبات المرتجعات",
-                    "الموافقة على عروض البيع",
-                    "طلبات شركة الرياض للاغذية",
-                    "طلبات ارجاع شركة الرياض للاغذية",
-                    "برنامج العروض",
-                    "حالة مبيعات العثيم",
-                    "ملخض خطة المبيعات",
-                    "إعداد منطقة مندوب مبيعات",
-                    "تحديث مستودع المبيعات"
-                ], isExpanded: false),
-            Section(name: "برنامج الستركس", items: [], isExpanded: false),
-            Section(name: "التقارير", items: [], isExpanded: false)
         ]
     }
     
@@ -203,7 +133,6 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "task"), listImage: [#imageLiteral(resourceName: "AddForms"), #imageLiteral(resourceName: "details")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "complain"), listImage: [#imageLiteral(resourceName: "AddForms"), #imageLiteral(resourceName: "details")]),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "sales"), listImage: [#imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon"), #imageLiteral(resourceName: "salesIcon")]),
-            MenuImage(headerTitleImage: #imageLiteral(resourceName: "citrix"), listImage: []),
             MenuImage(headerTitleImage: #imageLiteral(resourceName: "report"), listImage: []),
         ]
     }
@@ -225,7 +154,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // -- MARK: tableview datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsEnglish.count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -233,11 +162,11 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionsEnglish[section].items.count
+        return sections[section].items.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if sectionsEnglish[indexPath.section].isExpanded{
+        if sections[indexPath.section].isExpanded{
             return 44
         }
         return 0
@@ -246,16 +175,12 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if let header = tableView.dequeueReusableCell(withIdentifier: cellId_header) as? HeaderTableViewCell{
-            if languageChosen == 2{
-                header.headerTitle.text = sectionsArabic[section].name
-            } else {
-                header.headerTitle.text = sectionsEnglish[section].name
-            }
+            header.headerTitle.text = sections[section].name.localiz()
             header.headerIcon.image = menuImages[section].headerTitleImage
             header.expandButton.tag = section
             header.expandButton.addTarget(self, action: #selector(toggleSection(sender:)), for: .touchUpInside)
             
-            if (section == 0 || section == 12 || section == 13){
+            if (section == 0 || section == 11){
                 header.expandedIcon.isHidden = true
             }
             
@@ -267,11 +192,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cell_list, for: indexPath) as? ListTableViewCell{
-            if languageChosen == 2{
-                cell.itemTitle.text = sectionsArabic[indexPath.section].items[indexPath.row]
-            } else {
-                cell.itemTitle.text = sectionsEnglish[indexPath.section].items[indexPath.row]
-            }
+            cell.itemTitle.text = sections[indexPath.section].items[indexPath.row].localiz()
             cell.accessoryType = .disclosureIndicator
             cell.ItemIcon.image = menuImages[indexPath.section].listImage[indexPath.row]
             
@@ -287,18 +208,10 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func getNavTitle(indexPath: IndexPath){
-        if languageChosen == 1 {
-            if (indexPath.section == 0 || indexPath.section == 12 || indexPath.section == 13){
-                SlideMenuViewController.selectedItem = sectionsEnglish[indexPath.section].name
-            } else {
-                SlideMenuViewController.selectedItem = sectionsEnglish[indexPath.section].items[indexPath.row]
-            }
+        if (indexPath.section == 0 || indexPath.section == 11){
+            SlideMenuViewController.selectedItem = sections[indexPath.section].name
         } else {
-            if (indexPath.section == 0 || indexPath.section == 12 || indexPath.section == 13){
-                SlideMenuViewController.selectedItem = sectionsArabic[indexPath.section].name
-            } else {
-                SlideMenuViewController.selectedItem = sectionsArabic[indexPath.section].items[indexPath.row]
-            }
+            SlideMenuViewController.selectedItem = sections[indexPath.section].items[indexPath.row]
         }
     }
 }

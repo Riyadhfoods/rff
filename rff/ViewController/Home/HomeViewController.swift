@@ -30,17 +30,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let userId = AuthServices.currentUserId {
             taskInbox = webservice.Task_InboxM(langid: LoginViewController.languageChosen, emp_id: userId)
         }
-        navigationItem.title = getString(englishString: "Home", arabicString: "الرئيسية", language: language)
+        navigationItem.title = "Home".localiz()
         
         view.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
-        sideMenus()
+        
+        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if taskInbox.count == 0 {
-            emptyMessage(message: getString(englishString: "No data", arabicString: "لا توجد بيانات", language: language), viewController: self, tableView: pendingInboxTableview)
+            emptyMessage(message: "No data".localiz(), viewController: self, tableView: pendingInboxTableview)
         }
         return taskInbox.count
     }
@@ -53,28 +54,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let arabic_description = taskInbox[indexPath.row].ArabicDesc
             let count = taskInbox[indexPath.row].Count
             
-            cell.englishDescriptionLeft.text = getString(englishString: english_description, arabicString: "الوصف بالانجليزي:", language: language)
-            cell.arabicDescriptionLeft.text = getString(englishString: arabic_description, arabicString: "الوصف بالعربي:", language: language)
-            cell.countLeft.text = getString(englishString: "\(count)", arabicString: "العدد:", language: language)
-            cell.englishDescriptionRight.text = getString(englishString: "English Description:", arabicString: english_description, language: language)
-            cell.arabicDescriptionRight.text = getString(englishString: "Arabic Description:", arabicString: arabic_description, language: language)
-            cell.countRight.text = getString(englishString: "Count:", arabicString: "\(count)", language: language)
-            cell.viewButton.setTitle(getString(englishString: "CLICK TO VIEW", arabicString: "اضغط للعرض", language: language), for: .normal)
+            cell.englishDescriptionLeft.text = english_description.localiz()
+            cell.arabicDescriptionLeft.text = arabic_description.localiz()
+            cell.countLeft.text = "\(count)".localiz()
             
             return cell
         }
         return UITableViewCell()
-    }
-    
-    // -- MARK: Slide Menu
-    //To show the slide menu
-    func sideMenus () {
-        if revealViewController() != nil {
-            menuBtn.target = revealViewController()
-            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = screenSize.width * 0.75
-            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
     }
     
     // -- MARK: IBActions
