@@ -96,7 +96,15 @@ class ItemsSelectedCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewData
         if let qtyTxt = qtyTextfield.text, let qtyDouble = Double(qtyTxt), let unitPriceTxt = unitPriceTextfield.text, let unitPriceDouble = Double(unitPriceTxt){
             if qtyTxt == qtyOldText && unitPriceTxt == unitPriceOldText{ return }
             let result = qtyDouble * unitPriceDouble
-            totalPrice.text = String(format: "%.5f", result)
+            let resultFormatted = String(format: "%.5f", result)
+            totalPrice.text = resultFormatted
+            
+            if textField == qtyTextfield{
+                itemAddedArray[textField.tag].Grid_Qty = qtyTxt
+            } else {
+                itemAddedArray[textField.tag].Grid_UnitPrice = unitPriceTxt
+            }
+            itemAddedArray[textField.tag].Grid_TotalPrice = resultFormatted
         }
     }
     

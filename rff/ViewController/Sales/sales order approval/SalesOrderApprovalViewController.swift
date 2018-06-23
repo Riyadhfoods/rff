@@ -40,25 +40,26 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
     // -- MARK: Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if salesOrderDetails.count == 0{
-            emptyMessage(message: "No Data", viewController: self, tableView: salesOrdertableview)
-        }
-        return salesOrderDetails.count
+//        if salesOrderDetails.count == 0{
+//            emptyMessage(message: "No Data", viewController: self, tableView: salesOrdertableview)
+//        }
+//        return salesOrderDetails.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? SalesOrderApprovalCell{
-            cell.orderId.text = salesOrderDetails[indexPath.row].OrderID
-            cell.empCreated.text = salesOrderDetails[indexPath.row].SO_EmpCreated
-            cell.customerName.text = salesOrderDetails[indexPath.row].SO_CustomerName
-            cell.items.text = salesOrderDetails[indexPath.row].SO_Items
-            cell.date.text = salesOrderDetails[indexPath.row].DeliveryDate
-            cell.status.text = salesOrderDetails[indexPath.row].SO_Status
-            cell.comment.text = salesOrderDetails[indexPath.row].SO_Comment
+//            cell.orderId.text = salesOrderDetails[indexPath.row].OrderID
+//            cell.empCreated.text = salesOrderDetails[indexPath.row].SO_EmpCreated
+//            cell.customerName.text = salesOrderDetails[indexPath.row].SO_CustomerName
+//            cell.items.text = salesOrderDetails[indexPath.row].SO_Items
+//            cell.date.text = salesOrderDetails[indexPath.row].DeliveryDate
+//            cell.status.text = salesOrderDetails[indexPath.row].SO_Status
+//            cell.comment.text = salesOrderDetails[indexPath.row].SO_Comment
             cell.selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-            cell.selectButton.tag = indexPath.row
-            
-            urlSrtingArray.append(salesOrderDetails[indexPath.row].SO_Url)
+//            cell.selectButton.tag = indexPath.row
+//
+//            urlSrtingArray.append(salesOrderDetails[indexPath.row].SO_Url)
             
             return cell
         }
@@ -70,12 +71,6 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
     @objc func selectButtonTapped(sender: UIButton){
         rowIndexSelected = sender.tag
         performSegue(withIdentifier: "showSalesOrderApproval", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? WebSalesOrderApprovalViewController{
-            vc.urlString = self.urlSrtingArray[rowIndexSelected]
-        }
     }
     
     // -- MARK: IBActions

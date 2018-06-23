@@ -28,6 +28,8 @@ struct ItemsModul {
     }
 }
 
+var itemAddedArray = [ItemsModul]()
+
 class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, ItemCountAddedDelegate {
     
     // -- MARK: IBOutlets
@@ -57,7 +59,6 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var itemsName = [String]()
     var unoits = [SalesModel]()
     var unoitsName = [String]()
-    var itemAddedArray = [ItemsModul]()
     var itemAddedReceived = [ItemAddedModel]()
     var selectedRow: Int = 0
     
@@ -67,7 +68,7 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         self.count = count
     }
     func itemsArrayReceived(itemsArray: [ItemsModul]) {
-        self.itemAddedArray = itemsArray
+        itemAddedArray = itemsArray
     }
     
     // -- MARK: viewDidLoad
@@ -78,6 +79,7 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         showItemsPickerViewTextfield.tintColor = .clear
         showUnoitPickerViewTextfield.tintColor = .clear
         commentTextview.text = ""
+        commentTextview.delegate = self
         
         setupArrays()
         setUpWidth()
@@ -133,6 +135,8 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         commentTextview.layer.borderColor = mainBackgroundColor.cgColor
         commentTextview.layer.borderWidth = 1
     }
+    
+     // -- MARK: TextView handle
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
@@ -198,7 +202,7 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
-    // MARK: IBActions
+    // -- MARK: IBActions
     
     @IBAction func addItemButtonTapped(_ sender: Any) {
         if let itemText = itemsTextfield.text, let unoitText = unoitTextfield.text, let qtyText = qtyTextfield.text{
@@ -227,14 +231,12 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     @IBAction func showItemsButtonTapped(_ sender: Any) {
-        //print(itemAddedArray)
         performSegue(withIdentifier: "showSummary", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ItemsSelectedViewController{
             vc.delegate = self
-            vc.itemsArray = self.itemAddedArray
         }
     }
 }
