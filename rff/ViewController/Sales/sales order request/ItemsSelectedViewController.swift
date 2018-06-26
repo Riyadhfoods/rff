@@ -25,22 +25,23 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
     let webservice = Sales()
     var count: Int = 0
     var delegate: ItemCountAddedDelegate?
-    //var itemsArray = [ItemsModul]()
     var unoits = [SalesModel]()
+    var itemSentStatus = [SalesModel]()
+    var sentStatus = [SalesModel]()
+    var error: String = ""
     
     // -- MARk: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = "Summary".localize()
+        setViewAlignment()
         setDelegate()
     }
     
     func setDelegate(){
         if delegate != nil{
-            delegate?.setCount(count: itemAddedArray.count)
-            //delegate?.itemsArrayReceived(itemsArray: itemsArray)
+            delegate?.setCount(count: salesRequestDetails.itemsArray.count)
         }
     }
 
@@ -52,24 +53,25 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
     // -- MARK: Tableview data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if itemAddedArray.count == 0 {
-            emptyMessage(message: "No data".localiz(), viewController: self, tableView: itemsTableView)
+        if salesRequestDetails.itemsArray.count == 0 {
+            emptyMessage(message: "No data".localize(), viewController: self, tableView: itemsTableView)
         }
-        return itemAddedArray.count
+        return salesRequestDetails.itemsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ItemsSelectedCell{
-            cell.unoits = webservice.BindSalesOrderUnitofMeasure(itemid: itemAddedArray[indexPath.row].Grid_Desc)
+            cell.unoits = webservice.BindSalesOrderUnitofMeasure(itemid: salesRequestDetails.itemsArray[indexPath.row].Grid_Desc)
             
             cell.num.text = "\(indexPath.row + 1)"
-            cell.desc.text = itemAddedArray[indexPath.row].Grid_Desc
-            cell.PCSTextfield.text = itemAddedArray[indexPath.row].Grid_UOM
-            cell.qtyTextfield.text = itemAddedArray[indexPath.row].Grid_Qty
-            cell.unitPriceTextfield.text = itemAddedArray[indexPath.row].Grid_UnitPrice
-            cell.totalPrice.text = itemAddedArray[indexPath.row].Grid_TotalPrice
+            cell.desc.text = salesRequestDetails.itemsArray[indexPath.row].Grid_Desc
+            cell.PCSTextfield.text = salesRequestDetails.itemsArray[indexPath.row].Grid_UOM
+            cell.qtyTextfield.text = salesRequestDetails.itemsArray[indexPath.row].Grid_Qty
+            cell.unitPriceTextfield.text = salesRequestDetails.itemsArray[indexPath.row].Grid_UnitPrice
+            cell.totalPrice.text = salesRequestDetails.itemsArray[indexPath.row].Grid_TotalPrice
             cell.deleteButton.tag = indexPath.row
             cell.deleteButton.addTarget(self, action: #selector(handleDeleteAction(sender:)), for: .touchUpInside)
+            cell.indexpathRow = indexPath.row
             
             cell.qtyTextfield.tag = indexPath.row
             cell.unitPriceTextfield.tag = indexPath.row
@@ -80,7 +82,7 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @objc func handleDeleteAction(sender: UIButton){
-        itemAddedArray.remove(at: sender.tag)
+        salesRequestDetails.itemsArray.remove(at: sender.tag)
         itemsTableView.reloadData()
         setDelegate()
     }
@@ -88,19 +90,72 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
     // -- MARK: IBOutlets
     
     @IBAction func sendButtonTapped(_ sender: Any) {
-        var itemsInXml: String = "<xml>\n"
-        for item in itemAddedArray{
-            itemsInXml += " <row>\n"
-            itemsInXml += "     <Grid_ItemId>\(String(item.Grid_ItemId.prefix(4)))</Grid_ItemId>\n"
-            itemsInXml += "     <Grid_Desc>\(item.Grid_Desc)</Grid_Desc>\n"
-            itemsInXml += "     <Grid_UOM>\(item.Grid_UOM)</Grid_UOM>\n"
-            itemsInXml += "     <Grid_Qty>\(item.Grid_Qty)</Grid_Qty>\n"
-            itemsInXml += "     <Grid_UnitPrice>\(item.Grid_UnitPrice)</Grid_UnitPrice>\n"
-            itemsInXml += "     <Grid_TotalPrice>\(item.Grid_TotalPrice)</Grid_TotalPrice>\n"
-            itemsInXml += " </row>\n"
+        var count = 0
+        salesRequestDetails.table = !salesRequestDetails.itemsArray.isEmpty
+        if salesRequestDetails.table{
+            for item in salesRequestDetails.itemsArray{
+                itemSentStatus = webservice.SendItemGrid(orderid: salesRequestDetails.orderId, serialno: count, customerid: salesRequestDetails.customer, Grid_ItemId: item.Grid_ItemId, Grid_Desc: item.Grid_Desc, Grid_UnitPrice: item.Grid_UnitPrice, Grid_Qty: item.Grid_Qty, Grid_TotalPrice: item.Grid_TotalPrice, Grid_UOM: item.Grid_UOM)
+                for status in itemSentStatus{
+                    if status.grid_error != ""{
+                        let alertTitle = "Alert"
+                        let alertMessage = status.grid_error
+                        AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: "Ok", onAction: {
+                            return
+                        }, cancelAction: nil, self)
+                    } else {
+                        if salesRequestDetails.orderId == ""{
+                            salesRequestDetails.orderId = status.OrderID
+                        }
+                        if status.Flag == "true" {
+                            salesRequestDetails.flag = true
+                        } else { salesRequestDetails.flag = false }
+                        count += 1
+                        print("It sent successfully")
+                    }
+                }
+            }
+            
+            print(salesRequestDetails)
+            sentStatus = webservice.Senditem(
+                orderid: salesRequestDetails.orderId,
+                branchid: salesRequestDetails.branchId,
+                customerid: salesRequestDetails.customer,
+                branch: salesRequestDetails.branch,
+                table: salesRequestDetails.table,
+                salesperson: salesRequestDetails.salesperson,
+                company: salesRequestDetails.companyId,
+                emp_id: salesRequestDetails.emp_id,
+                comment: salesRequestDetails.comment,
+                city: salesRequestDetails.city,
+                store: salesRequestDetails.store,
+                salespersonstore: salesRequestDetails.salespersonstore,
+                merchandiser: salesRequestDetails.merchandiser,
+                offer: salesRequestDetails.offer,
+                deliverydate: salesRequestDetails.deliverydate,
+                loccode: salesRequestDetails.loccode,
+                docid: salesRequestDetails.docid,
+                purchasegrid: salesRequestDetails.purchasegrid,
+                supermarket: salesRequestDetails.supermarket,
+                flag: salesRequestDetails.flag)
+            
+            for status in sentStatus{
+                if status.grid_error != ""{
+                    error = status.grid_error
+                }
+            }
+            
+            if error != ""{
+                AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: "Ok", onAction: {
+                    return
+                }, cancelAction: nil, self)
+            } else {
+                AlertMessage().showAlertMessage(alertTitle: "Success", alertMessage: "Order request sent successfully", actionTitle: "Ok", onAction: {
+                    salesRequestDetails.removeAll()
+                    self.navigationController?.popToRootViewController(animated: true)
+                }, cancelAction: nil, self)
+            }
+            
         }
-        itemsInXml += "</xml>"
-        print(itemsInXml)
     }
 }
 
@@ -121,7 +176,18 @@ extension ItemsSelectedViewController{
 }
 
 
-
+//        var itemsInXml: String = "<Xml>"
+//        for item in itemAddedArray{
+//            itemsInXml += "<row>"
+//            itemsInXml += "<Grid_ItemId>\(String(item.Grid_ItemId.prefix(4)))</Grid_ItemId>"
+//            itemsInXml += "<Grid_Desc>\(item.Grid_Desc)</Grid_Desc>"
+//            itemsInXml += "<Grid_UOM>\(item.Grid_UOM)</Grid_UOM>"
+//            itemsInXml += "<Grid_Qty>\(item.Grid_Qty)</Grid_Qty>"
+//            itemsInXml += "<Grid_UnitPrice>\(item.Grid_UnitPrice)</Grid_UnitPrice>"
+//            itemsInXml += "<Grid_TotalPrice>\(item.Grid_TotalPrice)</Grid_TotalPrice>"
+//            itemsInXml += "</row>"
+//        }
+//        itemsInXml += "</Xml>"
 
 
 

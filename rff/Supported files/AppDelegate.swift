@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let screenSize = UIScreen.main.bounds
     let mainBackgroundColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0)
+    
+    //UIApplication.shared.isNetworkActivityIndicatorVisible
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

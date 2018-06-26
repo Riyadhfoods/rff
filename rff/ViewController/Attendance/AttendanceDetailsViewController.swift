@@ -42,6 +42,7 @@ class AttendanceDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
         setUpSelectors()
     }

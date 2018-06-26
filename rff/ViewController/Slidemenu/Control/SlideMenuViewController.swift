@@ -175,7 +175,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if let header = tableView.dequeueReusableCell(withIdentifier: cellId_header) as? HeaderTableViewCell{
-            header.headerTitle.text = sections[section].name.localiz()
+            header.headerTitle.text = sections[section].name.localize()
             header.headerIcon.image = menuImages[section].headerTitleImage
             header.expandButton.tag = section
             header.expandButton.addTarget(self, action: #selector(toggleSection(sender:)), for: .touchUpInside)
@@ -192,7 +192,7 @@ class SlideMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cell_list, for: indexPath) as? ListTableViewCell{
-            cell.itemTitle.text = sections[indexPath.section].items[indexPath.row].localiz()
+            cell.itemTitle.text = sections[indexPath.section].items[indexPath.row].localize()
             cell.accessoryType = .disclosureIndicator
             cell.ItemIcon.image = menuImages[indexPath.section].listImage[indexPath.row]
             

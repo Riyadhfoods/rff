@@ -58,6 +58,7 @@
 "SALES" = "SALES";
 "Sales Inbox" = "Sales Inbox";
 "Sales Order Approval" = "Sales Order Approval";
+"Sales Return Approval" = "Sales Return Approval";
 "Sales Promotion Approval" = "Sales Promotion Approval";
 "Sales Order Requests" = "Sales Order Requests";
 "Return Order Requests" = "Return Order Requests";
@@ -82,40 +83,94 @@
 "Count:" = "Count:";
 "CLICK TO VIEW" = "CLICK TO VIEW";
 
+// Sales Inbox
+"Sales Inbox" = "Sales Inbox";
+"Search content" = "Search content";
+"SEARCH" = "SEARCH";
+"Select a list" = "Select a list";
+"Order List" = "Order List";
+"Transfer List" = "Transfer List";
+"Return List" = "Return List";
+"Alert" = "Alert";
+"You did not select a list" = "You did not select a list";
+"out of" = "out of";
+"ID" = "ID";
+"Emp Created" = "Emp Created";
+"Customer Name" = "Customer Name";
+"Items" = "Items";
+"Date" = "Date";
+"Request Date" = "Request Date";
+"Return Date" = "Return Date";
+"Status" = "Status";
+"PendingBy" = "PendingBy";
+"Comment" = "Comment";
+"No Data" = "No Data";
 
 // Sales order request
+"Salesperson Details" = "Salesperson Details";
+"Store Details" = "Store Details";
+"Credit Details" = "Credit Details";
+"Add Items" = "Add Items";
+"Summary" = "Summary";
+"Alert!" = "Alert!";
+"NEXT" = "NEXT";
 "Company" = "Company";
 "Select company" = "Select company";
 "Branch" = "Branch";
 "Select branch" = "Select branch";
 "Doc ID" = "Doc ID";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
-//"Company" = "Company";
+"Select customer" = "Select customer";
+"Loc Code" = "Loc Code";
+"Select location code" = "Select location code";
+"You did not select a company, branch or location code" = "You did not select a company, branch or location code";
+
+"salesperson" = "salesperson";
+"No salespreson aviable" = "No salespreson aviable";
+"Customer" = "Customer";
+"Select customer" = "Select customer";
+"Delivery Date" = "Delivery Date";
+"Super Market?" = "Super Market?";
+"Offer?" = "Offer?";
+"yes" = "yes";
+"no" = "no";
+
+"Store" = "Store";
+"Select store id" = "Select store id";
+"City" = "City";
+"Select city" = "Select city";
+"Sales Person" = "Sales Person";
+"Select sales person" = "Select sales person";
+"Merchandiser" = "Merchandiser";
+"Select merchandiser" = "Select merchandiser";
+"You did not select a store id" = "You did not select a store id";
+
+"Credit Limit:" = "Credit Limit";
+"Total Due:" = "Total Due";
+"0 to 31 Days:" = "0 to 31 Days";
+"31 to 60 Days:" = "31 to 60 Days";
+"61 to 90 Days:" = "61 to 90 Days";
+"91 to 120 Days:" = "91 to 120 Days";
+"above 120 Days:" = "above 120 Days";
+"Status:" = "Status:";
+
+"Select item" = "Select item";
+"Unoit of Measure" = "Unoit of Measure";
+"Select unoit of measure" = "Select unoit of measure";
+"QTY" = "QTY";
+"ADD ITEM" = "ADD ITEM";
+"Items added is " = "Items added is ";
+"SHOW ITEMS" = "SHOW ITEMS";
+"Added" = "Added";
+"Item has been added" = "Item has been added";
+"You have already added this item. Do you wnat to add it again" = "You have already added this item. Do you wnat to add it again";
+
+"Description" = "Description";
+"QTY" = "QTY";
+"Unit Price" = "Unit Price";
+"Total Price" = "Total Price";
+"SEND" = "SEND";
+
+//
 //"Company" = "Company";
 //"Company" = "Company";
 //"Company" = "Company";

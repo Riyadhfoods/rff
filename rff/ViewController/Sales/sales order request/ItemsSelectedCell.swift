@@ -25,10 +25,12 @@ class ItemsSelectedCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewData
     let pickerview = UIPickerView()
     var unoits = [SalesModel]()
     var selectedRow = 0
+    var indexpathRow = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setViewAlignment()
         holderView.layer.cornerRadius = 5.0
         holderView.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
         holderView.layer.borderWidth = 1
@@ -37,8 +39,9 @@ class ItemsSelectedCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewData
         
         qtyTextfield.delegate = self
         unitPriceTextfield.delegate = self
-        setUpKeyboardToolBar(textfield: qtyTextfield, viewController: self, cancelTitle: nil, cancelSelector: nil, doneTitle: "Done", doneSelector: #selector(doneButtonClick))
-        setUpKeyboardToolBar(textfield: unitPriceTextfield, viewController: self, cancelTitle: nil, cancelSelector: nil, doneTitle: "Done", doneSelector: #selector(doneButtonClick))
+        
+        setUpKeyboardToolBar(textfield: qtyTextfield, viewController: self, cancelTitle: nil, cancelSelector: nil, doneTitle: "Done".localize(), doneSelector: #selector(doneButtonClick))
+        setUpKeyboardToolBar(textfield: unitPriceTextfield, viewController: self, cancelTitle: nil, cancelSelector: nil, doneTitle: "Done".localize(), doneSelector: #selector(doneButtonClick))
         
         PickerviewAction().showPickView(txtfield: showPCSPickerTextField, pickerview: pickerview, viewController: self, cancelSelector: #selector(cancelClick), doneSelector: #selector(doneClick))
     }
@@ -49,8 +52,22 @@ class ItemsSelectedCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewData
         // Configure the view for the selected state
     }
     
+    var itemAddedReceived = [ItemAddedModel]()
+    
     @objc func doneClick(){
         PCSTextfield.text = unoits.isEmpty ? "" : unoits[selectedRow].UnitofMeasure
+        
+        if let itemText = desc.text, let qtyText = qtyTextfield.text, let unoitText = PCSTextfield.text{
+            itemAddedReceived = webservice.BindPurchaseGridData(quantity: qtyText, quantityrequired: 0.0, ItemId: itemText, unitofmeasure: unoitText, customerid: salesRequestDetails.customer, loccode: salesRequestDetails.customer)
+            
+            for item in itemAddedReceived{
+                if item.grid_error == "" {
+                    unitPriceTextfield.text = item.Grid_UnitPrice
+                    salesRequestDetails.itemsArray[indexpathRow].Grid_UnitPrice = item.Grid_UnitPrice
+                }
+            }
+        }
+        
         showPCSPickerTextField.resignFirstResponder()
     }
     
@@ -100,11 +117,11 @@ class ItemsSelectedCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewData
             totalPrice.text = resultFormatted
             
             if textField == qtyTextfield{
-                itemAddedArray[textField.tag].Grid_Qty = qtyTxt
+                salesRequestDetails.itemsArray[textField.tag].Grid_Qty = qtyTxt
             } else {
-                itemAddedArray[textField.tag].Grid_UnitPrice = unitPriceTxt
+                salesRequestDetails.itemsArray[textField.tag].Grid_UnitPrice = unitPriceTxt
             }
-            itemAddedArray[textField.tag].Grid_TotalPrice = resultFormatted
+            salesRequestDetails.itemsArray[textField.tag].Grid_TotalPrice = resultFormatted
         }
     }
     

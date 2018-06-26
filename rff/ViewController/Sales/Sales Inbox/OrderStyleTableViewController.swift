@@ -1,5 +1,5 @@
 //
-//  JannatStyleTableViewController.swift
+//  OrderStyleTableViewController.swift
 //  rff
 //
 //  Created by Riyadh Foods Industrial Co. on 06/06/2018.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ReturnStyleTableViewController: UITableViewController {
-    
+class OrderStyleTableViewController: UITableViewController {
+
     // -- MARK: Variables
     
-    let cellId = "cell_returnStyle"
-    let cellId_page = "cell_pageReturn"
+    let cellId = "cell_orderStyle"
+    let cellId_pages = "cell_pages"
     var listIndexSelected: Int = 0
     var searchMessage: String = ""
     let salesWebservice: Sales = Sales()
@@ -37,12 +37,13 @@ class ReturnStyleTableViewController: UITableViewController {
     var reminder: Int = 0
     
     // -- MARK: viewDidLoad
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCustomNav(navItem: navigationItem, title: "Return List")
+        setViewAlignment()
+        setCustomNav(navItem: navigationItem, title: "Order List")
         view.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
-
+        
         preSalesArray = salesArray
         
         if salesArray.count != 0 {
@@ -54,6 +55,7 @@ class ReturnStyleTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     // -- MARK: Table view data source
@@ -66,7 +68,7 @@ class ReturnStyleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if isSalesArrayEmpty{
-            emptyMessage(message: "No Data", viewController: self, tableView: tableView)
+            emptyMessage(message: "No Data".localize(), viewController: self, tableView: tableView)
             return salesArray.count
         }
         return salesArray.count + 1
@@ -74,7 +76,7 @@ class ReturnStyleTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == salesArray.count {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId_page, for: indexPath) as? ReturnPagesCell{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId_pages, for: indexPath) as? OrderPagesCell{
                 if isSalesArrayEmpty{
                     return UITableViewCell()
                 }
@@ -83,38 +85,28 @@ class ReturnStyleTableViewController: UITableViewController {
                 cell.nextPage.addTarget(self, action: #selector(forwardButtonTapped), for: .touchUpInside)
                 cell.lastPage.addTarget(self, action: #selector(lastButtonTapped), for: .touchUpInside)
                 
-                cell.pageNum.text = "\(currentRow) out of \(totalRow)"
+                cell.pageNum.text = "\(currentRow) " + "out of".localize() + " \(totalRow)"
                 
                 return cell
             }
-        } else if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ReturnStyleCell{
-            
+        } else if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? OrderStyleCell{
+            print(indexPath.row)
             let id = "\(salesArray[indexPath.row].ID)"
             let empCreated = salesArray[indexPath.row].EmpCreated
+            let date = salesArray[indexPath.row].date
             let items = salesArray[indexPath.row].Items
-            let reqDate = salesArray[indexPath.row].RequestDate
-            let rtnDate = salesArray[indexPath.row].ReturnDate
             let status = salesArray[indexPath.row].Status
             let pendingBy = salesArray[indexPath.row].PendingBy
             let comment = salesArray[indexPath.row].Comment
+            let customerName = salesArray[indexPath.row].CustomerName
             
-            cell.idTitle.text = getString(englishString: "ID", arabicString: "الاصناف" , language: languageChosen)
-            cell.idLabel.text = getString(englishString: id, arabicString: items, language: languageChosen)
-            cell.empCreatedTitle.text = getString(englishString: "Emp Created", arabicString: "انشاء الموظف", language: languageChosen)
-            cell.empCreatedLabel.text = getString(englishString: empCreated, arabicString: id, language: languageChosen)
-            cell.itemsTitle.text = getString(englishString: "Items", arabicString: "الرقم", language: languageChosen)
-            cell.itemsLabel.text = getString(englishString: items, arabicString: id, language: languageChosen)
-            
-            cell.requestDateTitle.text = getString(englishString: "Request Date", arabicString: "الرقم", language: languageChosen)
-            cell.requestDateLabel.text = getString(englishString: reqDate, arabicString: rtnDate, language: languageChosen)
-            cell.returnDateTitle.text = getString(englishString: "Return Date", arabicString: "الاصناف", language: languageChosen)
-            cell.returnDateLabel.text = getString(englishString: rtnDate, arabicString: reqDate, language: languageChosen)
-            
-            cell.statusTitle.text = getString(englishString: "Status", arabicString: status, language: languageChosen)
-            cell.statusLabel.text = getString(englishString: status, arabicString: "الحاله", language: languageChosen)
-            cell.pendingByTitle.text = getString(englishString: "PendingBy", arabicString: "معلق من", language: languageChosen)
+            cell.idLabel.text = id
+            cell.empCreatedLabel.text = empCreated
+            cell.custNameLabel.text = customerName
+            cell.dateLabel.text = date
+            cell.itemsLabel.text = items
+            cell.statusLabel.text = status
             cell.pendingByLabel.text = pendingBy
-            cell.commentTitle.text = getString(englishString: "Comment", arabicString: "ملاحظات", language: languageChosen)
             cell.commentLabel.text = comment
             
             cell.viewOutlet.addTarget(self, action: #selector(viewButtonTapped(sender:)), for: .touchUpInside)
@@ -123,15 +115,16 @@ class ReturnStyleTableViewController: UITableViewController {
             urlString.append(salesArray[indexPath.row].URL)
             
             return cell
+            
         }
         return UITableViewCell()
     }
     
     // -- MARK: objc function
- 
+    
     @objc func viewButtonTapped(sender: UIButton){
         rowIndexSelected = sender.tag
-        performSegue(withIdentifier: "showReturnWeb", sender: nil)
+        performSegue(withIdentifier: "showOrderWeb", sender: nil)
     }
     
     @objc func firstButtonTapped(){
@@ -183,3 +176,15 @@ class ReturnStyleTableViewController: UITableViewController {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

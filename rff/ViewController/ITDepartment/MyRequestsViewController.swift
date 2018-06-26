@@ -18,6 +18,7 @@ class MyRequestsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

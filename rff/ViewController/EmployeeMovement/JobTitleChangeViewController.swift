@@ -18,6 +18,7 @@ class JobTitleChangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     @IBAction func signOutBuuttonTapped(_ sender: Any) {

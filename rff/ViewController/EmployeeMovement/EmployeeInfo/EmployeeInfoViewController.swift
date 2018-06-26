@@ -47,6 +47,7 @@ class EmployeeInfoViewController: UIViewController, UITableViewDataSource, UITab
         employeeInfoListItem.delegate = self
         employeeInfoListItem.dataSource = self
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

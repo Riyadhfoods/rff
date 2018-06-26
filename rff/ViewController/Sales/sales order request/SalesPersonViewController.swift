@@ -53,9 +53,11 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     let deliveryDatePickerView: UIDatePicker = UIDatePicker()
     let currentDate = Date()
     
+    var offer: Bool = false
+    var supermarket: Bool = false
+    
     // To keep track
     var pickerview: UIPickerView = UIPickerView()
-    
     let languageChosen = LoginViewController.languageChosen
     
     // -- MARK: viewDidLoad
@@ -63,17 +65,22 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupArrays()
+        title = "Salesperson Details".localize()
+        
+        stackviewWidth.constant = screenSize.width - 32
+        setbackNavTitle(navItem: navigationItem)
         
         showsalespersonPickerViewTextfield.tintColor = .clear
         showcustomerPickerViewTextfield.tintColor = .clear
         deliveryDateTextfield.tintColor = .clear
-        deliveryDateTextfield.text = getStringDate(date: currentDate)
+        deliveryDateTextfield.text = ""
         
+        setupArrays()
         setUpWidth()
         setUpPickerView()
         setUpSelectors()
         setupDatePicker()
+        setViewAlignment()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(gesture:)))
         view.addGestureRecognizer(tapGesture)
@@ -91,14 +98,14 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func setupArrays(){
-        salespersonArray = webservice.BindSalesOrderSalesPerson()
+        //salespersonArray = webservice.BindSalesOrderSalesPerson()
         for salespreson in salespersonArray{
-            salespersonNamesArray.append(salespreson.SalesPerson + salespreson.SalesPersonId)
+            salespersonNamesArray.append(salespreson.SalesPerson)
         }
-        customerNamesArray = ["Select customer"]
+        customerNamesArray = ["Select customer".localize()]
         
         if salespersonArray.isEmpty{
-            salespersonTextfield.text = "No salespreson aviable"
+            salespersonTextfield.text = "No salespreson aviable".localize()
         } else {
             salespersonTextfield.text = salespersonNamesArray[0]
             getCustomers(salesperson: salespersonNamesArray[0])
@@ -108,11 +115,11 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     func getCustomers(salesperson: String){
         customerArray = webservice.BindSalesOrderCustomers(salesperson: salesperson)
         if customerArray.isEmpty {
-            customerNamesArray = ["Select customer"]
+            customerNamesArray = ["Select customer".localize()]
         } else {
-            customerNamesArray = ["Select customer"]
+            customerNamesArray = ["Select customer".localize()]
             for customer in customerArray{
-                customerNamesArray.append(customer.CustomerName + customer.CustomerId)
+                customerNamesArray.append(customer.CustomerName)
             }
         }
     }
@@ -153,10 +160,12 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func setupDatePicker(){
-        PickerviewAction().showDatePicker(txtfield: deliveryDateTextfield, datePicker: deliveryDatePickerView, title: "Delivery Date", viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
+        PickerviewAction().showDatePicker(txtfield: deliveryDateTextfield, datePicker: deliveryDatePickerView, title: "Delivery Date".localize(), viewController: self, datePickerSelector: #selector(handleDatePicker(sender:)), doneSelector: #selector(datePickerDoneClick))
     }
     
+    var date: String = ""
     @objc func handleDatePicker(sender: UIDatePicker){
+        date = getStringDate(date: sender.date)
         deliveryDateTextfield.text = getStringDate(date: sender.date)
     }
     
@@ -170,10 +179,10 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @objc func doneClick(){
         if pickerview == salespersonPickerView{
-            salespersonTextfield.text = salespersonNamesArray[selectedRow]
+            salespersonTextfield.text = salespersonNamesArray[selectedRow].localize()
             showsalespersonPickerViewTextfield.resignFirstResponder()
         } else {
-            customerTextfield.text = customerNamesArray[selectedRow]
+            customerTextfield.text = customerNamesArray[selectedRow].localize()
             showcustomerPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -187,6 +196,9 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @objc func datePickerDoneClick(){
+        if date.isEmpty{
+            deliveryDateTextfield.text = getStringDate(date: currentDate)
+        }
         deliveryDateTextfield.resignFirstResponder()
     }
     
@@ -206,15 +218,16 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.pickerview = pickerView
         if pickerView == salespersonPickerView{
-            return salespersonNamesArray[row]
+            return salespersonNamesArray[row].localize()
         }
-        return customerNamesArray[row]
+        return customerNamesArray[row].localize()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
         if pickerView == salespersonPickerView{
             getCustomers(salesperson: salespersonNamesArray[row])
+            customerTextfield.text = customerNamesArray[0].localize()
         }
     }
     
@@ -223,37 +236,61 @@ class SalesPersonViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func superMarketYesButtonTapped(_ sender: Any) {
         superMarketYesButton.backgroundColor = mainBackgroundColor
         superMarketNoButton.backgroundColor = .white
+        
+        supermarket = true
     }
     
     @IBAction func superMarketNoButtonTapped(_ sender: Any) {
         superMarketYesButton.backgroundColor = .white
         superMarketNoButton.backgroundColor = mainBackgroundColor
+        
+        supermarket = false
     }
     
     @IBAction func offerYesButtonTapped(_ sender: Any) {
         offerYesButton.backgroundColor = mainBackgroundColor
         offerNoButton.backgroundColor = .white
+        
+        offer = true
     }
     
     @IBAction func offerNoButtonTapped(_ sender: Any) {
         offerYesButton.backgroundColor = .white
         offerNoButton.backgroundColor = mainBackgroundColor
+        
+        offer = false
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         if let salespersonText = salespersonTextfield.text, let customerText = customerTextfield.text, let deliveryDate = deliveryDateTextfield.text{
-            salesDetails.SalesPersonInFull = salespersonText
-            salesDetails.CustomerInFull = customerText
-            salesDetails.DeliveryDate = deliveryDate
+            if customerText == customerNamesArray[0] || deliveryDate.isEmpty{
+                let alertTitle = "Alert!".localize()
+                let alertMessage = "You did not select a customer or delivery date".localize()
+                AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: "OK", onAction: {
+                    return
+                }, cancelAction: nil, self)
+            }
+            salesRequestDetails.salesperson = salespersonText
+            salesRequestDetails.customer = customerText
+            salesRequestDetails.deliverydate = deliveryDate
+            salesRequestDetails.supermarket = supermarket
+            salesRequestDetails.offer = offer
         }
-        performSegue(withIdentifier: "showStoreDetails", sender: nil)
+        
+        let storeArray = webservice.BindDdlStore(customerid: salesRequestDetails.customer)
+        if storeArray.isEmpty{
+            performSegue(withIdentifier: "skipToAddItem", sender: nil)
+        } else {
+            performSegue(withIdentifier: "showStoreDetails", sender: nil)
+        }
     }
 }
+
 extension SalesPersonViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers(onShow: { frame in
-            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: frame.height - 65, right: 0)
             self.scrollView.contentInset = contentInset
         }, onHide: { _ in
             self.scrollView.contentInset = UIEdgeInsets.zero

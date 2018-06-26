@@ -13,11 +13,15 @@ let mainBackgroundColor = AppDelegate().mainBackgroundColor
 
 func setCustomNav(navItem: UINavigationItem){
     navItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    navItem.title = SlideMenuViewController.selectedItem
+    navItem.title = SlideMenuViewController.selectedItem.localize()
 }
 
 func setCustomNav(navItem: UINavigationItem, title: String){
-    navItem.title = title
+    navItem.title = title.localize()
+}
+
+func setbackNavTitle(navItem: UINavigationItem){
+    navItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 }
 
 func emptyMessage(message: String, viewController: UIViewController, tableView: UITableView) {

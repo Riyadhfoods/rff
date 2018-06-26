@@ -17,7 +17,7 @@ class PromotionRequestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

@@ -133,6 +133,7 @@ class VacationsDetailsViewController: UIViewController, UIPickerViewDelegate, UI
         if newSettlementRecieved != "" {
             setSettlementAmount(settlementAmountRecieved: newSettlementRecieved)
         }
+        setViewAlignment()
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,5 +1,5 @@
 //
-//  ItemDetailsCell.swift
+//  ItemReturnDetailsCell.swift
 //  rff
 //
 //  Created by Riyadh Foods Industrial Co. on 23/06/2018.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class ItemDetailsCell: UITableViewCell {
-
+class ItemReturnDetailsCell: UITableViewCell {
+    
+    @IBOutlet weak var holderView: UIView!
     @IBOutlet weak var num: UILabel!
-    @IBOutlet weak var itemDesc: UILabel!
-    @IBOutlet weak var changePrice: UILabel!
-    @IBOutlet weak var orgPrice: UILabel!
+    @IBOutlet weak var invoiceNo: UILabel!
+    @IBOutlet weak var lotNo: UILabel!
+    @IBOutlet weak var itemNo: UILabel!
+    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var unitePRice: UILabel!
+    @IBOutlet weak var totalCost: UILabel!
     @IBOutlet weak var qty: UILabel!
     @IBOutlet weak var uofm: UILabel!
-    @IBOutlet weak var lastYearORDQty: UILabel!
-    @IBOutlet weak var yearToDateORDQty: UILabel!
-    @IBOutlet weak var total: UILabel!
-    @IBOutlet weak var holderView: UIView!
+    @IBOutlet weak var returnType: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

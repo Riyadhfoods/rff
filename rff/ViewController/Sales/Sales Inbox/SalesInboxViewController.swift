@@ -38,11 +38,12 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // ---------------
+        setViewAlignment()
         
         ListTextfield.tintColor = .clear
         showListPickerTextfield.tintColor = .clear
-        
-        searchOutlet.setTitle(getString(englishString: "Search", arabicString: "ابحث", language: LoginViewController.languageChosen), for: .normal)
+        seachTextfield.placeholder = "Search content".localize()
         
         setCustomNav(navItem: navigationItem)
         setUpPickerView()
@@ -62,7 +63,7 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @objc func doneClick(){
-        ListTextfield.text = selectListArray[selectedListIndex]
+        ListTextfield.text = selectListArray[selectedListIndex].localize()
         showListPickerTextfield.resignFirstResponder()
     }
     
@@ -76,7 +77,7 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return selectListArray[row]
+        return selectListArray[row].localize()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -88,9 +89,11 @@ class SalesInboxViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
 
     @IBAction func searchButtonTapped(_ sender: Any) {
-        if ListTextfield.text == selectListArray[0]{
-            let alertTitle = getString(englishString: "Alert", arabicString: "تنبيه", language: languageChosen)
-            let alertMessage = getString(englishString: "Select a list first", arabicString: "اختر من القائمة اولاً", language: languageChosen)
+        if ListTextfield.text == selectListArray[0].localize(){
+            let alertTitle = "Alert".localize()
+                //getString(englishString: "Alert", arabicString: "تنبيه", language: languageChosen)
+            let alertMessage = "You did not select a list".localize()
+                //getString(englishString: "Select a list first", arabicString: "اختر من القائمة اولاً", language: languageChosen)
             
             AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
         }

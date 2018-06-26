@@ -28,8 +28,6 @@ struct ItemsModul {
     }
 }
 
-var itemAddedArray = [ItemsModul]()
-
 class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, ItemCountAddedDelegate {
     
     // -- MARK: IBOutlets
@@ -60,22 +58,30 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var unoits = [SalesModel]()
     var unoitsName = [String]()
     var itemAddedReceived = [ItemAddedModel]()
-    var selectedRow: Int = 0
+    var itemSelectedRow: Int = 0
+    var uofmSelectedRow: Int = 0
     
     var count: Int = 0
+    let customer = salesRequestDetails.customer
+    let loccode = salesRequestDetails.loccode
     
     func setCount(count: Int) {
         self.count = count
     }
     func itemsArrayReceived(itemsArray: [ItemsModul]) {
-        itemAddedArray = itemsArray
+        salesRequestDetails.itemsArray = itemsArray
+        //itemAddedArray = itemsArray
     }
     
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Add Items".localize()
+        if LanguageManger.isArabicLanguage{
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        }
+        stackviewWidth.constant = screenSize.width - 32
         showItemsPickerViewTextfield.tintColor = .clear
         showUnoitPickerViewTextfield.tintColor = .clear
         commentTextview.text = ""
@@ -94,8 +100,10 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !itemAddedArray.isEmpty{
-            count = itemAddedArray.count
+        setViewAlignment()
+        setbackNavTitle(navItem: navigationItem)
+        if !salesRequestDetails.itemsArray.isEmpty{
+            count = salesRequestDetails.itemsArray.count
         }
         setCountLabel(c: count)
     }
@@ -107,14 +115,14 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     // -- MARK: Set ups
     
     func setupArrays(){
-        items = webservice.BindSalesOrderItems(customerid: salesDetails.CustomerInFull)
+        items = webservice.BindSalesOrderItems(customerid: customer)
         for item in items{
-            itemsName.append(item.DrpItems + item.DrpItemId)
+            itemsName.append(item.DrpItems)
         }
     }
     
     func setCountLabel(c: Int){
-        itemsAddedLabel.text = "Items added is \(c)"
+        itemsAddedLabel.text = "Items added is ".localize() + "\(c)"
     }
     
     @objc func didTapView(gesture: UITapGestureRecognizer) {
@@ -150,13 +158,13 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @objc func doneClick(){
         if pickerview == itemsPickerView{
-            itemsTextfield.text = items.isEmpty ? "Select item" : itemsName[selectedRow]
-            unoits = items.isEmpty ? [SalesModel]() : webservice.BindSalesOrderUnitofMeasure(itemid: itemsName[selectedRow])
-            unoitTextfield.text = "Select unoit of measure"
+            itemsTextfield.text = items.isEmpty ? "Select item".localize() : itemsName[itemSelectedRow]
+            unoits = items.isEmpty ? [SalesModel]() : webservice.BindSalesOrderUnitofMeasure(itemid: itemsName[itemSelectedRow])
+            unoitTextfield.text = "Select unoit of measure".localize()
             showItemsPickerViewTextfield.resignFirstResponder()
             warningLabel.isHidden = true
         } else {
-            unoitTextfield.text = unoits.isEmpty ? "Select unoit of measure" : unoits[selectedRow].UnitofMeasure
+            unoitTextfield.text = unoits.isEmpty ? "Select unoit of measure".localize() : unoits[uofmSelectedRow].UnitofMeasure
             showUnoitPickerViewTextfield.resignFirstResponder()
         }
     }
@@ -195,18 +203,24 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-        
         if pickerView == itemsPickerView{
             unoits = webservice.BindSalesOrderUnitofMeasure(itemid: itemsName[row])
+            itemSelectedRow = row
+        } else {
+            uofmSelectedRow = row
         }
     }
     
     // -- MARK: IBActions
     
+    var oldItemName = ""
+    var oldItemUofm = ""
+    var oldItemQty = ""
     @IBAction func addItemButtonTapped(_ sender: Any) {
         if let itemText = itemsTextfield.text, let unoitText = unoitTextfield.text, let qtyText = qtyTextfield.text{
-            itemAddedReceived = webservice.BindPurchaseGridData(quantity: qtyText, quantityrequired: 0.0, ItemId: itemText, unitofmeasure: unoitText, customerid: salesDetails.CustomerInFull, loccode: salesDetails.LocationCode)
+            itemAddedReceived = webservice.BindPurchaseGridData(quantity: qtyText, quantityrequired: 0.0, ItemId: itemText, unitofmeasure: unoitText, customerid: customer, loccode: loccode)
+            
+            shouldAddItem(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
             
             for item in itemAddedReceived{
                 if item.grid_error != ""{
@@ -214,7 +228,7 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                     warningLabel.text = item.grid_error
                     return
                 }
-                itemAddedArray.append(
+                salesRequestDetails.itemsArray.append(
                     ItemsModul(
                         grid_error: item.grid_error,
                         Grid_ItemId: item.Grid_ItemId,
@@ -224,13 +238,33 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                         Grid_UnitPrice: item.Grid_UnitPrice,
                         Grid_TotalPrice: item.Grid_TotalPrice))
             }
+            warningLabel.isHidden = true
+            count += 1
+            setCountLabel(c: count)
         }
-        warningLabel.isHidden = true
-        count += 1
-        setCountLabel(c: count)
+        AlertMessage().showAlertForXTime(alertTitle: "Added".localize(), time: 1.5, tagert: self)
+    }
+    
+    func shouldAddItem(itemText: String, unoitText: String, qtyText: String){
+        if oldItemName == "" && oldItemUofm == "" && oldItemQty == "" {
+            oldItemName = itemText
+            oldItemUofm = unoitText
+            oldItemQty = qtyText
+        } else {
+            if itemText == oldItemName && unoitText == oldItemUofm && qtyText == oldItemQty {
+                AlertMessage().showAlertMessage(alertTitle: "Item has been added".localize(), alertMessage: "You have already added this item. Do you wnat to add it again".localize(), actionTitle: "Cancel".localize(), onAction: {
+                    self.count -= 1
+                    self.setCountLabel(c: self.count)
+                    salesRequestDetails.itemsArray.removeLast()
+                }, cancelAction: "Yes".localize(), self)
+            }
+        }
     }
     
     @IBAction func showItemsButtonTapped(_ sender: Any) {
+        if let commentTxt = commentTextview.text{
+            salesRequestDetails.comment = commentTxt
+        }
         performSegue(withIdentifier: "showSummary", sender: nil)
     }
     

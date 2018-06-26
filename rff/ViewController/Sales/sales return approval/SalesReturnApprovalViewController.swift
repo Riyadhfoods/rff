@@ -23,7 +23,7 @@ class SalesReturnApprovalViewController: UIViewController, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
@@ -35,9 +35,17 @@ class SalesReturnApprovalViewController: UIViewController, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? SalesReturnApprovalCellCell{
+            cell.selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
+            
             return cell
         }
         return UITableViewCell()
+    }
+    
+    // -- MARK: objc functions
+    
+    @objc func selectButtonTapped(sender: UIButton){
+        performSegue(withIdentifier: "showSalesReturnApproval", sender: nil)
     }
     
     // -- MARK: IBActions

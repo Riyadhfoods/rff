@@ -54,12 +54,15 @@ public class SoapHttpClient {
         req.addValue("text/xml;charset =utf-8", forHTTPHeaderField: "Content-Type")
         
         let contentLength = SoapMessage.utf8.count
+        
+        
+        
         req.addValue(String(contentLength), forHTTPHeaderField: "Content-Length")
         req.addValue(SoapAction, forHTTPHeaderField: "SOAPAction")
         
         let task_ = session.dataTask(with: req as URLRequest){ (data, response, error) in
             if let response = response{
-//                print("Response = \(response)")
+                //print("Response = \(response)")
             }
             self.Error=error
             

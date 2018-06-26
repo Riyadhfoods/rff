@@ -31,10 +31,13 @@ class CreditDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if LanguageManger.isArabicLanguage{
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+        setbackNavTitle(navItem: navigationItem)
         viewHolder.layer.cornerRadius = 5.0
         viewHolder.layer.borderColor = UIColor(red: 105/255, green: 132/255, blue: 92/255, alpha: 1.0).cgColor
         viewHolder.layer.borderWidth = 1
-        
         setupCreditDetails()
     }
 
@@ -44,7 +47,8 @@ class CreditDetailsViewController: UIViewController {
     }
     
     func setupCreditDetails(){
-        creditDetailsArray = webservice.BindCustomerAgingGV(cutomerid: salesDetails.CustomerInFull)
+        //salesDetails.CustomerInFull
+        creditDetailsArray = webservice.BindCustomerAgingGV(cutomerid: salesRequestDetails.customer)
         if creditDetailsArray.isEmpty{
             return
         }

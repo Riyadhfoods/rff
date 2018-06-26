@@ -12,7 +12,11 @@ class LanguageManger {
     
     /// Returns the singleton LanguageManger instance.
     static let shared: LanguageManger = LanguageManger()
-    
+    static var isArabicLanguage : Bool {
+        get {
+            return shared.currentLanguage.rawValue == "ar"
+        }
+    }
     
     /// Returns the currnet language
     var currentLanguage: Languages {
@@ -76,11 +80,12 @@ class LanguageManger {
     func setLanguage(language: Languages) {
         
         // change the dircation of the views
-        let semanticContentAttribute:UISemanticContentAttribute = language == .ar ? .forceRightToLeft : .forceLeftToRight
+        let semanticContentAttribute: UISemanticContentAttribute = language == .ar ? .forceRightToLeft : .forceLeftToRight
         UIView.appearance().semanticContentAttribute = semanticContentAttribute
         UINavigationBar.appearance().semanticContentAttribute = semanticContentAttribute
         UITextField.appearance().semanticContentAttribute = semanticContentAttribute
         UITextView.appearance().semanticContentAttribute = semanticContentAttribute
+        UIButton.appearance().semanticContentAttribute = semanticContentAttribute
         
         // change app language
         UserDefaults.standard.set([language.rawValue], forKey: "AppleLanguages")
@@ -131,11 +136,11 @@ extension UIView {
         
         switch self {
         case let txtf as UITextField:
-            txtf.text = txtf.text?.localiz()
+            txtf.text = txtf.text?.localize()
         case let lbl as UILabel:
-            lbl.text = lbl.text?.localiz()
+            lbl.text = lbl.text?.localize()
         case let btn as UIButton:
-            btn.setTitle(btn.title(for: .normal)?.localiz(), for: .normal)
+            btn.setTitle(btn.title(for: .normal)?.localize(), for: .normal)
         default:
             break
         }
@@ -151,7 +156,7 @@ extension String {
     ///
     /// - returns: The localized string
     ///
-    func localiz() -> String {
+    func localize() -> String {
         guard let bundle = Bundle.main.path(forResource: LanguageManger.shared.currentLanguage.rawValue, ofType: "lproj") else {
             return NSLocalizedString(self, comment: "")
         }

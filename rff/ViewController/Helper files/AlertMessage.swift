@@ -25,4 +25,10 @@ class AlertMessage{
         
         viewController.present(alert, animated: true, completion: nil)
     }
+    
+    func showAlertForXTime(alertTitle: String, time: TimeInterval, tagert viewContoller: UIViewController){
+        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        viewContoller.present(alert, animated: true, completion: nil)
+        Timer.scheduledTimer(withTimeInterval: time, repeats: false, block: { _ in alert.dismiss(animated: true, completion: nil)} )
+    }
 }

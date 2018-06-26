@@ -1,5 +1,5 @@
 //
-//  ItemDetailsCell.swift
+//  WorkFlowReturnCell.swift
 //  rff
 //
 //  Created by Riyadh Foods Industrial Co. on 23/06/2018.
@@ -8,17 +8,13 @@
 
 import UIKit
 
-class ItemDetailsCell: UITableViewCell {
+class WorkFlowReturnCell: UITableViewCell {
 
-    @IBOutlet weak var num: UILabel!
-    @IBOutlet weak var itemDesc: UILabel!
-    @IBOutlet weak var changePrice: UILabel!
-    @IBOutlet weak var orgPrice: UILabel!
-    @IBOutlet weak var qty: UILabel!
-    @IBOutlet weak var uofm: UILabel!
-    @IBOutlet weak var lastYearORDQty: UILabel!
-    @IBOutlet weak var yearToDateORDQty: UILabel!
-    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var empId: UILabel!
+    @IBOutlet weak var empName: UILabel!
+    @IBOutlet weak var empRole: UILabel!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var transDate: UILabel!
     @IBOutlet weak var holderView: UIView!
     
     override func awakeFromNib() {

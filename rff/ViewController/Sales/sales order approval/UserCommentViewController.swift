@@ -17,13 +17,19 @@ class UserCommentViewController: UIViewController, UITableViewDataSource, UITabl
     
     // -- MARK: Variables
     
+    let webservice = Sales()
     let cellId = "cell_userComment"
+    var orderId = ""
+    var userCommentArray = [SalesModel]()
     
     // -- MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //userCommentArray = webservice.BindUserComment_SalesApprovalForm(orderid: orderId)
+        
+        setViewAlignment()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,11 +39,19 @@ class UserCommentViewController: UIViewController, UITableViewDataSource, UITabl
     // -- MARK: Tableview data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if userCommentArray.count == 0{
+            emptyMessage(message: "No Data".localize(), viewController: self, tableView: userCommentTableView)
+        }
+        return userCommentArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? UserCommentCell{
+            
+            let userComment = userCommentArray[indexPath.row]
+            
+            cell.empName.text = userComment.SOA_EMPNAME
+            cell.comment.text = userComment.SOA_COMMENT
             
             return cell
         }

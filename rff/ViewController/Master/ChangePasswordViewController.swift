@@ -36,6 +36,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         
         setCustomNav(navItem: navigationItem)
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

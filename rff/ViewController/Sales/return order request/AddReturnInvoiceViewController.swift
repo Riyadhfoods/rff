@@ -33,7 +33,7 @@ class AddReturnInvoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setViewAlignment()
         invoiceArray = ["aaaaa1", "aaaaaaa2"]
         itemArray = ["bbbbbb1", "bbbbb2", "bbbbbb3"]
         

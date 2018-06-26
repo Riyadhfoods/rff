@@ -102,6 +102,8 @@ class TicketDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         if let userId = AuthServices.currentUserId{
             ticketdependentArray = webservice.GetEmpVacationTickets(emp_id: userId, langId: languageChosen)
         }
+        
+        setViewAlignment()
         setupScreenLayout()
         sutupTicketRequestSelector()
         sutupExitSelector()

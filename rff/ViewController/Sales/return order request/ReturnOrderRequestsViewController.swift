@@ -31,7 +31,7 @@ class ReturnOrderRequestsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

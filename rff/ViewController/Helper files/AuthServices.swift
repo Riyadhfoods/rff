@@ -36,10 +36,10 @@ class AuthServices{
     }
     
     func logout(_ UIViewController: UIViewController){
-        let title: String = "SignOut".localiz()
-        let message: String = "Are you sure you want to sign out?".localiz()
-        let actionTitle: String = "Yes".localiz()
-        let cancelTitle: String = "Cancel".localiz()
+        let title: String = "SignOut".localize()
+        let message: String = "Are you sure you want to sign out?".localize()
+        let actionTitle: String = "Yes".localize()
+        let cancelTitle: String = "Cancel".localize()
         
         AlertMessage().showAlertMessage(alertTitle: title, alertMessage: message, actionTitle: actionTitle, onAction: {
             AuthServices.currentUserId = nil

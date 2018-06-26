@@ -40,6 +40,7 @@ class TansferStyleTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewAlignment()
         setCustomNav(navItem: navigationItem, title: "Transfer List")
         view.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1.0)
         
@@ -67,7 +68,7 @@ class TansferStyleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if isSalesArrayEmpty{
-            emptyMessage(message: "No Data", viewController: self, tableView: tableView)
+            emptyMessage(message: "No Data".localize(), viewController: self, tableView: tableView)
             return salesArray.count
         }
         return salesArray.count + 1
@@ -84,7 +85,7 @@ class TansferStyleTableViewController: UITableViewController {
                 cell.nextPage.addTarget(self, action: #selector(forwardButtonTapped), for: .touchUpInside)
                 cell.lastPage.addTarget(self, action: #selector(lastButtonTapped), for: .touchUpInside)
                 
-                cell.pageNum.text = "\(currentRow) out of \(totalRow)"
+                cell.pageNum.text = "\(currentRow) " + "out of".localize() + " \(totalRow)"
                 
                 return cell
             }
@@ -98,19 +99,12 @@ class TansferStyleTableViewController: UITableViewController {
             let pendingBy = salesArray[indexPath.row].PendingBy
             let comment = salesArray[indexPath.row].Comment
             
-            cell.idTitle.text = getString(englishString: "ID", arabicString: "انشاء الموظف" , language: languageChosen)
-            cell.idLabel.text = getString(englishString: id, arabicString: empCreated, language: languageChosen)
-            cell.empCreatedTitle.text = getString(englishString: "Emp Created", arabicString: "الرقم", language: languageChosen)
-            cell.empCreatedLabel.text = getString(englishString: empCreated, arabicString: id, language: languageChosen)
-            cell.dateTitle.text = getString(englishString: "Date", arabicString: "الاصناف", language: languageChosen)
-            cell.dateLabel.text = getString(englishString: date, arabicString: items, language: languageChosen)
-            cell.itemsTitle.text = getString(englishString: "Items", arabicString: "التاريخ", language: languageChosen)
-            cell.itemsLabel.text = getString(englishString: items, arabicString: date, language: languageChosen)
-            cell.statusTitle.text = getString(englishString: "Status", arabicString: status, language: languageChosen)
-            cell.statusLabel.text = getString(englishString: status, arabicString: "الحاله", language: languageChosen)
-            cell.pendingByTitle.text = getString(englishString: "PendingBy", arabicString: "معلق من", language: languageChosen)
+            cell.idLabel.text = id
+            cell.empCreatedLabel.text = empCreated
+            cell.dateLabel.text = date
+            cell.itemsLabel.text = items
+            cell.statusLabel.text = status
             cell.pendingByLabel.text = pendingBy
-            cell.commentTitle.text = getString(englishString: "Comment", arabicString: "ملاحظات", language: languageChosen)
             cell.commentLabel.text = comment
             
             cell.selectOutlet.addTarget(self, action: #selector(selectButtonTapped(sender:)), for: .touchUpInside)

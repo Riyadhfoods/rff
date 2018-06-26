@@ -245,13 +245,18 @@
                     let elem1: XMLElement? =  xmlResult1?.element
                     strVal = ""
                     if elem1?.children.first is TextElement {
-                        let elemText:TextElement = elem1?.children.first as! TextElement
-                        strVal = elemText.text
-                        
+                        for elem in (elem1?.children)!{
+                            let elemText:TextElement = elem as! TextElement
+                            strVal += elemText.text
+                        }
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1
-                    if elemName == "EnglishDes" {
+                    if elemName == "FormId" {
+                        rItem1.FormId =  strVal
+                    }
+                    // Array Propert of returnValue subProperty for rItem1
+                    else if elemName == "EnglishDes" {
                         rItem1.EnglishDes =  strVal
                     }
                         // Array Propert of returnValue subProperty for rItem1
@@ -299,8 +304,9 @@
         
         let soapAction :String = "http://tempuri.org/Task_Inbox"
         
-        let responseData:Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
-        let returnValue:[Task_Inbox]=Task_InboxArrFromXML(data : responseData)
+        let responseData: Data = SoapHttpClient.callWS(Host : self.Host,WebServiceUrl:self.Url,SoapAction:soapAction,SoapMessage:soapReqXML)
+        
+        let returnValue: [Task_Inbox] = Task_InboxArrFromXML(data : responseData)
         return returnValue
     }
     public func ChangePassword(emp_id:String, oldpassword:String, newpassword:String, error:String)-> String{
@@ -361,9 +367,10 @@
                     let elem1: XMLElement? =  xmlResult1?.element
                     strVal = ""
                     if elem1?.children.first is TextElement {
-                        let elemText:TextElement = elem1?.children.first as! TextElement
-                        strVal = elemText.text
-                        
+                        for elem in (elem1?.children)!{
+                            let elemText:TextElement = elem as! TextElement
+                            strVal += elemText.text
+                        }
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1
@@ -431,9 +438,10 @@
                     let elem1: XMLElement? =  xmlResult1?.element
                     strVal = ""
                     if elem1?.children.first is TextElement {
-                        let elemText:TextElement = elem1?.children.first as! TextElement
-                        strVal = elemText.text
-                        
+                        for elem in (elem1?.children)!{
+                            let elemText:TextElement = elem as! TextElement
+                            strVal += elemText.text
+                        }
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1
@@ -521,9 +529,10 @@
                     let elem1: XMLElement? =  xmlResult1?.element
                     strVal = ""
                     if elem1?.children.first is TextElement {
-                        let elemText:TextElement = elem1?.children.first as! TextElement
-                        strVal = elemText.text
-                        
+                        for elem in (elem1?.children)!{
+                            let elemText:TextElement = elem as! TextElement
+                            strVal += elemText.text
+                        }
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1
@@ -1046,9 +1055,10 @@
                     let elem1: XMLElement? =  xmlResult1?.element
                     strVal = ""
                     if elem1?.children.first is TextElement {
-                        let elemText:TextElement = elem1?.children.first as! TextElement
-                        strVal = elemText.text
-                        
+                        for elem in (elem1?.children)!{
+                            let elemText:TextElement = elem as! TextElement
+                            strVal += elemText.text
+                        }
                     }
                     elemName = elem1!.name
                     // Array Propert of returnValue subProperty for rItem1

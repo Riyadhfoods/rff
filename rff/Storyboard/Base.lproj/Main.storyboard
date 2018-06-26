@@ -189,6 +189,7 @@
                                             <constraint firstAttribute="height" constant="50" id="D2Q-Lc-SYn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <size key="titleShadowOffset" width="-1" height="1"/>
                                         <state key="normal" title="LOGIN">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>

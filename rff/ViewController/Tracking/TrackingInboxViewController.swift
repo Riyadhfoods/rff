@@ -75,6 +75,7 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
         showListPickerTextField.tintColor = .clear
         showCategoryPickerTextField.tintColor = .clear
         
+        setViewAlignment()
         setUpPickerView()
         setupLanguagChange()
         setSlideMenu(controller: self, menuButton: menuBtn)
@@ -83,9 +84,9 @@ class TrackingInboxViewController: UIViewController, UIPickerViewDelegate, UIPic
     // -- MARK: Setups
     
     func setupLanguagChange(){
-        searchContectTextfield.placeholder = getString(englishString: "Search content", arabicString: "محتوى البحث", language: languageChosen)
-        setUpHeaderLabel(txt: searchContectTextfield, language: languageChosen)
-        searchButtonOutlet.setTitle(getString(englishString: "SEARCH", arabicString: "بحث", language: languageChosen), for: .normal)
+//        searchContectTextfield.placeholder = getString(englishString: "Search content", arabicString: "محتوى البحث", language: languageChosen)
+//        setUpHeaderLabel(txt: searchContectTextfield, language: languageChosen)
+//        searchButtonOutlet.setTitle(getString(englishString: "SEARCH", arabicString: "بحث", language: languageChosen), for: .normal)
         returnButtonOutlet.setTitle(getString(englishString: "RETURN", arabicString: "عودة", language: languageChosen), for: .normal)
     }
     

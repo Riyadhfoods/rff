@@ -18,6 +18,7 @@ class OverTimeCalcViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewAlignment()
         setSlideMenu(controller: self, menuButton: menuBtn)
     }
     

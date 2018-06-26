@@ -14,13 +14,20 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     @IBOutlet weak var salesOrdertableview: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // -- MAKR: Variables
     
     let screenSize = AppDelegate().screenSize
     let cellId = "cell_salesOrderApproval"
     let webService = Sales()
+    
     var salesOrderDetails: [SalesModel] = [SalesModel]()
+    var itemsDetailsArray = [SalesModel]()
+    var customerCreditDetailsArray = [SalesModel]()
+    var userCommentArray = [SalesModel]()
+    var workFlowArray = [SalesModel]()
+    
     var urlSrtingArray = [String]()
     var rowIndexSelected = 0
     
@@ -29,38 +36,45 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let userId = AuthServices.currentUserId{
-            if let userIdInt = Int(userId){
-                salesOrderDetails = webService.SalesOrderApprove(empno: userIdInt)
+        activityIndicator.startAnimating()
+        setViewAlignment()
+        
+        setSlideMenu(controller: self, menuButton: menuBtn)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if salesOrderDetails.isEmpty{
+            if let userId = AuthServices.currentUserId{
+                if let userIdInt = Int(userId){
+                    salesOrderDetails = webService.SalesOrderApprove(empno: userIdInt)
+                    salesOrdertableview.reloadData()
+                    activityIndicator.stopAnimating()
+                }
             }
         }
-        setSlideMenu(controller: self, menuButton: menuBtn)
     }
     
     // -- MARK: Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if salesOrderDetails.count == 0{
-//            emptyMessage(message: "No Data", viewController: self, tableView: salesOrdertableview)
-//        }
-//        return salesOrderDetails.count
-        return 1
+        if salesOrderDetails.count == 0{
+            emptyMessage(message: "No Data".localize(), viewController: self, tableView: salesOrdertableview)
+        }
+        return salesOrderDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? SalesOrderApprovalCell{
-//            cell.orderId.text = salesOrderDetails[indexPath.row].OrderID
-//            cell.empCreated.text = salesOrderDetails[indexPath.row].SO_EmpCreated
-//            cell.customerName.text = salesOrderDetails[indexPath.row].SO_CustomerName
-//            cell.items.text = salesOrderDetails[indexPath.row].SO_Items
-//            cell.date.text = salesOrderDetails[indexPath.row].DeliveryDate
-//            cell.status.text = salesOrderDetails[indexPath.row].SO_Status
-//            cell.comment.text = salesOrderDetails[indexPath.row].SO_Comment
+            cell.orderId.text = salesOrderDetails[indexPath.row].OrderID
+            cell.empCreated.text = salesOrderDetails[indexPath.row].SO_EmpCreated
+            cell.customerName.text = salesOrderDetails[indexPath.row].SO_CustomerName
+            cell.items.text = salesOrderDetails[indexPath.row].SO_Items
+            cell.date.text = salesOrderDetails[indexPath.row].DeliveryDate
+            cell.status.text = salesOrderDetails[indexPath.row].SO_Status
+            cell.comment.text = salesOrderDetails[indexPath.row].SO_Comment
             cell.selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-//            cell.selectButton.tag = indexPath.row
-//
-//            urlSrtingArray.append(salesOrderDetails[indexPath.row].SO_Url)
-            
+            cell.selectButton.tag = indexPath.row
             return cell
         }
         return UITableViewCell()
@@ -73,10 +87,18 @@ class SalesOrderApprovalViewController: UIViewController, UITableViewDelegate, U
         performSegue(withIdentifier: "showSalesOrderApproval", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailsSalesOrderApprovalViewController{
+            vc.orderId = salesOrderDetails[rowIndexSelected].OrderID
+            vc.reqDate = salesOrderDetails[rowIndexSelected].ReqDate
+            vc.deliveryDate = salesOrderDetails[rowIndexSelected].DeliveryDate
+        }
+    }
+    
     // -- MARK: IBActions
     
     @IBAction func signOutBuuttonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        AuthServices().logout(self)
     }
 
 }

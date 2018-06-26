@@ -153,8 +153,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func loginButton(_ sender: Any) {
         activityIndicator.startAnimating()
-        view.bringSubview(toFront: activityIndicator)
-        
         guard let usernametext = usernameTextfield.text, let passwordText = passwordTextfield.text else {
             return
         }
@@ -173,6 +171,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: nil, onAction: nil, cancelAction: "Dismiss", self)
             }, activityIndicator: activityIndicator)
         }
+        activityIndicator.stopAnimating()
     }
     
     // -- MARK: Pivker view delegate

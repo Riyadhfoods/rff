@@ -36,7 +36,7 @@ class PickerviewAction{
         if doneSelector != nil {
             let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let doneButton = UIBarButtonItem(title: getString(englishString: "Done", arabicString: "تم", language: language), style: .plain, target: viewController, action: doneSelector)
-            toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         } else {
             toolBar.setItems([cancelButton], animated: false)
         }
@@ -53,7 +53,7 @@ class PickerviewAction{
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let text = UIBarButtonItem(title: title, style: .plain, target: viewController, action: nil)
         
-        toolBar.setItems([ spaceButton, text, spaceButton, doneButton], animated: false)
+        toolBar.setItems([spaceButton, spaceButton, text, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         txtfield.inputAccessoryView = toolBar
