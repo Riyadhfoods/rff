@@ -245,7 +245,7 @@ class SalesOrderRequestsViewController: UIViewController, UIPickerViewDelegate, 
     @IBAction func nextButtonTapped(_ sender: Any) {
         if companyTextfield.text == companyNamesArray[0] || branchTextfield.text == branchNamesArray[0] || LocCodeTextfield.text == locCodeNumsArray[0]{
             let alertTitle = "Alert!".localize()
-            let alertMessage = "You did not select a company, branch or location code"
+            let alertMessage = "You did not select branch or location code".localize()
             AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: "OK", onAction: {
                 return
             }, cancelAction: nil, self)

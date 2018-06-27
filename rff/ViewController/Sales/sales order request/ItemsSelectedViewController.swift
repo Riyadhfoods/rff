@@ -97,7 +97,7 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
                 itemSentStatus = webservice.SendItemGrid(orderid: salesRequestDetails.orderId, serialno: count, customerid: salesRequestDetails.customer, Grid_ItemId: item.Grid_ItemId, Grid_Desc: item.Grid_Desc, Grid_UnitPrice: item.Grid_UnitPrice, Grid_Qty: item.Grid_Qty, Grid_TotalPrice: item.Grid_TotalPrice, Grid_UOM: item.Grid_UOM)
                 for status in itemSentStatus{
                     if status.grid_error != ""{
-                        let alertTitle = "Alert"
+                        let alertTitle = "Alert".localize()
                         let alertMessage = status.grid_error
                         AlertMessage().showAlertMessage(alertTitle: alertTitle, alertMessage: alertMessage, actionTitle: "Ok", onAction: {
                             return
@@ -145,11 +145,11 @@ class ItemsSelectedViewController: UIViewController, UITableViewDataSource, UITa
             }
             
             if error != ""{
-                AlertMessage().showAlertMessage(alertTitle: "Alert!", alertMessage: error, actionTitle: "Ok", onAction: {
+                AlertMessage().showAlertMessage(alertTitle: "Alert!".localize(), alertMessage: error, actionTitle: "Ok", onAction: {
                     return
                 }, cancelAction: nil, self)
             } else {
-                AlertMessage().showAlertMessage(alertTitle: "Success", alertMessage: "Order request sent successfully", actionTitle: "Ok", onAction: {
+                AlertMessage().showAlertMessage(alertTitle: "Success".localize(), alertMessage: "Order request sent successfully".localize(), actionTitle: "Ok", onAction: {
                     salesRequestDetails.removeAll()
                     self.navigationController?.popToRootViewController(animated: true)
                 }, cancelAction: nil, self)

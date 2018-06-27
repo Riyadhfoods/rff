@@ -161,6 +161,7 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             itemsTextfield.text = items.isEmpty ? "Select item".localize() : itemsName[itemSelectedRow]
             unoits = items.isEmpty ? [SalesModel]() : webservice.BindSalesOrderUnitofMeasure(itemid: itemsName[itemSelectedRow])
             unoitTextfield.text = "Select unoit of measure".localize()
+            qtyTextfield.text = "1"
             showItemsPickerViewTextfield.resignFirstResponder()
             warningLabel.isHidden = true
         } else {
@@ -213,52 +214,74 @@ class AddItemsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     // -- MARK: IBActions
     
+    struct oldValue {
+        var name = ""
+        var uofm = ""
+        var qty = ""
+    }
+    
     var oldItemName = ""
     var oldItemUofm = ""
     var oldItemQty = ""
+    var oldValuesArray = [oldValue]()
+    var isItemExist = false
+    
     @IBAction func addItemButtonTapped(_ sender: Any) {
         if let itemText = itemsTextfield.text, let unoitText = unoitTextfield.text, let qtyText = qtyTextfield.text{
             itemAddedReceived = webservice.BindPurchaseGridData(quantity: qtyText, quantityrequired: 0.0, ItemId: itemText, unitofmeasure: unoitText, customerid: customer, loccode: loccode)
             
-            shouldAddItem(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
-            
-            for item in itemAddedReceived{
-                if item.grid_error != ""{
-                    warningLabel.isHidden = false
-                    warningLabel.text = item.grid_error
-                    return
-                }
-                salesRequestDetails.itemsArray.append(
-                    ItemsModul(
-                        grid_error: item.grid_error,
-                        Grid_ItemId: item.Grid_ItemId,
-                        Grid_Desc: itemText,
-                        Grid_UOM: unoitText,
-                        Grid_Qty: qtyText,
-                        Grid_UnitPrice: item.Grid_UnitPrice,
-                        Grid_TotalPrice: item.Grid_TotalPrice))
+            if unoitText == "Select unoit of measure".localize(){
+                AlertMessage().showAlertMessage(alertTitle: "Alert!".localize(), alertMessage: "You did not select a unit of measure".localize(), actionTitle: nil, onAction: nil, cancelAction: "Ok", self)
+                return
             }
-            warningLabel.isHidden = true
-            count += 1
-            setCountLabel(c: count)
+            
+            if oldValuesArray.isEmpty {
+                addItemAndUpdateOldValues(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
+            } else {
+                for value in oldValuesArray{
+                    if value.name == itemText && value.uofm == unoitText && value.qty == qtyText{
+                        isItemExist = true
+                        break
+                    }
+                }
+                if isItemExist{
+                    AlertMessage().showAlertMessage(alertTitle: "Item has been Added".localize(), alertMessage: "You have already added this item. Do you wnat to add it again".localize(), actionTitle: "Yes".localize(), onAction: {
+                        self.addItem(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
+                    }, cancelAction: "No".localize(), self)
+                    isItemExist = false
+                } else {
+                    addItemAndUpdateOldValues(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
+                }
+            }
         }
-        AlertMessage().showAlertForXTime(alertTitle: "Added".localize(), time: 1.5, tagert: self)
     }
     
-    func shouldAddItem(itemText: String, unoitText: String, qtyText: String){
-        if oldItemName == "" && oldItemUofm == "" && oldItemQty == "" {
-            oldItemName = itemText
-            oldItemUofm = unoitText
-            oldItemQty = qtyText
-        } else {
-            if itemText == oldItemName && unoitText == oldItemUofm && qtyText == oldItemQty {
-                AlertMessage().showAlertMessage(alertTitle: "Item has been added".localize(), alertMessage: "You have already added this item. Do you wnat to add it again".localize(), actionTitle: "Cancel".localize(), onAction: {
-                    self.count -= 1
-                    self.setCountLabel(c: self.count)
-                    salesRequestDetails.itemsArray.removeLast()
-                }, cancelAction: "Yes".localize(), self)
+    func addItem(itemText: String, unoitText: String, qtyText: String){
+        for item in itemAddedReceived{
+            if item.grid_error != ""{
+                warningLabel.isHidden = false
+                warningLabel.text = item.grid_error
+                return
             }
+            salesRequestDetails.itemsArray.append(
+                ItemsModul(
+                    grid_error: item.grid_error,
+                    Grid_ItemId: item.Grid_ItemId,
+                    Grid_Desc: itemText,
+                    Grid_UOM: unoitText,
+                    Grid_Qty: qtyText,
+                    Grid_UnitPrice: item.Grid_UnitPrice,
+                    Grid_TotalPrice: item.Grid_TotalPrice))
         }
+        warningLabel.isHidden = true
+        count += 1
+        setCountLabel(c: count)
+        AlertMessage().showAlertForXTime(alertTitle: "Item has been Added".localize(), time: 0.5, tagert: self)
+    }
+    
+    func addItemAndUpdateOldValues(itemText: String, unoitText: String, qtyText: String){
+        addItem(itemText: itemText, unoitText: unoitText, qtyText: qtyText)
+        oldValuesArray.append(oldValue(name: itemText, uofm: unoitText, qty: qtyText))
     }
     
     @IBAction func showItemsButtonTapped(_ sender: Any) {

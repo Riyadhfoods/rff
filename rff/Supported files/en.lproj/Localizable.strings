@@ -74,6 +74,7 @@
 "Are you sure you want to sign out?" = "Are you sure you want to sign out?";
 "Yes" = "Yes";
 "Cancel" = "Cancel";
+"No" = "No";
 
 // Home
 "Home" = "Home";
@@ -122,7 +123,7 @@
 "Select customer" = "Select customer";
 "Loc Code" = "Loc Code";
 "Select location code" = "Select location code";
-"You did not select a company, branch or location code" = "You did not select a company, branch or location code";
+"You did not select branch or location code" = "You did not select a company, branch or location code";
 
 "salesperson" = "salesperson";
 "No salespreson aviable" = "No salespreson aviable";
@@ -131,6 +132,7 @@
 "Delivery Date" = "Delivery Date";
 "Super Market?" = "Super Market?";
 "Offer?" = "Offer?";
+"You did not select a customer or delivery date" = "You did not select a customer or delivery date";
 "yes" = "yes";
 "no" = "no";
 
@@ -156,12 +158,12 @@
 "Select item" = "Select item";
 "Unoit of Measure" = "Unoit of Measure";
 "Select unoit of measure" = "Select unoit of measure";
+"You did not select a unit of measure" = "You did not select a unit of measure";
 "QTY" = "QTY";
 "ADD ITEM" = "ADD ITEM";
 "Items added is " = "Items added is ";
 "SHOW ITEMS" = "SHOW ITEMS";
-"Added" = "Added";
-"Item has been added" = "Item has been added";
+"Item has been Added" = "Item has been Added";
 "You have already added this item. Do you wnat to add it again" = "You have already added this item. Do you wnat to add it again";
 
 "Description" = "Description";
@@ -169,6 +171,8 @@
 "Unit Price" = "Unit Price";
 "Total Price" = "Total Price";
 "SEND" = "SEND";
+"Success" = "Success";
+"Order request sent successfully" = "Order request sent successfully";
 
 //
 //"Company" = "Company";
